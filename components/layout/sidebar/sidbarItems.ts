@@ -8,7 +8,7 @@ export const sidebarItems = [
     },
     {
         title: "Products",
-        url: "#",
+        url: "/products",
         icon: Barcode
     },
     {
