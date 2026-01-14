@@ -1,16 +1,16 @@
-import { Sequelize } from "sequelize"
-import pg from "pg"
+import { Sequelize } from 'sequelize';
+import pg from 'pg';
 
-const database = process.env.DB_URL
+const database = process.env.DB_URL;
 
 if (!database) {
-    throw new Error("db url was undefined or not a string")
+  throw new Error('db url was undefined or not a string');
 }
 
 const sequelize = new Sequelize(database, {
-    dialect: "postgres",
-    dialectModule: pg
-})
+  dialect: 'postgres',
+  dialectModule: pg,
+});
 
 // export const connectDb = async () => {
 //     try {
@@ -21,6 +21,5 @@ const sequelize = new Sequelize(database, {
 //         console.error("db connect failed", error)
 //     }
 // }
-
 
 export default sequelize;
