@@ -17,7 +17,7 @@ type CardTypes = {
 };
 
 type CardProp = {
-  data: CardTypes;
+  data: CardTypes
 };
 
 export function HomeCard({ data }: CardProp) {
