@@ -20,7 +20,9 @@ export function ProductTable({ products }: ProductTableProps) {
       <TableHeader>
         <TableRow>
           {products.length > 0 &&
-            Object.keys(products[0]).map((key) => (
+          Object.keys(products[0])
+            .filter((key) => key !== "id")
+            .map((key) => (
               <TableHead key={key}>
                 {key.charAt(0).toUpperCase() + key.slice(1)}
               </TableHead>
@@ -29,10 +31,12 @@ export function ProductTable({ products }: ProductTableProps) {
       </TableHeader>
       <TableBody>
         {products.map((product) => (
-          <TableRow key={product.description}>
-            {Object.values(product).map((item) => (
-              <TableCell>{item ?? 'N/A'}</TableCell>
-            ))}
+            <TableRow key={product.description}>
+            {Object.entries(product)
+              .filter(([key]) => key !== "id")
+              .map(([key, value]) => (
+                <TableCell key={key}>{value}</TableCell>
+              ))}
           </TableRow>
         ))}
       </TableBody>

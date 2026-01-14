@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../ui/card';
+} from "@/components/ui/card"
 import { LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 

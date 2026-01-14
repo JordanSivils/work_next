@@ -22,3 +22,12 @@ docker run -d \
 -e POSTGRES_DB=<db_name> \
 -p 5432:5432 \
 postgres:16.10-bookworm
+
+prisma:
+npm audit fix --force will move the prisma cli to v-6 making migrations imposible
+
+migrate schema (in terminal) - npx prisma migrate dev --name whatever_you_want
+
+generate client (in terminal) - npx prisma generate
+
+now the exported prisma in /lib/prisma-export/prisma-client.ts is usable
