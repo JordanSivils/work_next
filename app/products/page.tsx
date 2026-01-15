@@ -44,7 +44,14 @@ function ProductTableSkeleton() {
   );
 }
 
-export function ProductPage() {
+export async function ProductPage({
+    searchParams
+}: {
+    searchParams: Promise<{ [key: string]: string | undefined}>
+}) {
+    // const q = searchParams.q
+    // const page = searchParams.page
+    const { take } = await searchParams
   return (
     <div>
       <h1 className='text-xl font-semibold'>Products</h1>
@@ -52,7 +59,7 @@ export function ProductPage() {
         <Button>Filter by something</Button>
       </div>
       <Suspense fallback={<ProductTableSkeleton />}>
-        <ProductTableWrapper />
+        <ProductTableWrapper query ={{ take }} />
       </Suspense>
     </div>
   );
