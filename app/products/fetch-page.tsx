@@ -1,13 +1,16 @@
 import { ProductTable } from '@/app/products/components/product-table';
-import { getItems, Product, ProductQuery } from '@/lib/actions/get-product-data';
+import { BrandCombobox } from '@/components/ui/brand-combobox';
+import { getBrandData } from '@/lib/actions/brands/get-brand-data';
+import { getAllProducts } from '@/lib/actions/products/get-product-data';
+import { Product, ProductQuery } from '@/lib/actions/products/product-interfaces';
 
 interface TableWrapperProps {
   query: ProductQuery
 }
 export async function ProductTableWrapper({ query }: TableWrapperProps) {
-  const data = await getItems(query);
+  const res = await getAllProducts(query);
 
-  const products = data.map((product): Product => ({
+  const products = res.data.map((product): Product => ({
       id: product.id,
       description: product.description,
       available: Number(product.available),
@@ -16,4 +19,10 @@ export async function ProductTableWrapper({ query }: TableWrapperProps) {
     }))
 
   return <ProductTable products={products} />;
+}
+
+export async function BrandComboboxWrapper() {
+  const res = await getBrandData();
+
+  return <BrandCombobox brands={res} />
 }

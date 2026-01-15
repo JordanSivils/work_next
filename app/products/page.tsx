@@ -11,6 +11,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ProductFilter } from './components/product-filter';
+import { ItemStatus } from '../generated/prisma/enums';
 
 function ProductTableSkeleton() {
   // Based on Product type: description, available, status, price (and sometimes category)
@@ -45,21 +47,54 @@ function ProductTableSkeleton() {
 }
 
 export async function ProductPage({
-    searchParams
+  searchParams
 }: {
-    searchParams: Promise<{ [key: string]: string | undefined}>
+  searchParams: Promise<{ [key: string]: string | undefined }>
 }) {
-    // const q = searchParams.q
-    // const page = searchParams.page
-    const { take } = await searchParams
+  const params = await searchParams;
+  // const q = searchParams.q
+  // const page = searchParams.page
+  const {
+    page,
+    limit,
+    brand,
+    suppliers,
+    category,
+    search,
+  } = await searchParams
+
+  const status = params.status === "negative" || params.status === "standard" ? params.status : undefined
+  const sort = params.sort === "available" || params.sort === "description" ? params.sort : undefined
+  const dir = params.dir === "desc" || params.dir === "asc" ? params.dir : undefined
+  
+  
   return (
     <div>
       <h1 className='text-xl font-semibold'>Products</h1>
       <div className='p-4 bg-card w-full rounded-md'>
-        <Button>Filter by something</Button>
+        <ProductFilter />
+
+        {/* 
+        <uiContainerForFilters>
+            < Fetch Here >
+          <Suspense>
+
+
+            <filterWrapper>
+              <triggerForSheet stuffFromDb={ }>
+                <uiForSheet>
+                  <comboBoxToPickFilter></comboBoxToPickFilter>
+                  <comboBoxToPickFilter></comboBoxToPickFilter>
+                  <comboBoxToPickFilter></comboBoxToPickFilter>
+                </uiForSheet>
+              </triggerForSheet>
+            </filterWrapper>
+          </Suspense>
+        </uiContainerForFilters>
+        */}
       </div>
       <Suspense fallback={<ProductTableSkeleton />}>
-        <ProductTableWrapper query ={{ take }} />
+        <ProductTableWrapper query={{ page, limit, status, brand, search, sort, dir, suppliers, category}} />
       </Suspense>
     </div>
   );

@@ -1,3 +1,5 @@
+
+import { Product } from '@/lib/actions/products/product-interfaces';
 import {
   Table,
   TableBody,
@@ -7,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/table';
-import { Product } from '@/lib/actions/get-product-data';
+import { ProductDialog } from './product-dialog';
 
 interface ProductTableProps {
   products: Product[];
@@ -27,6 +29,7 @@ export function ProductTable({ products }: ProductTableProps) {
                 {key.charAt(0).toUpperCase() + key.slice(1)}
               </TableHead>
             ))}
+            <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -37,6 +40,7 @@ export function ProductTable({ products }: ProductTableProps) {
               .map(([key, value]) => (
                 <TableCell key={key}>{value}</TableCell>
               ))}
+            <TableCell><ProductDialog id={product.id} /></TableCell>
           </TableRow>
         ))}
       </TableBody>
