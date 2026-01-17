@@ -6,7 +6,7 @@ import { Prisma } from "@/app/generated/prisma/client";
 
 const whereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
   return {
-    status: q.status,
+    status: q.status ?? undefined,
     Brand: { name: q.brand },
     Supplier: { some: { name: q.suppliers } },
     ...(q.search && {
@@ -27,7 +27,7 @@ function sortBuilder(q: ProductQuery) {
     break;
     case "available": orderBy = { available: dir ?? "asc" }
     break;
-    default: orderBy = { description: "desc"}
+    default: orderBy = { description: "asc"}
   }
   return orderBy
 }
@@ -58,19 +58,20 @@ export async function getAllProducts(q: ProductQuery) {
       take: limit,
       skip: skip ?? 24,
       include: {
-        Category: true
+        Category: {
+          select: { name: true }
+        }
       }
     }),
     prisma.item.count({ where })
   ])
   return {
-    page: q.page,
-    limit: q.limit,
+    page: page,
+    limit: limit,
     total,
-    pageCount: Math.ceil(total / Number(q.limit)),
-    nextPage: Number(q.page) * Number(q.limit) < total,
-    previousPage: Number(q.page) > 1,
+    pageCount: Math.ceil(total / limit),
+    nextPage: page * limit < total,
+    previousPage: page > 1,
     data
   }
 }
-

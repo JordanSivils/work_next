@@ -1,4 +1,4 @@
-
+"use client"
 import { Product } from '@/lib/actions/products/product-interfaces';
 import {
   Table,
@@ -9,11 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/table';
-import { ProductDialog } from './product-dialog';
+import Link from 'next/link';
 
 interface ProductTableProps {
   products: Product[];
 }
+
 
 export function ProductTable({ products }: ProductTableProps) {
   return (
@@ -29,19 +30,22 @@ export function ProductTable({ products }: ProductTableProps) {
                 {key.charAt(0).toUpperCase() + key.slice(1)}
               </TableHead>
             ))}
-            <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {products.map((product) => (
-            <TableRow key={product.description}>
+          
+
+          <TableRow key={product.description} className='cursor-pointer' >
+            
             {Object.entries(product)
               .filter(([key]) => key !== "id")
               .map(([key, value]) => (
-                <TableCell key={key}>{value}</TableCell>
+                <TableCell key={key}><Link href={`/products/${product.id}`}>{value}</Link></TableCell>
               ))}
-            <TableCell><ProductDialog id={product.id} /></TableCell>
           </TableRow>
+          
+            
         ))}
       </TableBody>
     </Table>
