@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 import { Brand } from "@/lib/actions/brands/brand-interface";
@@ -9,15 +9,16 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { CommandList } from "cmdk";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
 
-interface BrandComboboxProps {
-    brands: Brand[]
+interface SupplierComboboxProps {
+    suppliers: Supplier[]
     sendDataUp: (key: string, val: string) => void
     handleClear: () => void
 }
 
 
-export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandComboboxProps) {
+export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: SupplierComboboxProps) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | undefined>(undefined)
 
@@ -26,50 +27,46 @@ export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandCombobox
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button role="combobox" className="min-w-50">
+                <Button role="combobox" className="min-w-80">
                     {value
-                    ? brands.find((brand) => brand.name === value)?.name
-                    : "Select Brand"}
+                    ? suppliers.find((supplier) => supplier.name === value)?.name
+                    : "Select Supplier"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent >
                 <Command>
-                    <CommandInput placeholder="Search Brands" />
+                    <CommandInput placeholder="Search Suppliers" />
                     <CommandList className="max-h-70 overflow-y-auto">
-                        <CommandEmpty>No Brands Found...</CommandEmpty>
+                        <CommandEmpty>No Suppliers Found...</CommandEmpty>
                         <CommandGroup >
-                            {brands.map((brand) => (
+                            {suppliers.map((supplier) => (
                                 <CommandItem 
-                                key={brand.id}
-                                value={brand.name}
+                                key={supplier.id}
+                                value={supplier.name}
                                 onSelect={(currentValue) => {
                                     setValue(currentValue ?? "")
                                     setOpen(false)
-                                    sendDataUp("brand", currentValue)
+                                    sendDataUp("supplier", currentValue)
                                 }}
                                 >
-                                    {brand.name}
+                                    {supplier.name}
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === brand.name ? "opacity-100" : "opacity-0"
+                                            value === supplier.name ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>
                             ))}
-                            
                         </CommandGroup>
-                        
                     </CommandList>
-                    
                 </Command>
-                
             </PopoverContent>
             <Button variant={"ghost"} onClick={() => {
                 handleClear()
                 setValue(undefined)
-            }}>clear</Button>
+            }}>Clear</Button>
         </Popover>
     )
 }

@@ -8,7 +8,7 @@ const whereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
   return {
     status: q.status ?? undefined,
     Brand: { name: q.brand },
-    Supplier: { some: { name: q.suppliers } },
+    Supplier: { some: { name: q.supplier } },
     ...(q.search && {
       OR: [
         { description: {
@@ -39,14 +39,6 @@ export async function getAllProducts(q: ProductQuery) {
   const limit = Number(q.limit ?? 25)
   const page = Number(q.page ?? 1)
   const skip = Number((page - 1) * limit);
-
-  console.log({ 
-    where: where,
-    orderBy: orderBy,
-    limit: limit,
-    page: page,
-    skip: skip
-  })
   
   const [data, total] = await Promise.all([
     prisma.item.findMany({

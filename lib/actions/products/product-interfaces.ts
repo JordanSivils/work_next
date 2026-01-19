@@ -17,7 +17,7 @@ export interface Product {
 export interface ProductQuery  {
   status?: ProductStatus
   brand?: string
-  suppliers?: string
+  supplier?: string
   category?: string
   search?: string
   sort?: SortOpts

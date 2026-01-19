@@ -1,21 +1,24 @@
 import { ProductTable } from '@/app/products/components/product-table';
-import { BrandCombobox } from '@/components/ui/brand-combobox';
 import { getBrandData } from '@/lib/actions/brands/get-brand-data';
 import { getAllProducts } from '@/lib/actions/products/get-product-data';
-import { Product, ProductQuery, ProductResponse } from '@/lib/actions/products/product-interfaces';
+import { Product, ProductQuery } from '@/lib/actions/products/product-interfaces';
 import { FilterPaginationWrapper } from './components/filter-pagination';
+import { getSupplierData } from '@/lib/actions/suppliers/get-supplier-data';
+import { ProductDataTable } from './components/product-data-table';
+import { columns } from './components/column-defs';
 
 interface TableWrapperProps {
   query: ProductQuery
 }
-  export async function ProductTableWrapper({  query }: TableWrapperProps) {
+  export async function ProductTableWrapper({ query }: TableWrapperProps) {
 
-  const asyncTimeout = () => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 4000)
-    })
-  }
-  await asyncTimeout();
+  // const asyncTimeout = () => {
+  //   return new Promise((resolve) => {
+  //     setTimeout(resolve, 4000)
+  //   })
+  // }
+  // await asyncTimeout();
+  const suppliers = await getSupplierData()
   const brands = await getBrandData()
   const products = await getAllProducts(query)
 
@@ -30,10 +33,12 @@ interface TableWrapperProps {
     const previousPage = products.previousPage
     const totalPages = products.pageCount
     const currentPage = products.page
+    
   return (
   <>
-  <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} brands={brands} />
-  <ProductTable products={mapedProducts} />
+  <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} brands={brands} suppliers={suppliers} />
+  {/* <ProductTable products={mapedProducts} /> */}
+  <ProductDataTable columns={columns} data={mapedProducts} />
   </>
   );
 }

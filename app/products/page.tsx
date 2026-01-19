@@ -12,7 +12,6 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 
 function ProductTableSkeleton() {
-  // Based on Product type: description, available, status, price (and sometimes category)
   const columns = 5;
   const rows = 15;
 
@@ -23,10 +22,8 @@ function ProductTableSkeleton() {
         <Skeleton className="h-10 w-56" />  
       </div>
 
-      {/* Search input */}
       <Skeleton className="h-10 w-80" />
 
-      {/* Pagination */}
       <div className="flex items-center gap-2">
         <Skeleton className="h-8 w-8 rounded-md" />
         <Skeleton className="h-8 w-8 rounded-md" />
@@ -67,13 +64,11 @@ export async function ProductPage({
   searchParams: Promise<{ [key: string]: string | undefined }>
 }) {
   const params = await searchParams;
-  // const q = searchParams.q
-  // const page = searchParams.page
   const {
     page,
     limit,
     brand,
-    suppliers,
+    supplier,
     category,
     search,
   } = await searchParams
@@ -92,7 +87,7 @@ export async function ProductPage({
           page,
           limit,
           brand,
-          suppliers,
+          supplier,
           category,
           search,
           status,
@@ -107,21 +102,3 @@ export async function ProductPage({
 
 export default ProductPage;
 
-{/* 
-        <uiContainerForFilters>
-            < Fetch Here >
-          <Suspense>
-
-
-            <filterWrapper>
-              <triggerForSheet stuffFromDb={ }>
-                <uiForSheet>
-                  <comboBoxToPickFilter></comboBoxToPickFilter>
-                  <comboBoxToPickFilter></comboBoxToPickFilter>
-                  <comboBoxToPickFilter></comboBoxToPickFilter>
-                </uiForSheet>
-              </triggerForSheet>
-            </filterWrapper>
-          </Suspense>
-        </uiContainerForFilters>
-        */}
