@@ -1,18 +1,18 @@
 "use client"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-
-interface ProductDataTable<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
-    data: TData[]
+interface BrandTableProps<Tdata, Tvalue> {
+    columns: ColumnDef<Tdata, Tvalue>[]
+    data: Tdata[]
 }
 
-export function ProductDataTable<TData, TValue>({ columns, data }: ProductDataTable<TData, TValue>) {
+export function BrandDataTable<Tdata, Tvalue>({ columns, data }: BrandTableProps<Tdata, Tvalue>) {
     const table = useReactTable({
-        data,
         columns,
+        data,
         getCoreRowModel: getCoreRowModel()
     })
+
     return (
         <div className="overflow-hidden rounded-md border">
           <Table>

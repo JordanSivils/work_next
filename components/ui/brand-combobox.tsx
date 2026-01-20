@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
-import { Brand } from "@/lib/actions/brands/brand-interface";
+import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./command";
 import { CommandList } from "cmdk";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 
 interface BrandComboboxProps {
-    brands: Brand[]
+    brands: BrandComboboxInterface[]
     sendDataUp: (key: string, val: string) => void
     handleClear: () => void
 }

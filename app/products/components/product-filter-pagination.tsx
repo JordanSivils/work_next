@@ -1,24 +1,21 @@
 "use client"
 import { BrandCombobox } from "@/components/ui/brand-combobox";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DebouncedInput } from "@/components/ui/debounced-input";
-import { Input } from "@/components/ui/input";
 import { PaginationGroup } from "@/components/ui/pagination-group";
 import { SheetWrapper } from "@/components/ui/sheet-wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SupplierCombobox } from "@/components/ui/supplier-combobox";
 import { BaseListPaginationInterface } from "@/lib/actions/base-interfaces/base-pagination";
-import { Brand } from "@/lib/actions/brands/brand-interface";
+import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
 import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
-import { useDebounce } from "@/lib/debounce";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, useCallback, useEffect, useState, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 
 interface FilterPaginationWrapperProps {
     pagination: BaseListPaginationInterface
-    brands: Brand[]
+    brands: BrandComboboxInterface[]
     suppliers: Supplier[]
 }
 

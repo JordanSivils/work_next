@@ -1,5 +1,7 @@
+import { InventoryForm } from '@/app/components/inventory-form';
 import {
   Barcode,
+  BriefcaseBusiness,
   FileText,
   Home,
   SquareUserRound,
@@ -28,13 +30,18 @@ export const sidebarItems = [
     url: '#',
     icon: SquareUserRound,
   },
+  {
+    title: 'Brands',
+    url: '/brands?limit=25',
+    icon: BriefcaseBusiness,
+  }
 ];
 
 export const sidebarQuick = [
   {
     title: 'Inventory',
     url: '#',
-    icon: FileText,
+    button: <InventoryForm />
   },
   {
     title: 'Product Upload',

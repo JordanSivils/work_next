@@ -53,10 +53,7 @@ export function AppSidebar() {
               {sidebarQuick.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+                    {item.button}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

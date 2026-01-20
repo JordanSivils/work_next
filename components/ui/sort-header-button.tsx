@@ -5,11 +5,11 @@ import { ArrowUpDown } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useTransition } from "react"
 
-export function SortHeader({ field, label }: { field: "description" | "available"; label: string }) {
+export function SortHeader({ field, label }: { field: string; label: string }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [, startTransition] = useTransition()
+  const [isSubmitting, startTransition] = useTransition()
 
   function onSort() {
     const params = new URLSearchParams(searchParams.toString())
@@ -17,8 +17,7 @@ export function SortHeader({ field, label }: { field: "description" | "available
     const currentSort = params.get("sort")
     const currentDir = params.get("dir")
 
-    const nextDir =
-      currentSort !== field ? "asc" : currentDir === "asc" ? "desc" : "asc"
+    const nextDir = currentSort !== field ? "asc" : currentDir === "asc" ? "desc" : "asc"
 
     params.set("sort", field)
     params.set("dir", nextDir)
@@ -30,7 +29,7 @@ export function SortHeader({ field, label }: { field: "description" | "available
   }
 
   return (
-    <Button variant="ghost" onClick={onSort}>
+    <Button variant="ghost" onClick={onSort} disabled={isSubmitting} className={isSubmitting ? "hover:bg-transparent text-muted-foreground opacity-50 pointer-events-none" : ""}>
       {label}
       <ArrowUpDown />
     </Button>

@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma-export/prisma-client";
 import { ProductQuery } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
 
-const whereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
+const productWhereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
   return {
     status: q.status ?? undefined,
     Brand: { name: q.brand },
@@ -32,9 +32,8 @@ function sortBuilder(q: ProductQuery) {
   return orderBy
 }
 
-
 export async function getAllProducts(q: ProductQuery) {
-  const where = whereBuilder(q)
+  const where = productWhereBuilder(q)
   const orderBy = sortBuilder(q)
   const limit = Number(q.limit ?? 25)
   const page = Number(q.page ?? 1)
@@ -48,7 +47,7 @@ export async function getAllProducts(q: ProductQuery) {
         { description: "asc"}
       ],
       take: limit,
-      skip: skip ?? 24,
+      skip: skip ?? 25,
       include: {
         Category: {
           select: { name: true }
