@@ -12,6 +12,7 @@ import {
   SidebarMenuItem,
 } from '../../ui/sidebar';
 import { sidebarItems, sidebarQuick } from './sidbarItems';
+import { SignedIn, UserButton } from '@clerk/nextjs';
 
 export function AppSidebar() {
   return (
@@ -57,6 +58,7 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem><SignedIn><UserButton /></SignedIn></SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -10,10 +10,9 @@
  */
 export type * from './models/Brand'
 export type * from './models/Category'
-export type * from './models/Item'
-export type * from './models/Manufacturer'
 export type * from './models/SpecialOrder'
 export type * from './models/Supplier'
-export type * from './models/SupplierDetails'
 export type * from './models/User'
+export type * from './models/Product'
+export type * from './models/ProductStaging'
 export type * from './commonInputTypes'

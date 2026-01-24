@@ -8,69 +8,49 @@ datasource db {
 }
 
 model Brand {
-  id           String         @id
-  name         String         @unique
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime
-  Item         Item[]
-  SpecialOrder SpecialOrder[]
-  Supplier     Supplier[]
+  id                String    @id
+  name              String    @unique
+  slug              String    @unique
+  inventoriedById   String?
+  lastInventoriedAt DateTime?
+  isActive          Boolean   @default(true)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime
+  User              User?     @relation(fields: [inventoriedById], references: [id])
+  Product           Product[]
 }
 
 model Category {
-  id   String @id
-  name String @unique
-  Item Item[]
-}
-
-model Item {
-  id             String        @id
-  sku            String        @unique
-  description    String
-  status         ItemStatus    @default(standard)
-  available      Int?
-  manufacturerId String?
-  brandId        String?
-  categoryId     String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime
-  Brand          Brand?        @relation(fields: [brandId], references: [id])
-  Category       Category?     @relation(fields: [categoryId], references: [id])
-  Manufacturer   Manufacturer? @relation(fields: [manufacturerId], references: [id])
-  Supplier       Supplier[]
-
-  @@index([brandId])
-  @@index([categoryId])
-  @@index([manufacturerId])
-  @@index([status])
-}
-
-model Manufacturer {
-  id        String   @id
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  Item      Item[]
+  id       String    @id
+  slug     String    @unique
+  name     String    @unique
+  isActive Boolean   @default(true)
+  Product  Product[]
 }
 
 model SpecialOrder {
-  id             String      @id
-  items          Json?
-  notes          String?
-  brandId        String?
-  supplierId     String?
-  orderStatus    OrderStatus @default(requested)
-  existingItem   Boolean     @default(false)
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime
-  createdById    String?
-  initialOrderAt DateTime?
-  nextOrderAt    DateTime?
-  orderFrequency Int?
-  recurring      Boolean     @default(false)
-  Brand          Brand?      @relation(fields: [brandId], references: [id])
-  User           User?       @relation(fields: [createdById], references: [id])
-  Supplier       Supplier?   @relation(fields: [supplierId], references: [id])
+  id              String      @id
+  items           Json?
+  notes           String?
+  supplierId      String?
+  customer        String?
+  customerContact String?
+  comments        String?
+  orderStatus     OrderStatus @default(requested)
+  requestType     RequestType @default(order)
+  existingItem    Boolean?    @default(false)
+  createdById     String?
+  initialOrderAt  DateTime?
+  nextOrderAt     DateTime?
+  orderFrequency  Int?
+  recurring       Boolean     @default(false)
+  processingAt    DateTime?
+  lastRunAt       DateTime?
+  lastError       String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime
+  User            User?       @relation(fields: [createdById], references: [id])
+  Supplier        Supplier?   @relation(fields: [supplierId], references: [id])
 
   @@index([nextOrderAt])
   @@index([orderStatus])
@@ -79,47 +59,70 @@ model SpecialOrder {
 }
 
 model Supplier {
-  id              String           @id
-  name            String           @unique
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime
-  SpecialOrder    SpecialOrder[]
-  SupplierDetails SupplierDetails?
-  Brand           Brand[]
-  Item            Item[]
-}
-
-model SupplierDetails {
-  id           String   @id
-  userId       String?
+  id           String         @id
+  name         String         @unique
+  slug         String         @unique
   orderDay     String?
   orderNotes   String?
   orderMinimum String?
-  supplierId   String   @unique
-  createdAt    DateTime @default(now())
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
   updatedAt    DateTime
-  Supplier     Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
-  User         User?    @relation(fields: [userId], references: [id])
-
-  @@index([userId])
+  userId       String?
+  Product      Product[]
+  SpecialOrder SpecialOrder[]
+  User         User?          @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id              String            @id
-  clerkId         String            @unique
-  firstName       String
-  lastName        String
-  email           String            @unique
-  phoneNumber     String
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime
-  SpecialOrder    SpecialOrder[]
-  SupplierDetails SupplierDetails[]
+  id           String         @id
+  clerkId      String         @unique
+  firstName    String
+  lastName     String
+  email        String?        @unique
+  phoneNumber  String?
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  Brand        Brand[]
+  SpecialOrder SpecialOrder[]
+  Supplier     Supplier[]
 }
 
-enum ItemStatus {
-  negative
-  standard
+model Product {
+  id          String    @id
+  sku         String    @unique
+  description String
+  available   Int?
+  margin      Float?
+  brandId     String?
+  categoryId  String?
+  supplierId  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  Brand       Brand?    @relation(fields: [brandId], references: [id])
+  Category    Category? @relation(fields: [categoryId], references: [id])
+  Supplier    Supplier? @relation(fields: [supplierId], references: [id])
+
+  @@index([available])
+  @@index([brandId])
+  @@index([categoryId])
+  @@index([supplierId])
+}
+
+model ProductStaging {
+  id          String  @id
+  description String?
+  sku         String
+  available   Int?
+  brand       String?
+  category    String?
+  supplier    String?
+  margin      Float?
+  uploadId    String
+
+  @@index([sku])
+  @@index([uploadId])
 }
 
 enum OrderStatus {
@@ -128,4 +131,9 @@ enum OrderStatus {
   ordered
   received
   shorted
+}
+
+enum RequestType {
+  cost
+  order
 }

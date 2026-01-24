@@ -45,7 +45,7 @@ export async function getBrandData(q?: BrandQuery) {
             skip: skip ?? 0,
             include: {
                 _count: {
-                  select: { Item: true}
+                  select: { Product: true}
                 }
             }
         }),

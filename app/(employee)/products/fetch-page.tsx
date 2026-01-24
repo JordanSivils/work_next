@@ -11,13 +11,6 @@ interface TableWrapperProps {
   productQuery: ProductQuery
 }
   export async function ProductTableWrapper({ productQuery }: TableWrapperProps) {
-
-  const asyncTimeout = () => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 4000)
-    })
-  }
-  await asyncTimeout();
   const suppliers = await getSupplierData()
   const brands = await getBrandData()
   const products = await getAllProducts(productQuery)
@@ -26,7 +19,6 @@ interface TableWrapperProps {
       id: product.id,
       description: product.description,
       available: Number(product.available),
-      status: product.status,
       category: product.Category?.name ?? "NA"
     }))
     const nextPage = products.nextPage
@@ -40,9 +32,9 @@ interface TableWrapperProps {
     }))
     
   return (
-  <>
-  <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} brands={mappedBrand} suppliers={suppliers} />
-  <ProductDataTable columns={columns} data={mapedProducts} />
-  </>
+    <div className='flex flex-col gap-4 m-4'>
+      <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} brands={mappedBrand} suppliers={suppliers} />
+      <ProductDataTable columns={columns} data={mapedProducts} />
+    </div>
   );
 }

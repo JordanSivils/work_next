@@ -8,20 +8,18 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./command";
 import { CommandList } from "cmdk";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
 
 interface BrandComboboxProps {
     brands: BrandComboboxInterface[]
-    sendDataUp: (key: string, val: string) => void
-    handleClear: () => void
+    sendDataUp?: (key: string, val: string) => void
+    handleClear?: () => void
+    formData?: (val: string) => void
 }
 
 
-export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandComboboxProps) {
+export function BrandCombobox({ brands, sendDataUp, handleClear, formData }: BrandComboboxProps) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | undefined>(undefined)
-
-    const searchParams = useSearchParams();
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -46,7 +44,8 @@ export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandCombobox
                                 onSelect={(currentValue) => {
                                     setValue(currentValue ?? "")
                                     setOpen(false)
-                                    sendDataUp("brand", currentValue)
+                                    sendDataUp?.("brand", currentValue)
+                                    formData?.(currentValue)
                                 }}
                                 >
                                     {brand.name}
@@ -58,16 +57,12 @@ export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandCombobox
                                     />
                                 </CommandItem>
                             ))}
-                            
                         </CommandGroup>
-                        
                     </CommandList>
-                    
                 </Command>
-                
             </PopoverContent>
             <Button variant={"ghost"} onClick={() => {
-                handleClear()
+                handleClear?.()
                 setValue(undefined)
             }}>clear</Button>
         </Popover>

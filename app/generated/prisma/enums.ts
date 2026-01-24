@@ -9,14 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const ItemStatus = {
-  negative: 'negative',
-  standard: 'standard'
-} as const
-
-export type ItemStatus = (typeof ItemStatus)[keyof typeof ItemStatus]
-
-
 export const OrderStatus = {
   requested: 'requested',
   rejected: 'rejected',
@@ -26,3 +18,11 @@ export const OrderStatus = {
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const RequestType = {
+  cost: 'cost',
+  order: 'order'
+} as const
+
+export type RequestType = (typeof RequestType)[keyof typeof RequestType]

@@ -1,4 +1,4 @@
-import { InventoryForm } from '@/app/components/inventory-form';
+import { InventoryForm } from '@/app/(employee)/components/inventory-form';
 import {
   Barcode,
   BriefcaseBusiness,

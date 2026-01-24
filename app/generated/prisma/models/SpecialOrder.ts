@@ -37,50 +37,68 @@ export type SpecialOrderSumAggregateOutputType = {
 export type SpecialOrderMinAggregateOutputType = {
   id: string | null
   notes: string | null
-  brandId: string | null
   supplierId: string | null
+  customer: string | null
+  customerContact: string | null
+  comments: string | null
   orderStatus: $Enums.OrderStatus | null
+  requestType: $Enums.RequestType | null
   existingItem: boolean | null
-  createdAt: Date | null
-  updatedAt: Date | null
   createdById: string | null
   initialOrderAt: Date | null
   nextOrderAt: Date | null
   orderFrequency: number | null
   recurring: boolean | null
+  processingAt: Date | null
+  lastRunAt: Date | null
+  lastError: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SpecialOrderMaxAggregateOutputType = {
   id: string | null
   notes: string | null
-  brandId: string | null
   supplierId: string | null
+  customer: string | null
+  customerContact: string | null
+  comments: string | null
   orderStatus: $Enums.OrderStatus | null
+  requestType: $Enums.RequestType | null
   existingItem: boolean | null
-  createdAt: Date | null
-  updatedAt: Date | null
   createdById: string | null
   initialOrderAt: Date | null
   nextOrderAt: Date | null
   orderFrequency: number | null
   recurring: boolean | null
+  processingAt: Date | null
+  lastRunAt: Date | null
+  lastError: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SpecialOrderCountAggregateOutputType = {
   id: number
   items: number
   notes: number
-  brandId: number
   supplierId: number
+  customer: number
+  customerContact: number
+  comments: number
   orderStatus: number
+  requestType: number
   existingItem: number
-  createdAt: number
-  updatedAt: number
   createdById: number
   initialOrderAt: number
   nextOrderAt: number
   orderFrequency: number
   recurring: number
+  processingAt: number
+  lastRunAt: number
+  lastError: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -96,50 +114,68 @@ export type SpecialOrderSumAggregateInputType = {
 export type SpecialOrderMinAggregateInputType = {
   id?: true
   notes?: true
-  brandId?: true
   supplierId?: true
+  customer?: true
+  customerContact?: true
+  comments?: true
   orderStatus?: true
+  requestType?: true
   existingItem?: true
-  createdAt?: true
-  updatedAt?: true
   createdById?: true
   initialOrderAt?: true
   nextOrderAt?: true
   orderFrequency?: true
   recurring?: true
+  processingAt?: true
+  lastRunAt?: true
+  lastError?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type SpecialOrderMaxAggregateInputType = {
   id?: true
   notes?: true
-  brandId?: true
   supplierId?: true
+  customer?: true
+  customerContact?: true
+  comments?: true
   orderStatus?: true
+  requestType?: true
   existingItem?: true
-  createdAt?: true
-  updatedAt?: true
   createdById?: true
   initialOrderAt?: true
   nextOrderAt?: true
   orderFrequency?: true
   recurring?: true
+  processingAt?: true
+  lastRunAt?: true
+  lastError?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type SpecialOrderCountAggregateInputType = {
   id?: true
   items?: true
   notes?: true
-  brandId?: true
   supplierId?: true
+  customer?: true
+  customerContact?: true
+  comments?: true
   orderStatus?: true
+  requestType?: true
   existingItem?: true
-  createdAt?: true
-  updatedAt?: true
   createdById?: true
   initialOrderAt?: true
   nextOrderAt?: true
   orderFrequency?: true
   recurring?: true
+  processingAt?: true
+  lastRunAt?: true
+  lastError?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -233,17 +269,23 @@ export type SpecialOrderGroupByOutputType = {
   id: string
   items: runtime.JsonValue | null
   notes: string | null
-  brandId: string | null
   supplierId: string | null
+  customer: string | null
+  customerContact: string | null
+  comments: string | null
   orderStatus: $Enums.OrderStatus
-  existingItem: boolean
-  createdAt: Date
-  updatedAt: Date
+  requestType: $Enums.RequestType
+  existingItem: boolean | null
   createdById: string | null
   initialOrderAt: Date | null
   nextOrderAt: Date | null
   orderFrequency: number | null
   recurring: boolean
+  processingAt: Date | null
+  lastRunAt: Date | null
+  lastError: string | null
+  createdAt: Date
+  updatedAt: Date
   _count: SpecialOrderCountAggregateOutputType | null
   _avg: SpecialOrderAvgAggregateOutputType | null
   _sum: SpecialOrderSumAggregateOutputType | null
@@ -273,18 +315,23 @@ export type SpecialOrderWhereInput = {
   id?: Prisma.StringFilter<"SpecialOrder"> | string
   items?: Prisma.JsonNullableFilter<"SpecialOrder">
   notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  brandId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+  requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
+  existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
   createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   initialOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
   nextOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
   orderFrequency?: Prisma.IntNullableFilter<"SpecialOrder"> | number | null
   recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-  Brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
+  processingAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastRunAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastError?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
   User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
 }
@@ -293,18 +340,23 @@ export type SpecialOrderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   items?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  brandId?: Prisma.SortOrderInput | Prisma.SortOrder
   supplierId?: Prisma.SortOrderInput | Prisma.SortOrder
+  customer?: Prisma.SortOrderInput | Prisma.SortOrder
+  customerContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  comments?: Prisma.SortOrderInput | Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
-  existingItem?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  existingItem?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   initialOrderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   nextOrderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   orderFrequency?: Prisma.SortOrderInput | Prisma.SortOrder
   recurring?: Prisma.SortOrder
-  Brand?: Prisma.BrandOrderByWithRelationInput
+  processingAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastRunAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Supplier?: Prisma.SupplierOrderByWithRelationInput
 }
@@ -316,18 +368,23 @@ export type SpecialOrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SpecialOrderWhereInput | Prisma.SpecialOrderWhereInput[]
   items?: Prisma.JsonNullableFilter<"SpecialOrder">
   notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  brandId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+  requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
+  existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
   createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   initialOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
   nextOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
   orderFrequency?: Prisma.IntNullableFilter<"SpecialOrder"> | number | null
   recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-  Brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
+  processingAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastRunAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastError?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
   User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
 }, "id">
@@ -336,17 +393,23 @@ export type SpecialOrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   items?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  brandId?: Prisma.SortOrderInput | Prisma.SortOrder
   supplierId?: Prisma.SortOrderInput | Prisma.SortOrder
+  customer?: Prisma.SortOrderInput | Prisma.SortOrder
+  customerContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  comments?: Prisma.SortOrderInput | Prisma.SortOrder
   orderStatus?: Prisma.SortOrder
-  existingItem?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  existingItem?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   initialOrderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   nextOrderAt?: Prisma.SortOrderInput | Prisma.SortOrder
   orderFrequency?: Prisma.SortOrderInput | Prisma.SortOrder
   recurring?: Prisma.SortOrder
+  processingAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastRunAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.SpecialOrderCountOrderByAggregateInput
   _avg?: Prisma.SpecialOrderAvgOrderByAggregateInput
   _max?: Prisma.SpecialOrderMaxOrderByAggregateInput
@@ -361,32 +424,44 @@ export type SpecialOrderScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SpecialOrder"> | string
   items?: Prisma.JsonNullableWithAggregatesFilter<"SpecialOrder">
   notes?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
-  brandId?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   supplierId?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  customer?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  customerContact?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  comments?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusWithAggregatesFilter<"SpecialOrder"> | $Enums.OrderStatus
-  existingItem?: Prisma.BoolWithAggregatesFilter<"SpecialOrder"> | boolean
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
+  requestType?: Prisma.EnumRequestTypeWithAggregatesFilter<"SpecialOrder"> | $Enums.RequestType
+  existingItem?: Prisma.BoolNullableWithAggregatesFilter<"SpecialOrder"> | boolean | null
   createdById?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   initialOrderAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SpecialOrder"> | Date | string | null
   nextOrderAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SpecialOrder"> | Date | string | null
   orderFrequency?: Prisma.IntNullableWithAggregatesFilter<"SpecialOrder"> | number | null
   recurring?: Prisma.BoolWithAggregatesFilter<"SpecialOrder"> | boolean
+  processingAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SpecialOrder"> | Date | string | null
+  lastRunAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SpecialOrder"> | Date | string | null
+  lastError?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
 }
 
 export type SpecialOrderCreateInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
-  Brand?: Prisma.BrandCreateNestedOneWithoutSpecialOrderInput
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
   User?: Prisma.UserCreateNestedOneWithoutSpecialOrderInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutSpecialOrderInput
 }
@@ -395,32 +470,44 @@ export type SpecialOrderUncheckedCreateInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
   supplierId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   createdById?: string | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Brand?: Prisma.BrandUpdateOneWithoutSpecialOrderNestedInput
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneWithoutSpecialOrderNestedInput
   Supplier?: Prisma.SupplierUpdateOneWithoutSpecialOrderNestedInput
 }
@@ -429,65 +516,165 @@ export type SpecialOrderUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SpecialOrderCreateManyInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
   supplierId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   createdById?: string | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SpecialOrderUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SpecialOrderCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  items?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  supplierId?: Prisma.SortOrder
+  customer?: Prisma.SortOrder
+  customerContact?: Prisma.SortOrder
+  comments?: Prisma.SortOrder
+  orderStatus?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  existingItem?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  initialOrderAt?: Prisma.SortOrder
+  nextOrderAt?: Prisma.SortOrder
+  orderFrequency?: Prisma.SortOrder
+  recurring?: Prisma.SortOrder
+  processingAt?: Prisma.SortOrder
+  lastRunAt?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type SpecialOrderAvgOrderByAggregateInput = {
+  orderFrequency?: Prisma.SortOrder
+}
+
+export type SpecialOrderMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  supplierId?: Prisma.SortOrder
+  customer?: Prisma.SortOrder
+  customerContact?: Prisma.SortOrder
+  comments?: Prisma.SortOrder
+  orderStatus?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  existingItem?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  initialOrderAt?: Prisma.SortOrder
+  nextOrderAt?: Prisma.SortOrder
+  orderFrequency?: Prisma.SortOrder
+  recurring?: Prisma.SortOrder
+  processingAt?: Prisma.SortOrder
+  lastRunAt?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type SpecialOrderMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  supplierId?: Prisma.SortOrder
+  customer?: Prisma.SortOrder
+  customerContact?: Prisma.SortOrder
+  comments?: Prisma.SortOrder
+  orderStatus?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  existingItem?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  initialOrderAt?: Prisma.SortOrder
+  nextOrderAt?: Prisma.SortOrder
+  orderFrequency?: Prisma.SortOrder
+  recurring?: Prisma.SortOrder
+  processingAt?: Prisma.SortOrder
+  lastRunAt?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type SpecialOrderSumOrderByAggregateInput = {
+  orderFrequency?: Prisma.SortOrder
 }
 
 export type SpecialOrderListRelationFilter = {
@@ -500,115 +687,24 @@ export type SpecialOrderOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type SpecialOrderCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  items?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  brandId?: Prisma.SortOrder
-  supplierId?: Prisma.SortOrder
-  orderStatus?: Prisma.SortOrder
-  existingItem?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  initialOrderAt?: Prisma.SortOrder
-  nextOrderAt?: Prisma.SortOrder
-  orderFrequency?: Prisma.SortOrder
-  recurring?: Prisma.SortOrder
-}
-
-export type SpecialOrderAvgOrderByAggregateInput = {
-  orderFrequency?: Prisma.SortOrder
-}
-
-export type SpecialOrderMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  brandId?: Prisma.SortOrder
-  supplierId?: Prisma.SortOrder
-  orderStatus?: Prisma.SortOrder
-  existingItem?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  initialOrderAt?: Prisma.SortOrder
-  nextOrderAt?: Prisma.SortOrder
-  orderFrequency?: Prisma.SortOrder
-  recurring?: Prisma.SortOrder
-}
-
-export type SpecialOrderMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  brandId?: Prisma.SortOrder
-  supplierId?: Prisma.SortOrder
-  orderStatus?: Prisma.SortOrder
-  existingItem?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  initialOrderAt?: Prisma.SortOrder
-  nextOrderAt?: Prisma.SortOrder
-  orderFrequency?: Prisma.SortOrder
-  recurring?: Prisma.SortOrder
-}
-
-export type SpecialOrderSumOrderByAggregateInput = {
-  orderFrequency?: Prisma.SortOrder
-}
-
-export type SpecialOrderCreateNestedManyWithoutBrandInput = {
-  create?: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput> | Prisma.SpecialOrderCreateWithoutBrandInput[] | Prisma.SpecialOrderUncheckedCreateWithoutBrandInput[]
-  connectOrCreate?: Prisma.SpecialOrderCreateOrConnectWithoutBrandInput | Prisma.SpecialOrderCreateOrConnectWithoutBrandInput[]
-  createMany?: Prisma.SpecialOrderCreateManyBrandInputEnvelope
-  connect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-}
-
-export type SpecialOrderUncheckedCreateNestedManyWithoutBrandInput = {
-  create?: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput> | Prisma.SpecialOrderCreateWithoutBrandInput[] | Prisma.SpecialOrderUncheckedCreateWithoutBrandInput[]
-  connectOrCreate?: Prisma.SpecialOrderCreateOrConnectWithoutBrandInput | Prisma.SpecialOrderCreateOrConnectWithoutBrandInput[]
-  createMany?: Prisma.SpecialOrderCreateManyBrandInputEnvelope
-  connect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-}
-
-export type SpecialOrderUpdateManyWithoutBrandNestedInput = {
-  create?: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput> | Prisma.SpecialOrderCreateWithoutBrandInput[] | Prisma.SpecialOrderUncheckedCreateWithoutBrandInput[]
-  connectOrCreate?: Prisma.SpecialOrderCreateOrConnectWithoutBrandInput | Prisma.SpecialOrderCreateOrConnectWithoutBrandInput[]
-  upsert?: Prisma.SpecialOrderUpsertWithWhereUniqueWithoutBrandInput | Prisma.SpecialOrderUpsertWithWhereUniqueWithoutBrandInput[]
-  createMany?: Prisma.SpecialOrderCreateManyBrandInputEnvelope
-  set?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  disconnect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  delete?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  connect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  update?: Prisma.SpecialOrderUpdateWithWhereUniqueWithoutBrandInput | Prisma.SpecialOrderUpdateWithWhereUniqueWithoutBrandInput[]
-  updateMany?: Prisma.SpecialOrderUpdateManyWithWhereWithoutBrandInput | Prisma.SpecialOrderUpdateManyWithWhereWithoutBrandInput[]
-  deleteMany?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
-}
-
-export type SpecialOrderUncheckedUpdateManyWithoutBrandNestedInput = {
-  create?: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput> | Prisma.SpecialOrderCreateWithoutBrandInput[] | Prisma.SpecialOrderUncheckedCreateWithoutBrandInput[]
-  connectOrCreate?: Prisma.SpecialOrderCreateOrConnectWithoutBrandInput | Prisma.SpecialOrderCreateOrConnectWithoutBrandInput[]
-  upsert?: Prisma.SpecialOrderUpsertWithWhereUniqueWithoutBrandInput | Prisma.SpecialOrderUpsertWithWhereUniqueWithoutBrandInput[]
-  createMany?: Prisma.SpecialOrderCreateManyBrandInputEnvelope
-  set?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  disconnect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  delete?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  connect?: Prisma.SpecialOrderWhereUniqueInput | Prisma.SpecialOrderWhereUniqueInput[]
-  update?: Prisma.SpecialOrderUpdateWithWhereUniqueWithoutBrandInput | Prisma.SpecialOrderUpdateWithWhereUniqueWithoutBrandInput[]
-  updateMany?: Prisma.SpecialOrderUpdateManyWithWhereWithoutBrandInput | Prisma.SpecialOrderUpdateManyWithWhereWithoutBrandInput[]
-  deleteMany?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
-}
-
 export type EnumOrderStatusFieldUpdateOperationsInput = {
   set?: $Enums.OrderStatus
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type EnumRequestTypeFieldUpdateOperationsInput = {
+  set?: $Enums.RequestType
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type SpecialOrderCreateNestedManyWithoutSupplierInput = {
@@ -695,97 +791,25 @@ export type SpecialOrderUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
 }
 
-export type SpecialOrderCreateWithoutBrandInput = {
-  id: string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
-  initialOrderAt?: Date | string | null
-  nextOrderAt?: Date | string | null
-  orderFrequency?: number | null
-  recurring?: boolean
-  User?: Prisma.UserCreateNestedOneWithoutSpecialOrderInput
-  Supplier?: Prisma.SupplierCreateNestedOneWithoutSpecialOrderInput
-}
-
-export type SpecialOrderUncheckedCreateWithoutBrandInput = {
-  id: string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  supplierId?: string | null
-  orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
-  createdById?: string | null
-  initialOrderAt?: Date | string | null
-  nextOrderAt?: Date | string | null
-  orderFrequency?: number | null
-  recurring?: boolean
-}
-
-export type SpecialOrderCreateOrConnectWithoutBrandInput = {
-  where: Prisma.SpecialOrderWhereUniqueInput
-  create: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput>
-}
-
-export type SpecialOrderCreateManyBrandInputEnvelope = {
-  data: Prisma.SpecialOrderCreateManyBrandInput | Prisma.SpecialOrderCreateManyBrandInput[]
-  skipDuplicates?: boolean
-}
-
-export type SpecialOrderUpsertWithWhereUniqueWithoutBrandInput = {
-  where: Prisma.SpecialOrderWhereUniqueInput
-  update: Prisma.XOR<Prisma.SpecialOrderUpdateWithoutBrandInput, Prisma.SpecialOrderUncheckedUpdateWithoutBrandInput>
-  create: Prisma.XOR<Prisma.SpecialOrderCreateWithoutBrandInput, Prisma.SpecialOrderUncheckedCreateWithoutBrandInput>
-}
-
-export type SpecialOrderUpdateWithWhereUniqueWithoutBrandInput = {
-  where: Prisma.SpecialOrderWhereUniqueInput
-  data: Prisma.XOR<Prisma.SpecialOrderUpdateWithoutBrandInput, Prisma.SpecialOrderUncheckedUpdateWithoutBrandInput>
-}
-
-export type SpecialOrderUpdateManyWithWhereWithoutBrandInput = {
-  where: Prisma.SpecialOrderScalarWhereInput
-  data: Prisma.XOR<Prisma.SpecialOrderUpdateManyMutationInput, Prisma.SpecialOrderUncheckedUpdateManyWithoutBrandInput>
-}
-
-export type SpecialOrderScalarWhereInput = {
-  AND?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
-  OR?: Prisma.SpecialOrderScalarWhereInput[]
-  NOT?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
-  id?: Prisma.StringFilter<"SpecialOrder"> | string
-  items?: Prisma.JsonNullableFilter<"SpecialOrder">
-  notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  brandId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
-  createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  initialOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
-  nextOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
-  orderFrequency?: Prisma.IntNullableFilter<"SpecialOrder"> | number | null
-  recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
-}
-
 export type SpecialOrderCreateWithoutSupplierInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
-  Brand?: Prisma.BrandCreateNestedOneWithoutSpecialOrderInput
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
   User?: Prisma.UserCreateNestedOneWithoutSpecialOrderInput
 }
 
@@ -793,16 +817,22 @@ export type SpecialOrderUncheckedCreateWithoutSupplierInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   createdById?: string | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderCreateOrConnectWithoutSupplierInput = {
@@ -831,19 +861,51 @@ export type SpecialOrderUpdateManyWithWhereWithoutSupplierInput = {
   data: Prisma.XOR<Prisma.SpecialOrderUpdateManyMutationInput, Prisma.SpecialOrderUncheckedUpdateManyWithoutSupplierInput>
 }
 
+export type SpecialOrderScalarWhereInput = {
+  AND?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
+  OR?: Prisma.SpecialOrderScalarWhereInput[]
+  NOT?: Prisma.SpecialOrderScalarWhereInput | Prisma.SpecialOrderScalarWhereInput[]
+  id?: Prisma.StringFilter<"SpecialOrder"> | string
+  items?: Prisma.JsonNullableFilter<"SpecialOrder">
+  notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
+  requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
+  existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
+  createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  initialOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  nextOrderAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  orderFrequency?: Prisma.IntNullableFilter<"SpecialOrder"> | number | null
+  recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
+  processingAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastRunAt?: Prisma.DateTimeNullableFilter<"SpecialOrder"> | Date | string | null
+  lastError?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
+}
+
 export type SpecialOrderCreateWithoutUserInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
-  Brand?: Prisma.BrandCreateNestedOneWithoutSpecialOrderInput
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
   Supplier?: Prisma.SupplierCreateNestedOneWithoutSpecialOrderInput
 }
 
@@ -851,16 +913,22 @@ export type SpecialOrderUncheckedCreateWithoutUserInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
   supplierId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderCreateOrConnectWithoutUserInput = {
@@ -889,99 +957,47 @@ export type SpecialOrderUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.SpecialOrderUpdateManyMutationInput, Prisma.SpecialOrderUncheckedUpdateManyWithoutUserInput>
 }
 
-export type SpecialOrderCreateManyBrandInput = {
-  id: string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  supplierId?: string | null
-  orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
-  createdById?: string | null
-  initialOrderAt?: Date | string | null
-  nextOrderAt?: Date | string | null
-  orderFrequency?: number | null
-  recurring?: boolean
-}
-
-export type SpecialOrderUpdateWithoutBrandInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  User?: Prisma.UserUpdateOneWithoutSpecialOrderNestedInput
-  Supplier?: Prisma.SupplierUpdateOneWithoutSpecialOrderNestedInput
-}
-
-export type SpecialOrderUncheckedUpdateWithoutBrandInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-}
-
-export type SpecialOrderUncheckedUpdateManyWithoutBrandInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-}
-
 export type SpecialOrderCreateManySupplierInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   createdById?: string | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderUpdateWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Brand?: Prisma.BrandUpdateOneWithoutSpecialOrderNestedInput
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneWithoutSpecialOrderNestedInput
 }
 
@@ -989,63 +1005,87 @@ export type SpecialOrderUncheckedUpdateWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SpecialOrderUncheckedUpdateManyWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SpecialOrderCreateManyUserInput = {
   id: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
-  brandId?: string | null
   supplierId?: string | null
+  customer?: string | null
+  customerContact?: string | null
+  comments?: string | null
   orderStatus?: $Enums.OrderStatus
-  existingItem?: boolean
-  createdAt?: Date | string
-  updatedAt: Date | string
+  requestType?: $Enums.RequestType
+  existingItem?: boolean | null
   initialOrderAt?: Date | string | null
   nextOrderAt?: Date | string | null
   orderFrequency?: number | null
   recurring?: boolean
+  processingAt?: Date | string | null
+  lastRunAt?: Date | string | null
+  lastError?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
 }
 
 export type SpecialOrderUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Brand?: Prisma.BrandUpdateOneWithoutSpecialOrderNestedInput
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Supplier?: Prisma.SupplierUpdateOneWithoutSpecialOrderNestedInput
 }
 
@@ -1053,32 +1093,44 @@ export type SpecialOrderUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SpecialOrderUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orderStatus?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  existingItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  existingItem?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   initialOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   nextOrderAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   orderFrequency?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  processingAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastRunAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1087,18 +1139,23 @@ export type SpecialOrderSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   items?: boolean
   notes?: boolean
-  brandId?: boolean
   supplierId?: boolean
+  customer?: boolean
+  customerContact?: boolean
+  comments?: boolean
   orderStatus?: boolean
+  requestType?: boolean
   existingItem?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   createdById?: boolean
   initialOrderAt?: boolean
   nextOrderAt?: boolean
   orderFrequency?: boolean
   recurring?: boolean
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
+  processingAt?: boolean
+  lastRunAt?: boolean
+  lastError?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }, ExtArgs["result"]["specialOrder"]>
@@ -1107,18 +1164,23 @@ export type SpecialOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   items?: boolean
   notes?: boolean
-  brandId?: boolean
   supplierId?: boolean
+  customer?: boolean
+  customerContact?: boolean
+  comments?: boolean
   orderStatus?: boolean
+  requestType?: boolean
   existingItem?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   createdById?: boolean
   initialOrderAt?: boolean
   nextOrderAt?: boolean
   orderFrequency?: boolean
   recurring?: boolean
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
+  processingAt?: boolean
+  lastRunAt?: boolean
+  lastError?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }, ExtArgs["result"]["specialOrder"]>
@@ -1127,18 +1189,23 @@ export type SpecialOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   items?: boolean
   notes?: boolean
-  brandId?: boolean
   supplierId?: boolean
+  customer?: boolean
+  customerContact?: boolean
+  comments?: boolean
   orderStatus?: boolean
+  requestType?: boolean
   existingItem?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   createdById?: boolean
   initialOrderAt?: boolean
   nextOrderAt?: boolean
   orderFrequency?: boolean
   recurring?: boolean
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
+  processingAt?: boolean
+  lastRunAt?: boolean
+  lastError?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }, ExtArgs["result"]["specialOrder"]>
@@ -1147,32 +1214,35 @@ export type SpecialOrderSelectScalar = {
   id?: boolean
   items?: boolean
   notes?: boolean
-  brandId?: boolean
   supplierId?: boolean
+  customer?: boolean
+  customerContact?: boolean
+  comments?: boolean
   orderStatus?: boolean
+  requestType?: boolean
   existingItem?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   createdById?: boolean
   initialOrderAt?: boolean
   nextOrderAt?: boolean
   orderFrequency?: boolean
   recurring?: boolean
+  processingAt?: boolean
+  lastRunAt?: boolean
+  lastError?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type SpecialOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "items" | "notes" | "brandId" | "supplierId" | "orderStatus" | "existingItem" | "createdAt" | "updatedAt" | "createdById" | "initialOrderAt" | "nextOrderAt" | "orderFrequency" | "recurring", ExtArgs["result"]["specialOrder"]>
+export type SpecialOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "items" | "notes" | "supplierId" | "customer" | "customerContact" | "comments" | "orderStatus" | "requestType" | "existingItem" | "createdById" | "initialOrderAt" | "nextOrderAt" | "orderFrequency" | "recurring" | "processingAt" | "lastRunAt" | "lastError" | "createdAt" | "updatedAt", ExtArgs["result"]["specialOrder"]>
 export type SpecialOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }
 export type SpecialOrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }
 export type SpecialOrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Brand?: boolean | Prisma.SpecialOrder$BrandArgs<ExtArgs>
   User?: boolean | Prisma.SpecialOrder$UserArgs<ExtArgs>
   Supplier?: boolean | Prisma.SpecialOrder$SupplierArgs<ExtArgs>
 }
@@ -1180,7 +1250,6 @@ export type SpecialOrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $SpecialOrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SpecialOrder"
   objects: {
-    Brand: Prisma.$BrandPayload<ExtArgs> | null
     User: Prisma.$UserPayload<ExtArgs> | null
     Supplier: Prisma.$SupplierPayload<ExtArgs> | null
   }
@@ -1188,17 +1257,23 @@ export type $SpecialOrderPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     items: runtime.JsonValue | null
     notes: string | null
-    brandId: string | null
     supplierId: string | null
+    customer: string | null
+    customerContact: string | null
+    comments: string | null
     orderStatus: $Enums.OrderStatus
-    existingItem: boolean
-    createdAt: Date
-    updatedAt: Date
+    requestType: $Enums.RequestType
+    existingItem: boolean | null
     createdById: string | null
     initialOrderAt: Date | null
     nextOrderAt: Date | null
     orderFrequency: number | null
     recurring: boolean
+    processingAt: Date | null
+    lastRunAt: Date | null
+    lastError: string | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["specialOrder"]>
   composites: {}
 }
@@ -1593,7 +1668,6 @@ readonly fields: SpecialOrderFieldRefs;
  */
 export interface Prisma__SpecialOrderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Brand<T extends Prisma.SpecialOrder$BrandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpecialOrder$BrandArgs<ExtArgs>>): Prisma.Prisma__BrandClient<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   User<T extends Prisma.SpecialOrder$UserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpecialOrder$UserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Supplier<T extends Prisma.SpecialOrder$SupplierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpecialOrder$SupplierArgs<ExtArgs>>): Prisma.Prisma__SupplierClient<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1628,17 +1702,23 @@ export interface SpecialOrderFieldRefs {
   readonly id: Prisma.FieldRef<"SpecialOrder", 'String'>
   readonly items: Prisma.FieldRef<"SpecialOrder", 'Json'>
   readonly notes: Prisma.FieldRef<"SpecialOrder", 'String'>
-  readonly brandId: Prisma.FieldRef<"SpecialOrder", 'String'>
   readonly supplierId: Prisma.FieldRef<"SpecialOrder", 'String'>
+  readonly customer: Prisma.FieldRef<"SpecialOrder", 'String'>
+  readonly customerContact: Prisma.FieldRef<"SpecialOrder", 'String'>
+  readonly comments: Prisma.FieldRef<"SpecialOrder", 'String'>
   readonly orderStatus: Prisma.FieldRef<"SpecialOrder", 'OrderStatus'>
+  readonly requestType: Prisma.FieldRef<"SpecialOrder", 'RequestType'>
   readonly existingItem: Prisma.FieldRef<"SpecialOrder", 'Boolean'>
-  readonly createdAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"SpecialOrder", 'String'>
   readonly initialOrderAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
   readonly nextOrderAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
   readonly orderFrequency: Prisma.FieldRef<"SpecialOrder", 'Int'>
   readonly recurring: Prisma.FieldRef<"SpecialOrder", 'Boolean'>
+  readonly processingAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
+  readonly lastRunAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
+  readonly lastError: Prisma.FieldRef<"SpecialOrder", 'String'>
+  readonly createdAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"SpecialOrder", 'DateTime'>
 }
     
 
@@ -2032,25 +2112,6 @@ export type SpecialOrderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many SpecialOrders to delete.
    */
   limit?: number
-}
-
-/**
- * SpecialOrder.Brand
- */
-export type SpecialOrder$BrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Brand
-   */
-  select?: Prisma.BrandSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Brand
-   */
-  omit?: Prisma.BrandOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BrandInclude<ExtArgs> | null
-  where?: Prisma.BrandWhereInput
 }
 
 /**

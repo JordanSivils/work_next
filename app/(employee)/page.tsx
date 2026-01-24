@@ -1,4 +1,4 @@
-import { cards } from '@/app/components/cards';
+import { cards } from '@/app/(employee)/components/cards';
 import { HomeCard } from './components/home-card';
 
 export default function Home() {
