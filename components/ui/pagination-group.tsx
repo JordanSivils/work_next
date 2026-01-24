@@ -15,16 +15,16 @@ interface PaginationGroupProps {
 function PaginationLoadingState() {
     return (
         <div className="flex items-center gap-1">
-      <Skeleton className="h-6 w-6 rounded-md" />
-      <Skeleton className="h-6 w-6 rounded-md" />
+        <Skeleton className="h-6 w-6 rounded-md" />
+        <Skeleton className="h-6 w-6 rounded-md" />
 
-      <Skeleton className="h-2 w-3" />
-      <Skeleton className="h-2 w-1" />
-      <Skeleton className="h-2 w-3" />
+        <Skeleton className="h-2 w-3" />
+        <Skeleton className="h-2 w-1" />
+        <Skeleton className="h-2 w-3" />
 
-      <Skeleton className="h-6 w-6 rounded-md" />
-      <Skeleton className="h-6 w-6 rounded-md" />
-    </div>
+        <Skeleton className="h-6 w-6 rounded-md" />
+        <Skeleton className="h-6 w-6 rounded-md" />
+        </div>
     )
 }
 

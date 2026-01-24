@@ -1,4 +1,3 @@
-import { BaseListResponse } from "../base-interfaces/base-responses";
 
 export type ProductStatus = 'standard' | 'negative';
 export type ItemSortField = "description" | "available";
@@ -17,15 +16,11 @@ export interface Product {
 export interface ProductQuery  {
   status?: ProductStatus
   brand?: string
-  suppliers?: string
+  supplier?: string
   category?: string
   search?: string
   sort?: SortOpts
   page?: string
   limit?: string
   dir?: "asc" | "desc"
-}
-
-export interface ProductResponse extends BaseListResponse {
-  data: Product[]
 }
