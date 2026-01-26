@@ -214,9 +214,9 @@ export type UserWhereInput = {
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  Brand?: Prisma.BrandListRelationFilter
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
   Supplier?: Prisma.SupplierListRelationFilter
+  Brand?: Prisma.BrandListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -229,9 +229,9 @@ export type UserOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  Brand?: Prisma.BrandOrderByRelationAggregateInput
   SpecialOrder?: Prisma.SpecialOrderOrderByRelationAggregateInput
   Supplier?: Prisma.SupplierOrderByRelationAggregateInput
+  Brand?: Prisma.BrandOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -247,9 +247,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  Brand?: Prisma.BrandListRelationFilter
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
   Supplier?: Prisma.SupplierListRelationFilter
+  Brand?: Prisma.BrandListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -283,7 +283,7 @@ export type UserScalarWhereWithAggregatesInput = {
 }
 
 export type UserCreateInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -291,14 +291,14 @@ export type UserCreateInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -306,10 +306,10 @@ export type UserUncheckedCreateInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -322,9 +322,9 @@ export type UserUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
   SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -337,13 +337,13 @@ export type UserUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
   SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -351,7 +351,7 @@ export type UserCreateManyInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -468,7 +468,7 @@ export type UserUpdateOneWithoutSupplierNestedInput = {
 }
 
 export type UserCreateWithoutBrandInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -476,13 +476,13 @@ export type UserCreateWithoutBrandInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBrandInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -490,7 +490,7 @@ export type UserUncheckedCreateWithoutBrandInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
 }
@@ -540,7 +540,7 @@ export type UserUncheckedUpdateWithoutBrandInput = {
 }
 
 export type UserCreateWithoutSpecialOrderInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -548,13 +548,13 @@ export type UserCreateWithoutSpecialOrderInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSpecialOrderInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -562,9 +562,9 @@ export type UserUncheckedCreateWithoutSpecialOrderInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSpecialOrderInput = {
@@ -593,8 +593,8 @@ export type UserUpdateWithoutSpecialOrderInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpecialOrderInput = {
@@ -607,12 +607,12 @@ export type UserUncheckedUpdateWithoutSpecialOrderInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -620,13 +620,13 @@ export type UserCreateWithoutSupplierInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   clerkId: string
   firstName: string
   lastName: string
@@ -634,9 +634,9 @@ export type UserUncheckedCreateWithoutSupplierInput = {
   phoneNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  updatedAt: Date | string
-  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSupplierInput = {
@@ -665,8 +665,8 @@ export type UserUpdateWithoutSupplierInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
   SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupplierInput = {
@@ -679,8 +679,8 @@ export type UserUncheckedUpdateWithoutSupplierInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
   SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -689,15 +689,15 @@ export type UserUncheckedUpdateWithoutSupplierInput = {
  */
 
 export type UserCountOutputType = {
-  Brand: number
   SpecialOrder: number
   Supplier: number
+  Brand: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Brand?: boolean | UserCountOutputTypeCountBrandArgs
   SpecialOrder?: boolean | UserCountOutputTypeCountSpecialOrderArgs
   Supplier?: boolean | UserCountOutputTypeCountSupplierArgs
+  Brand?: boolean | UserCountOutputTypeCountBrandArgs
 }
 
 /**
@@ -708,13 +708,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountBrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BrandWhereInput
 }
 
 /**
@@ -731,6 +724,13 @@ export type UserCountOutputTypeCountSupplierArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.SupplierWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BrandWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -742,9 +742,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
   SpecialOrder?: boolean | Prisma.User$SpecialOrderArgs<ExtArgs>
   Supplier?: boolean | Prisma.User$SupplierArgs<ExtArgs>
+  Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -786,9 +786,9 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "firstName" | "lastName" | "email" | "phoneNumber" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
   SpecialOrder?: boolean | Prisma.User$SpecialOrderArgs<ExtArgs>
   Supplier?: boolean | Prisma.User$SupplierArgs<ExtArgs>
+  Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -797,9 +797,9 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    Brand: Prisma.$BrandPayload<ExtArgs>[]
     SpecialOrder: Prisma.$SpecialOrderPayload<ExtArgs>[]
     Supplier: Prisma.$SupplierPayload<ExtArgs>[]
+    Brand: Prisma.$BrandPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1205,9 +1205,9 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Brand<T extends Prisma.User$BrandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BrandArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   SpecialOrder<T extends Prisma.User$SpecialOrderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$SpecialOrderArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpecialOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Supplier<T extends Prisma.User$SupplierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$SupplierArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Brand<T extends Prisma.User$BrandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BrandArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1634,30 +1634,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.Brand
- */
-export type User$BrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Brand
-   */
-  select?: Prisma.BrandSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Brand
-   */
-  omit?: Prisma.BrandOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BrandInclude<ExtArgs> | null
-  where?: Prisma.BrandWhereInput
-  orderBy?: Prisma.BrandOrderByWithRelationInput | Prisma.BrandOrderByWithRelationInput[]
-  cursor?: Prisma.BrandWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
-}
-
-/**
  * User.SpecialOrder
  */
 export type User$SpecialOrderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1703,6 +1679,30 @@ export type User$SupplierArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SupplierScalarFieldEnum | Prisma.SupplierScalarFieldEnum[]
+}
+
+/**
+ * User.Brand
+ */
+export type User$BrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Brand
+   */
+  select?: Prisma.BrandSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Brand
+   */
+  omit?: Prisma.BrandOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandInclude<ExtArgs> | null
+  where?: Prisma.BrandWhereInput
+  orderBy?: Prisma.BrandOrderByWithRelationInput | Prisma.BrandOrderByWithRelationInput[]
+  cursor?: Prisma.BrandWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
 }
 
 /**

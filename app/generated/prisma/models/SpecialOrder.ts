@@ -444,7 +444,7 @@ export type SpecialOrderScalarWhereWithAggregatesInput = {
 }
 
 export type SpecialOrderCreateInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   customer?: string | null
@@ -461,13 +461,13 @@ export type SpecialOrderCreateInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   User?: Prisma.UserCreateNestedOneWithoutSpecialOrderInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutSpecialOrderInput
 }
 
 export type SpecialOrderUncheckedCreateInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   supplierId?: string | null
@@ -486,7 +486,7 @@ export type SpecialOrderUncheckedCreateInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderUpdateInput = {
@@ -536,7 +536,7 @@ export type SpecialOrderUncheckedUpdateInput = {
 }
 
 export type SpecialOrderCreateManyInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   supplierId?: string | null
@@ -555,7 +555,7 @@ export type SpecialOrderCreateManyInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderUpdateManyMutationInput = {
@@ -699,14 +699,6 @@ export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type SpecialOrderCreateNestedManyWithoutSupplierInput = {
   create?: Prisma.XOR<Prisma.SpecialOrderCreateWithoutSupplierInput, Prisma.SpecialOrderUncheckedCreateWithoutSupplierInput> | Prisma.SpecialOrderCreateWithoutSupplierInput[] | Prisma.SpecialOrderUncheckedCreateWithoutSupplierInput[]
   connectOrCreate?: Prisma.SpecialOrderCreateOrConnectWithoutSupplierInput | Prisma.SpecialOrderCreateOrConnectWithoutSupplierInput[]
@@ -792,7 +784,7 @@ export type SpecialOrderUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type SpecialOrderCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   customer?: string | null
@@ -809,12 +801,12 @@ export type SpecialOrderCreateWithoutSupplierInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   User?: Prisma.UserCreateNestedOneWithoutSpecialOrderInput
 }
 
 export type SpecialOrderUncheckedCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   customer?: string | null
@@ -832,7 +824,7 @@ export type SpecialOrderUncheckedCreateWithoutSupplierInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderCreateOrConnectWithoutSupplierInput = {
@@ -888,7 +880,7 @@ export type SpecialOrderScalarWhereInput = {
 }
 
 export type SpecialOrderCreateWithoutUserInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   customer?: string | null
@@ -905,12 +897,12 @@ export type SpecialOrderCreateWithoutUserInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   Supplier?: Prisma.SupplierCreateNestedOneWithoutSpecialOrderInput
 }
 
 export type SpecialOrderUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   supplierId?: string | null
@@ -928,7 +920,7 @@ export type SpecialOrderUncheckedCreateWithoutUserInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderCreateOrConnectWithoutUserInput = {
@@ -958,7 +950,7 @@ export type SpecialOrderUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type SpecialOrderCreateManySupplierInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   customer?: string | null
@@ -976,7 +968,7 @@ export type SpecialOrderCreateManySupplierInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderUpdateWithoutSupplierInput = {
@@ -1046,7 +1038,7 @@ export type SpecialOrderUncheckedUpdateManyWithoutSupplierInput = {
 }
 
 export type SpecialOrderCreateManyUserInput = {
-  id: string
+  id?: string
   items?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   supplierId?: string | null
@@ -1064,7 +1056,7 @@ export type SpecialOrderCreateManyUserInput = {
   lastRunAt?: Date | string | null
   lastError?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SpecialOrderUpdateWithoutUserInput = {

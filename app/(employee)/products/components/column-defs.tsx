@@ -1,13 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { SortHeader } from "@/components/ui/sort-header-button"
-import { Product } from "@/lib/actions/products/product-interfaces"
+import { Product, ProductTable } from "@/lib/actions/products/product-interfaces"
 import { type ColumnDef } from "@tanstack/react-table"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<ProductTable>[] = [
     {
         accessorKey: "description",
         header: ({ column }) => {

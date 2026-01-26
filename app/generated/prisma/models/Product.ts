@@ -335,20 +335,20 @@ export type ProductScalarWhereWithAggregatesInput = {
 }
 
 export type ProductCreateInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
   margin?: number | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   Brand?: Prisma.BrandCreateNestedOneWithoutProductInput
   Category?: Prisma.CategoryCreateNestedOneWithoutProductInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -357,7 +357,7 @@ export type ProductUncheckedCreateInput = {
   categoryId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductUpdateInput = {
@@ -387,7 +387,7 @@ export type ProductUncheckedUpdateInput = {
 }
 
 export type ProductCreateManyInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -396,7 +396,7 @@ export type ProductCreateManyInput = {
   categoryId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -607,28 +607,20 @@ export type ProductUncheckedUpdateManyWithoutSupplierNestedInput = {
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ProductCreateWithoutBrandInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
   margin?: number | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   Category?: Prisma.CategoryCreateNestedOneWithoutProductInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutBrandInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -636,7 +628,7 @@ export type ProductUncheckedCreateWithoutBrandInput = {
   categoryId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductCreateOrConnectWithoutBrandInput = {
@@ -682,19 +674,19 @@ export type ProductScalarWhereInput = {
 }
 
 export type ProductCreateWithoutCategoryInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
   margin?: number | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   Brand?: Prisma.BrandCreateNestedOneWithoutProductInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCategoryInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -702,7 +694,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   brandId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -732,19 +724,19 @@ export type ProductUpdateManyWithWhereWithoutCategoryInput = {
 }
 
 export type ProductCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
   margin?: number | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   Brand?: Prisma.BrandCreateNestedOneWithoutProductInput
   Category?: Prisma.CategoryCreateNestedOneWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutSupplierInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -752,7 +744,7 @@ export type ProductUncheckedCreateWithoutSupplierInput = {
   brandId?: string | null
   categoryId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductCreateOrConnectWithoutSupplierInput = {
@@ -782,7 +774,7 @@ export type ProductUpdateManyWithWhereWithoutSupplierInput = {
 }
 
 export type ProductCreateManyBrandInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -790,7 +782,7 @@ export type ProductCreateManyBrandInput = {
   categoryId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductUpdateWithoutBrandInput = {
@@ -830,7 +822,7 @@ export type ProductUncheckedUpdateManyWithoutBrandInput = {
 }
 
 export type ProductCreateManyCategoryInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -838,7 +830,7 @@ export type ProductCreateManyCategoryInput = {
   brandId?: string | null
   supplierId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductUpdateWithoutCategoryInput = {
@@ -878,7 +870,7 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
 }
 
 export type ProductCreateManySupplierInput = {
-  id: string
+  id?: string
   sku: string
   description: string
   available?: number | null
@@ -886,7 +878,7 @@ export type ProductCreateManySupplierInput = {
   brandId?: string | null
   categoryId?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type ProductUpdateWithoutSupplierInput = {

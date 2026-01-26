@@ -53,11 +53,11 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Brand: 'Brand',
   Category: 'Category',
+  ProductStaging: 'ProductStaging',
+  Product: 'Product',
   SpecialOrder: 'SpecialOrder',
   Supplier: 'Supplier',
-  User: 'User',
-  Product: 'Product',
-  ProductStaging: 'ProductStaging'
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -98,6 +98,37 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const ProductStagingScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  sku: 'sku',
+  available: 'available',
+  brand: 'brand',
+  category: 'category',
+  supplier: 'supplier',
+  margin: 'margin',
+  uploadId: 'uploadId'
+} as const
+
+export type ProductStagingScalarFieldEnum = (typeof ProductStagingScalarFieldEnum)[keyof typeof ProductStagingScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  sku: 'sku',
+  description: 'description',
+  available: 'available',
+  margin: 'margin',
+  brandId: 'brandId',
+  categoryId: 'categoryId',
+  supplierId: 'supplierId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
 export const SpecialOrderScalarFieldEnum = {
@@ -155,37 +186,6 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const ProductScalarFieldEnum = {
-  id: 'id',
-  sku: 'sku',
-  description: 'description',
-  available: 'available',
-  margin: 'margin',
-  brandId: 'brandId',
-  categoryId: 'categoryId',
-  supplierId: 'supplierId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
-
-export const ProductStagingScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  sku: 'sku',
-  available: 'available',
-  brand: 'brand',
-  category: 'category',
-  supplier: 'supplier',
-  margin: 'margin',
-  uploadId: 'uploadId'
-} as const
-
-export type ProductStagingScalarFieldEnum = (typeof ProductStagingScalarFieldEnum)[keyof typeof ProductStagingScalarFieldEnum]
 
 
 export const SortOrder = {

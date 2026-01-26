@@ -28,6 +28,16 @@ export type Brand = Prisma.BrandModel
  */
 export type Category = Prisma.CategoryModel
 /**
+ * Model ProductStaging
+ * 
+ */
+export type ProductStaging = Prisma.ProductStagingModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
  * Model SpecialOrder
  * 
  */
@@ -42,13 +52,3 @@ export type Supplier = Prisma.SupplierModel
  * 
  */
 export type User = Prisma.UserModel
-/**
- * Model Product
- * 
- */
-export type Product = Prisma.ProductModel
-/**
- * Model ProductStaging
- * 
- */
-export type ProductStaging = Prisma.ProductStagingModel

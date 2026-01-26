@@ -314,7 +314,7 @@ export type ProductStagingScalarWhereWithAggregatesInput = {
 }
 
 export type ProductStagingCreateInput = {
-  id: string
+  id?: string
   description?: string | null
   sku: string
   available?: number | null
@@ -326,7 +326,7 @@ export type ProductStagingCreateInput = {
 }
 
 export type ProductStagingUncheckedCreateInput = {
-  id: string
+  id?: string
   description?: string | null
   sku: string
   available?: number | null
@@ -362,7 +362,7 @@ export type ProductStagingUncheckedUpdateInput = {
 }
 
 export type ProductStagingCreateManyInput = {
-  id: string
+  id?: string
   description?: string | null
   sku: string
   available?: number | null
@@ -441,6 +441,22 @@ export type ProductStagingMinOrderByAggregateInput = {
 export type ProductStagingSumOrderByAggregateInput = {
   available?: Prisma.SortOrder
   margin?: Prisma.SortOrder
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 

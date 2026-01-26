@@ -1,8 +1,8 @@
 import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
 import { getBrandData } from "@/lib/actions/brands/get-brand-data";
-import { ExcelPdfForm } from "./excel-pdf-form";
+import { InventoryForm } from "./inventory-form";
 
-export async function ExcelPdfFormWrapper() {
+export async function InventoryFormWrapper() {
     const brands = await getBrandData();
 
     const mappedBrands = brands.data.map((brand): BrandComboboxInterface => ({
@@ -10,5 +10,5 @@ export async function ExcelPdfFormWrapper() {
         name: brand.name
     }))
 
-    return <ExcelPdfForm brands={mappedBrands} />
+    return <InventoryForm brands={mappedBrands} />
 }

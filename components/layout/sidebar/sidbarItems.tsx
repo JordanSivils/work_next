@@ -1,4 +1,6 @@
-import { InventoryForm } from '@/app/(employee)/components/inventory-form';
+import { CsvDialog } from '@/app/(employee)/components/forms/csv-dialog';
+import { SyncUsers } from '@/app/(employee)/components/forms/sync-users';
+import { InventoryForm } from '@/app/(employee)/components/forms/inventory-form';
 import {
   Barcode,
   BriefcaseBusiness,
@@ -8,6 +10,7 @@ import {
   Truck,
   Upload,
 } from 'lucide-react';
+import { InventoryFormWrapper } from '@/app/(employee)/components/forms/inventory-form-wrapper';
 
 export const sidebarItems = [
   {
@@ -40,12 +43,17 @@ export const sidebarItems = [
 export const sidebarQuick = [
   {
     title: 'Inventory',
-    url: '#',
-    button: <InventoryForm />
-  },
-  {
-    title: 'Product Upload',
-    url: '#',
-    icon: Upload,
+    button: <InventoryFormWrapper />
   },
 ];
+
+export const adminActions = [
+  {
+    title: 'Database Inventory',
+    button: <CsvDialog />
+  },
+  {
+    title: "Sync Users",
+    button: <SyncUsers />
+  }
+]

@@ -9,18 +9,18 @@ interface BrandTableWrapperProps {
 }
 
 export async function BrandTableWrapper({ brandQuery }: BrandTableWrapperProps) {
-    const asyncTimeout = () => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 4000)
-    })
-  }
-  await asyncTimeout();
+//     const asyncTimeout = () => {
+//     return new Promise((resolve) => {
+//       setTimeout(resolve, 4000)
+//     })
+//   }
+//   await asyncTimeout();
     const brands = await getBrandData(brandQuery);
 
     const mappedBrands = brands.data.map((brand): Brand => ({
         id: brand.id,
         name: brand.name,
-        itemCount: brand._count.Item
+        itemCount: brand._count.Product
     }))
 
     const nextPage = brands.nextPage

@@ -1,9 +1,13 @@
 'use server';
 
 import prisma from "@/lib/prisma-export/prisma-client";
-import { ProductQuery } from "./product-interfaces";
+import {  ProductQuery, ProductTable, ProudctTableRow } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
 import { auth } from "@clerk/nextjs/server";
+import { ActionRes } from "../action-results";
+import { redirect } from "next/navigation";
+import { BaseListResponse } from "../base-interfaces/base-responses";
+import { reqRoles } from "../require-auth";
 
 const productWhereBuilder = (q: ProductQuery): Prisma.ProductWhereInput => {
   return {
@@ -32,10 +36,10 @@ function sortBuilder(q: ProductQuery) {
   return orderBy
 }
 
-export async function getAllProducts(q: ProductQuery) {
-  const { isAuthenticated } = await auth()
-  if (!isAuthenticated) throw new Error("Not Authorized")
-    
+export async function getAllProducts(q: ProductQuery): Promise<ActionRes<BaseListResponse<ProudctTableRow>>> {
+  
+  await reqRoles.loggedIn()
+
   const where = productWhereBuilder(q)
   const orderBy = sortBuilder(q)
   const limit = Number(q.limit ?? 25)
@@ -52,20 +56,21 @@ export async function getAllProducts(q: ProductQuery) {
       take: limit,
       skip: skip ?? 25,
       include: {
-        Category: {
-          select: { name: true }
-        }
+        Category: true
       }
     }),
     prisma.product.count({ where })
   ])
   return {
-    page: page,
-    limit: limit,
-    total,
-    pageCount: Math.ceil(total / limit),
-    nextPage: page * limit < total,
-    previousPage: page > 1,
-    data
+    ok: true,
+    result: {
+      page: page,
+      limit: limit,
+      total,
+      pageCount: Math.ceil(total / limit),
+      nextPage: page * limit < total,
+      previousPage: page > 1,
+      data
+    }
   }
 }

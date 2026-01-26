@@ -217,7 +217,7 @@ export type CategoryScalarWhereWithAggregatesInput = {
 }
 
 export type CategoryCreateInput = {
-  id: string
+  id?: string
   slug: string
   name: string
   isActive?: boolean
@@ -225,7 +225,7 @@ export type CategoryCreateInput = {
 }
 
 export type CategoryUncheckedCreateInput = {
-  id: string
+  id?: string
   slug: string
   name: string
   isActive?: boolean
@@ -249,7 +249,7 @@ export type CategoryUncheckedUpdateInput = {
 }
 
 export type CategoryCreateManyInput = {
-  id: string
+  id?: string
   slug: string
   name: string
   isActive?: boolean
@@ -312,14 +312,14 @@ export type CategoryUpdateOneWithoutProductNestedInput = {
 }
 
 export type CategoryCreateWithoutProductInput = {
-  id: string
+  id?: string
   slug: string
   name: string
   isActive?: boolean
 }
 
 export type CategoryUncheckedCreateWithoutProductInput = {
-  id: string
+  id?: string
   slug: string
   name: string
   isActive?: boolean

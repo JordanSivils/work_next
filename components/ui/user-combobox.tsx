@@ -1,37 +1,34 @@
 "use client"
 
-import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { Button } from "./button";
-import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
-import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./command";
 import { CommandList } from "cmdk";
-import { cn } from "@/lib/utils";
+import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
+import { Button } from "./button";
+import { useState } from "react";
 import { useDebounce } from "@/lib/debounce";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface BrandComboboxProps {
-    brands: BrandComboboxInterface[]
+interface UserComboboxProps {
+    users: UserComboboxInterface[]
     sendDataUp?: (key: string, val: string) => void
     handleClear?: () => void
     formData?: (val: string) => void 
     isLoading: boolean
 }
 
-
-export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoading }: BrandComboboxProps) {
+export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoading }: UserComboboxProps) {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState<string | undefined>(undefined)
-    const debouncedVal = useDebounce(value, 300);
-
-    
+        const [value, setValue] = useState<string | undefined>(undefined)
+        const debouncedVal = useDebounce(value, 300);
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
                     {value
-                    ? brands.find((brand) => brand.name === value)?.name
+                    ? users.find((user) => user.id === value)?.firstName
                     : "Select Brand"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
@@ -42,22 +39,22 @@ export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoa
                     <CommandList className="max-h-70 overflow-y-auto">
                         <CommandEmpty>No Brands Found...</CommandEmpty>
                         <CommandGroup >
-                            {brands.map((brand) => (
+                            {users.map((user) => (
                                 <CommandItem 
-                                key={brand.id}
-                                value={brand.name}
-                                onSelect={(currentValue = brand.id) => {
+                                key={user.id}
+                                value={user.id}
+                                onSelect={(currentValue) => {
                                     setValue(currentValue ?? "")
                                     setOpen(false)
-                                    sendDataUp?.("brand", currentValue)
+                                    sendDataUp?.("user", currentValue)
                                     formData?.(currentValue)
                                 }}
                                 >
-                                    {brand.name}
+                                    {`${user.firstName} ${user.lastName}`}
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === brand.name ? "opacity-100" : "opacity-0"
+                                            value === user.firstName ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>
