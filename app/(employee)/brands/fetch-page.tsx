@@ -1,38 +1,19 @@
-import { Brand, BrandQuery } from "@/lib/actions/brands/brand-interface";
 import { getBrandData } from "@/lib/actions/brands/get-brand-data";
-import { BrandDataTable } from "./components/brand-data-table";
-import { columns } from "./components/brand-table-cols";
-import { BrandFilterPagination } from "./components/brand-filter-pagination";
+import { BrandTableContext } from "./components/brand-table-context";
+import { BrandTable } from "./components/brand-data-table";
+import { BrandTableTopper } from "./components/brand-filter-pagination";
+import { getAllUsers } from "@/lib/actions/users/get-users";
 
-interface BrandTableWrapperProps {
-    brandQuery?: BrandQuery
-}
+export async function BrandTableWrapper() {
+    const brands = await getBrandData({limit: 25});
+    const users = await getAllUsers();
 
-export async function BrandTableWrapper({ brandQuery }: BrandTableWrapperProps) {
-//     const asyncTimeout = () => {
-//     return new Promise((resolve) => {
-//       setTimeout(resolve, 4000)
-//     })
-//   }
-//   await asyncTimeout();
-    const brands = await getBrandData(brandQuery);
-
-    const mappedBrands = brands.data.map((brand): Brand => ({
-        id: brand.id,
-        name: brand.name,
-        itemCount: brand._count.Product
-    }))
-
-    const nextPage = brands.nextPage
-    const previousPage = brands.previousPage
-    const totalPages = brands.pageCount
-    const currentPage = brands.page
-
-    return ( 
-    <div className="flex flex-col gap-2">
-        <BrandFilterPagination pagination={{ nextPage, previousPage, totalPages, currentPage }} />
-        <BrandDataTable columns={columns} data={mappedBrands} />
-    </div>
-        
+    return (
+        <BrandTableContext brands={brands.data} brandCount={brands.total}>
+            <div className="flex flex-col gap-4 m-4">
+                <BrandTableTopper users={users}/>
+                <BrandTable users={users}/>
+            </div>
+        </BrandTableContext>
     )
 }

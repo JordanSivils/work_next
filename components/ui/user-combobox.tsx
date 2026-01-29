@@ -21,7 +21,6 @@ interface UserComboboxProps {
 export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoading }: UserComboboxProps) {
     const [open, setOpen] = useState(false);
         const [value, setValue] = useState<string | undefined>(undefined)
-        const debouncedVal = useDebounce(value, 300);
 
     return (
          <Popover open={open} onOpenChange={setOpen}>
@@ -29,7 +28,7 @@ export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoadi
                 <Button role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
                     {value
                     ? users.find((user) => user.id === value)?.firstName
-                    : "Select Brand"}
+                    : "Select User"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -37,7 +36,7 @@ export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoadi
                 <Command>
                     <CommandInput placeholder="Search Brands" />
                     <CommandList className="max-h-70 overflow-y-auto">
-                        <CommandEmpty>No Brands Found...</CommandEmpty>
+                        <CommandEmpty>No Users Found</CommandEmpty>
                         <CommandGroup >
                             {users.map((user) => (
                                 <CommandItem 

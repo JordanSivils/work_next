@@ -35,7 +35,7 @@ export const sidebarItems = [
   },
   {
     title: 'Brands',
-    url: '/brands?limit=25',
+    url: '/brands',
     icon: BriefcaseBusiness,
   }
 ];

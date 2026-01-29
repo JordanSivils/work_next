@@ -1,18 +1,21 @@
+"use server"
 import prisma from "@/lib/prisma-export/prisma-client";
 import { BrandQuery } from "./brand-interface";
-import { Prisma } from "@/app/generated/prisma/browser";
+import { Prisma } from "@/app/generated/prisma/client";
 
-type SortDir = "asc" | "desc"
+export type SortDir = "asc" | "desc"
 
 function buildBrandWhere(q?: BrandQuery): Prisma.BrandWhereInput {
     return {
+        ...(q?.isActive !== undefined ? { isActive: q.isActive } : { isActive: true }),
+        ...(q?.inventoriedById  && { inventoriedById: q.inventoriedById}),
         ...(q?.search && {
-        OR: [
-            { name: {
-                contains: q.search, mode: "insensitive"
-            }}
-        ]
-    })    
+            OR: [
+                { name: {
+                    contains: q.search, mode: "insensitive"
+                }}
+            ]
+        })    
     }
 } 
 
@@ -24,7 +27,9 @@ function brandSortBuilder(q?: BrandQuery) {
     let dir = parseDir(q?.dir)
 
     switch (q?.sort) {
-        case "name": orderBy = { name: dir ?? "asc"}
+        case "name": orderBy = { name: dir }
+        break
+        case "lastInventoriedAt": orderBy = { lastInventoriedAt: dir }
         break
         default: orderBy =  { name: "asc"}
     } 
@@ -43,13 +48,9 @@ export async function getBrandData(q?: BrandQuery) {
             orderBy,
             take: limit,
             skip: skip ?? 0,
-            include: {
-                _count: {
-                  select: { Product: true}
-                }
-            }
+            include: { user: true}
         }),
-        prisma.brand.count()
+        prisma.brand.count({ where })
     ])
       return {
         page: page,

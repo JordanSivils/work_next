@@ -1,11 +1,9 @@
 'use server';
 
 import prisma from "@/lib/prisma-export/prisma-client";
-import {  ProductQuery, ProductTable, ProudctTableRow } from "./product-interfaces";
+import {  ProductQuery,  ProudctTableRow } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
-import { auth } from "@clerk/nextjs/server";
 import { ActionRes } from "../action-results";
-import { redirect } from "next/navigation";
 import { BaseListResponse } from "../base-interfaces/base-responses";
 import { reqRoles } from "../require-auth";
 
@@ -54,7 +52,7 @@ export async function getAllProducts(q: ProductQuery): Promise<ActionRes<BaseLis
         { description: "asc"}
       ],
       take: limit,
-      skip: skip ?? 25,
+      skip: skip ?? 0,
       include: {
         Category: true
       }

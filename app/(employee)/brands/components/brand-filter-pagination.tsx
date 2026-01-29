@@ -1,62 +1,102 @@
 "use client"
-import { DebouncedInput } from "@/components/ui/debounced-input";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useTransition } from "react";
 import { BaseListPaginationInterface } from "@/lib/actions/base-interfaces/base-pagination";
-import { PaginationGroup } from "@/components/ui/pagination-group";
+import { useBrandTableContext } from "./brand-table-context";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
+import { useDebounce } from "@/lib/debounce";
+import { SheetWrapper } from "@/components/ui/sheet-wrapper";
+import { Label } from "@/components/ui/label";
+import { UserCombobox } from "@/components/ui/user-combobox";
+import { User, UserComboboxInterface } from "@/lib/actions/users/user-interface";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CheckedState } from "@radix-ui/react-checkbox";
 
-interface BrandFilterPaginationProps {
-    pagination: BaseListPaginationInterface
+interface BrandTableTopperProps {
+    users: UserComboboxInterface[]
 }
 
-export function BrandFilterPagination({ pagination }: BrandFilterPaginationProps) {
+export function BrandTableTopper({ users }: BrandTableTopperProps) {
+    const { page, totalPages, setPage, refresh, nextPage, isActive, setIsActive ,search, setSearch, prevPage, loading, inventoriedById, setInventoriedById } = useBrandTableContext()
+    const [checked, setChecked] = useState(false)
+    const [thisSearch, setThisSearch] = useState<string>("")
+    const debouncedSearch = useDebounce(thisSearch, 300);
 
-    const router = useRouter();
-        const pathname = usePathname();
-        const [isPending, startTransition] = useTransition()
-        const searchParams = useSearchParams()
-
-    const handleInputChange = (val: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        
-        if (!val) {
-            params.delete("search")
-        } else {
-            params.set("page", "1")
-            params.set("search", val)
-        }
-        return startTransition(() => router.push(pathname + '?' + params.toString()))
+    const handleInventory = (id: string) => {
+        setInventoriedById(id);
+        refresh();
     }
-    
+    const handleClear = () => {
+        setInventoriedById(undefined)
+    }
+
+    const handleCheckChange = (next: CheckedState) => {
+        const isChecked = next === true;
+        setChecked(isChecked);
+        setIsActive(isChecked ? false : undefined);
+        refresh()
+    };
+
+
+    useEffect(() => {
+        const s = debouncedSearch.trim()
+        setSearch(s ? s : undefined)
+    }, [debouncedSearch, setSearch])
     return (
-        <div className="flex justify-between px-4 items-center">
-            {isPending ? 
-            <>
-                <div className="flex-1 flex justify-center">
-                <div className="h-9 w-full max-w-100 rounded-md bg-muted animate-pulse" />
-            </div>
-            <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-md bg-muted animate-pulse" />
-                <div className="h-8 w-8 rounded-md bg-muted animate-pulse" />
-
-                <div className="flex items-center gap-1 px-2">
-                <div className="h-4 w-4 rounded bg-muted animate-pulse" />
-                <span className="text-muted-foreground">/</span>
-                <div className="h-4 w-6 rounded bg-muted animate-pulse" />
+        <div className="flex justify-between items-center gap-4">
+            <SheetWrapper>
+                <div>
+                    <Label htmlFor="user-combobox">Select User</Label>
+                    <UserCombobox isLoading={loading} users={users} handleClear={handleClear} formData={handleInventory} />
                 </div>
-
-                <div className="h-8 w-8 rounded-md bg-muted animate-pulse" />
-                <div className="h-8 w-8 rounded-md bg-muted animate-pulse" />
+                <div className="flex gap-2">
+                    <Checkbox id="check" checked={checked} onCheckedChange={handleCheckChange}/>
+                    <Label htmlFor="check">Show Inactives</Label>
+                </div>
+            </SheetWrapper>
+            <Input type="text" value={thisSearch} onChange={(e) => setThisSearch(e.target.value)} className="max-w-100" />
+            <div className="flex items-center">
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading}
+                onClick={() => setPage(1)}
+                >
+                    <ChevronsLeft className={!loading ? "" : "text-muted"}/>
+                </Button>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading}
+                onClick={prevPage}
+                >
+                    <ChevronLeft className={!loading ? "" : "text-muted"} />
+                </Button>
+                <p>{page}</p>
+                <p>/</p>
+                <p>{totalPages}</p>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading || page === totalPages}
+                onClick={nextPage}
+                >
+                    <ChevronRight className={!loading ? "" : "text-muted"} />
+                    </Button>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading || page === totalPages}
+                onClick={() => page < totalPages ? setPage(totalPages) : null }
+                >
+                    <ChevronsRight className={!loading ? "" : "text-muted"} />
+                </Button>
             </div>
-            </>
-            :
-            <>
-            <DebouncedInput sendChange={handleInputChange} placeholder="search..." />
-            <PaginationGroup pagination={ pagination } />
-            </>
-            }
-            
         </div>
     )
-    
 }

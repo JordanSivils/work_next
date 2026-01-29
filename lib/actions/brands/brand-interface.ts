@@ -19,11 +19,12 @@ export interface BrandComboboxInterface {
 
 export interface BrandQuery {
     search?: string
-    page?: string
-    limit?: string
-    user: string
+    page?: number
+    limit?: number
+    isActive?: boolean
+    inventoriedById?: string
     dir?: "asc" | "desc"
-    sort?: "name" | "lastInventoriedBy"
+    sort?: "name" | "lastInventoriedAt"
 }
 
 export type BrandTableRow = Prisma.BrandGetPayload<{
