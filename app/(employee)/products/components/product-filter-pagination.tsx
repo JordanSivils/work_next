@@ -6,9 +6,11 @@ import { PaginationGroup } from "@/components/ui/pagination-group";
 import { SheetWrapper } from "@/components/ui/sheet-wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SupplierCombobox } from "@/components/ui/supplier-combobox";
+import { UserCombobox } from "@/components/ui/user-combobox";
 import { BaseListPaginationInterface } from "@/lib/actions/base-interfaces/base-pagination";
 import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
 import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
+import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState, useTransition } from "react";
@@ -16,10 +18,11 @@ import { useCallback, useState, useTransition } from "react";
 interface FilterPaginationWrapperProps {
     pagination: BaseListPaginationInterface
     brands: BrandComboboxInterface[]
+    users: UserComboboxInterface[]
     suppliers: Supplier[]
 }
 
-export function FilterPaginationWrapper({ pagination, brands, suppliers }: FilterPaginationWrapperProps) {
+export function FilterPaginationWrapper({ pagination, brands, suppliers, users }: FilterPaginationWrapperProps) {
     const router = useRouter();
     const pathname = usePathname();
     const [isPending, startTransition] = useTransition()
@@ -91,14 +94,17 @@ export function FilterPaginationWrapper({ pagination, brands, suppliers }: Filte
                 <>
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
-                        <BrandCombobox sendDataUp={handleQueryFromChild} brands={brands} handleClear={() => handleClearFromChild("brand")}/>
+                        <BrandCombobox isLoading={isPending} sendDataUp={handleQueryFromChild} brands={brands} handleClear={() => handleClearFromChild("brand")}/>
                     </div>
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
                         <SupplierCombobox sendDataUp={handleQueryFromChild} suppliers={suppliers} handleClear={() => handleClearFromChild("supplier")} />
                     </div>
+                    <div>
+                        <p className="text-xs font-semibold text-muted-foreground pb-2">Select User</p>
+                        <UserCombobox isLoading={isPending} sendDataUp={handleQueryFromChild} users={users} handleClear={() => handleClearFromChild("user")} />
+                    </div>
                 </>
-                    
                 }
                 
             </SheetWrapper>

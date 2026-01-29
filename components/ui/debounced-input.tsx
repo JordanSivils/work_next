@@ -10,7 +10,7 @@ interface DebouncedInputProps {
 
 export function DebouncedInput({ sendChange, placeholder, initValue = "" }: DebouncedInputProps) {
     const [search, setSearch] = useState(initValue)
-    const debouncedSearch = useDebounce(search)
+    const debouncedSearch = useDebounce(search, 300)
 
     const didMount = useRef(false)
 

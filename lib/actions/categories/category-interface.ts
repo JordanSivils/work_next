@@ -1,6 +1,8 @@
 interface Category {
     id: string
     name: string
-    createAd?: string
-    updatedAt?: string
+    slug?: string
+    isActive?: boolean
+    createAd?: Date
+    updatedAt?: Date
 }

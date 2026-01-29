@@ -1,20 +1,37 @@
+import { Prisma } from "@/app/generated/prisma/browser";
+import { BaseListResponse } from "../base-interfaces/base-responses";
+import { Brand } from "../brands/brand-interface";
+import { Supplier } from "../suppliers/supplier-interfaces";
 
-export type ProductStatus = 'standard' | 'negative';
 export type ItemSortField = "description" | "available";
 export type ItemSortDir = "asc" | "desc"
 export type SortOpts = "description" | "available"
 
-export interface Product {
+export interface ProductTable {
   id: string
   description: string;
   available: number;
-  status: ProductStatus;
   category: string
+}
+
+export interface Product {
+  id: string
+  sku?: string
+  available?: number
+  margin?: number
+  brandId?: string
+  supplierId?: string
+  categoryId?: string
+  description: string
+  Category?: Category
+  Brand?: Brand
+  Supplier?: Supplier
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 
 export interface ProductQuery  {
-  status?: ProductStatus
   brand?: string
   supplier?: string
   category?: string
@@ -24,3 +41,9 @@ export interface ProductQuery  {
   limit?: string
   dir?: "asc" | "desc"
 }
+
+export type ProudctTableRow = Prisma.ProductGetPayload<{
+  include: { Category: {
+    select: { name: true }
+  }}
+}>

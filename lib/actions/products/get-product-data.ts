@@ -1,14 +1,16 @@
 'use server';
 
 import prisma from "@/lib/prisma-export/prisma-client";
-import { ProductQuery } from "./product-interfaces";
+import {  ProductQuery,  ProudctTableRow } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
+import { ActionRes } from "../action-results";
+import { BaseListResponse } from "../base-interfaces/base-responses";
+import { reqRoles } from "../require-auth";
 
-const productWhereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
+const productWhereBuilder = (q: ProductQuery): Prisma.ProductWhereInput => {
   return {
-    status: q.status ?? undefined,
     Brand: { name: q.brand },
-    Supplier: { some: { name: q.supplier } },
+    Supplier: { name: q.supplier },
     ...(q.search && {
       OR: [
         { description: {
@@ -20,7 +22,7 @@ const productWhereBuilder = (q: ProductQuery): Prisma.ItemWhereInput => {
 }
 
 function sortBuilder(q: ProductQuery) {
-  let orderBy: Prisma.ItemOrderByWithRelationInput = {}
+  let orderBy: Prisma.ProductOrderByWithRelationInput = {}
   let dir = q.dir
   switch (q.sort) {
     case "description": orderBy = { description: dir ?? "asc" }
@@ -32,7 +34,10 @@ function sortBuilder(q: ProductQuery) {
   return orderBy
 }
 
-export async function getAllProducts(q: ProductQuery) {
+export async function getAllProducts(q: ProductQuery): Promise<ActionRes<BaseListResponse<ProudctTableRow>>> {
+  
+  await reqRoles.loggedIn()
+
   const where = productWhereBuilder(q)
   const orderBy = sortBuilder(q)
   const limit = Number(q.limit ?? 25)
@@ -40,29 +45,30 @@ export async function getAllProducts(q: ProductQuery) {
   const skip = Number((page - 1) * limit);
   
   const [data, total] = await Promise.all([
-    prisma.item.findMany({
+    prisma.product.findMany({
       where,
       orderBy: [
         orderBy,
         { description: "asc"}
       ],
       take: limit,
-      skip: skip ?? 25,
+      skip: skip ?? 0,
       include: {
-        Category: {
-          select: { name: true }
-        }
+        Category: true
       }
     }),
-    prisma.item.count({ where })
+    prisma.product.count({ where })
   ])
   return {
-    page: page,
-    limit: limit,
-    total,
-    pageCount: Math.ceil(total / limit),
-    nextPage: page * limit < total,
-    previousPage: page > 1,
-    data
+    ok: true,
+    result: {
+      page: page,
+      limit: limit,
+      total,
+      pageCount: Math.ceil(total / limit),
+      nextPage: page * limit < total,
+      previousPage: page > 1,
+      data
+    }
   }
 }

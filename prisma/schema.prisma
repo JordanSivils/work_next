@@ -8,68 +8,89 @@ datasource db {
 }
 
 model Brand {
-  id           String         @id
-  name         String         @unique
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime
-  Item         Item[]
-  SpecialOrder SpecialOrder[]
-  Supplier     Supplier[]
+  id                    String      @id @default(uuid())
+  name                  String      @unique                 
+  slug                  String      @unique
+  inventoriedById       String?
+  lastInventoriedAt     DateTime?
+  isActive              Boolean     @default(true)
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+  user                  User?       @relation(fields: [inventoriedById], references: [id], onDelete: SetNull)
+  Product               Product[]
 }
 
 model Category {
-  id   String @id
+  id   String @id @default(uuid())
+  slug  String @unique
   name String @unique
-  Item Item[]
+  isActive  Boolean @default(true)
+  Product Product[]
 }
 
-model Item {
-  id             String        @id
-  sku            String        @unique
-  description    String
-  status         ItemStatus    @default(standard)
+model ProductStaging {
+  id             String        @id @default(uuid())
+  description String?
+  sku            String
   available      Int?
-  manufacturerId String?
+  brand String?
+  category String?
+  supplier String?
+  margin Float?
+
+  uploadId String 
+  @@index([uploadId])
+  @@index([sku])
+}
+
+model Product {
+  id             String        @id @default(uuid())
+  sku            String        @unique
+  description    String        
+  available      Int?
+  margin         Float?
   brandId        String?
   categoryId     String?
+  supplierId     String?
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime       @updatedAt
   Brand          Brand?        @relation(fields: [brandId], references: [id])
   Category       Category?     @relation(fields: [categoryId], references: [id])
-  Manufacturer   Manufacturer? @relation(fields: [manufacturerId], references: [id])
-  Supplier       Supplier[]
+  Supplier       Supplier?     @relation(fields: [supplierId], references: [id])
 
   @@index([brandId])
   @@index([categoryId])
-  @@index([manufacturerId])
-  @@index([status])
-}
-
-model Manufacturer {
-  id        String   @id
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  Item      Item[]
+  @@index([available])
+  @@index([supplierId])
 }
 
 model SpecialOrder {
-  id             String      @id
+  id             String      @id @default(uuid())
   items          Json?
   notes          String?
-  brandId        String?
   supplierId     String?
-  orderStatus    OrderStatus @default(requested)
-  existingItem   Boolean     @default(false)
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime
+  customer       String?
+  customerContact String?
+  comments        String?
+  orderStatus    OrderStatus  @default(requested)
+  requestType     RequestType @default(order)
+  existingItem   Boolean?     @default(false)
+
   createdById    String?
   initialOrderAt DateTime?
   nextOrderAt    DateTime?
   orderFrequency Int?
   recurring      Boolean     @default(false)
-  Brand          Brand?      @relation(fields: [brandId], references: [id])
-  User           User?       @relation(fields: [createdById], references: [id])
+
+  processingAt   DateTime?
+  lastRunAt      DateTime?
+  lastError      String?
+
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  
+  User           User?       @relation(fields: [createdById], references: [id], onDelete: SetNull)
   Supplier       Supplier?   @relation(fields: [supplierId], references: [id])
 
   @@index([nextOrderAt])
@@ -79,47 +100,34 @@ model SpecialOrder {
 }
 
 model Supplier {
-  id              String           @id
+  id              String           @id @default(uuid())
   name            String           @unique
+  slug            String           @unique
+  orderDay        String?
+  orderNotes      String?
+  orderMinimum    String?
+  isActive  Boolean @default(true)
   createdAt       DateTime         @default(now())
-  updatedAt       DateTime
+  updatedAt       DateTime         @updatedAt
+  userId          String?
+  User            User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  Product         Product[]
   SpecialOrder    SpecialOrder[]
-  SupplierDetails SupplierDetails?
-  Brand           Brand[]
-  Item            Item[]
-}
-
-model SupplierDetails {
-  id           String   @id
-  userId       String?
-  orderDay     String?
-  orderNotes   String?
-  orderMinimum String?
-  supplierId   String   @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime
-  Supplier     Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
-  User         User?    @relation(fields: [userId], references: [id])
-
-  @@index([userId])
 }
 
 model User {
-  id              String            @id
+  id              String            @id @default(uuid())
   clerkId         String            @unique
-  firstName       String
-  lastName        String
-  email           String            @unique
-  phoneNumber     String
+  firstName       String            
+  lastName        String            
+  email           String?            @unique
+  phoneNumber     String?
+  isActive        Boolean           @default(true)
   createdAt       DateTime          @default(now())
-  updatedAt       DateTime
+  updatedAt       DateTime          @updatedAt
   SpecialOrder    SpecialOrder[]
-  SupplierDetails SupplierDetails[]
-}
-
-enum ItemStatus {
-  negative
-  standard
+  Supplier Supplier[]
+  Brand Brand[]
 }
 
 enum OrderStatus {
@@ -128,4 +136,9 @@ enum OrderStatus {
   ordered
   received
   shorted
+}
+
+enum RequestType {
+  cost
+  order
 }

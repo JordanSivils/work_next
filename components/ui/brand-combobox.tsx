@@ -8,25 +8,28 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./command";
 import { CommandList } from "cmdk";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
+import { useDebounce } from "@/lib/debounce";
 
 interface BrandComboboxProps {
     brands: BrandComboboxInterface[]
-    sendDataUp: (key: string, val: string) => void
-    handleClear: () => void
+    sendDataUp?: (key: string, val: string) => void
+    handleClear?: () => void
+    formData?: (val: string) => void 
+    isLoading: boolean
 }
 
 
-export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandComboboxProps) {
+export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoading }: BrandComboboxProps) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | undefined>(undefined)
+    const debouncedVal = useDebounce(value, 300);
 
-    const searchParams = useSearchParams();
+    
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button role="combobox" className="min-w-50">
+                <Button role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
                     {value
                     ? brands.find((brand) => brand.name === value)?.name
                     : "Select Brand"}
@@ -43,10 +46,11 @@ export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandCombobox
                                 <CommandItem 
                                 key={brand.id}
                                 value={brand.name}
-                                onSelect={(currentValue) => {
+                                onSelect={(currentValue = brand.id) => {
                                     setValue(currentValue ?? "")
                                     setOpen(false)
-                                    sendDataUp("brand", currentValue)
+                                    sendDataUp?.("brand", currentValue)
+                                    formData?.(currentValue)
                                 }}
                                 >
                                     {brand.name}
@@ -58,16 +62,12 @@ export function BrandCombobox({ brands, sendDataUp, handleClear }: BrandCombobox
                                     />
                                 </CommandItem>
                             ))}
-                            
                         </CommandGroup>
-                        
                     </CommandList>
-                    
                 </Command>
-                
             </PopoverContent>
             <Button variant={"ghost"} onClick={() => {
-                handleClear()
+                handleClear?.()
                 setValue(undefined)
             }}>clear</Button>
         </Popover>

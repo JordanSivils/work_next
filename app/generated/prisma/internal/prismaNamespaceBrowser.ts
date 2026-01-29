@@ -53,11 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Brand: 'Brand',
   Category: 'Category',
-  Item: 'Item',
-  Manufacturer: 'Manufacturer',
+  ProductStaging: 'ProductStaging',
+  Product: 'Product',
   SpecialOrder: 'SpecialOrder',
   Supplier: 'Supplier',
-  SupplierDetails: 'SupplierDetails',
   User: 'User'
 } as const
 
@@ -80,6 +79,10 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const BrandScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  slug: 'slug',
+  inventoriedById: 'inventoriedById',
+  lastInventoriedAt: 'lastInventoriedAt',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -89,53 +92,66 @@ export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof Br
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  slug: 'slug',
+  name: 'name',
+  isActive: 'isActive'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
-export const ItemScalarFieldEnum = {
+export const ProductStagingScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  sku: 'sku',
+  available: 'available',
+  brand: 'brand',
+  category: 'category',
+  supplier: 'supplier',
+  margin: 'margin',
+  uploadId: 'uploadId'
+} as const
+
+export type ProductStagingScalarFieldEnum = (typeof ProductStagingScalarFieldEnum)[keyof typeof ProductStagingScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
   id: 'id',
   sku: 'sku',
   description: 'description',
-  status: 'status',
   available: 'available',
-  manufacturerId: 'manufacturerId',
+  margin: 'margin',
   brandId: 'brandId',
   categoryId: 'categoryId',
+  supplierId: 'supplierId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
-
-
-export const ManufacturerScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ManufacturerScalarFieldEnum = (typeof ManufacturerScalarFieldEnum)[keyof typeof ManufacturerScalarFieldEnum]
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
 export const SpecialOrderScalarFieldEnum = {
   id: 'id',
   items: 'items',
   notes: 'notes',
-  brandId: 'brandId',
   supplierId: 'supplierId',
+  customer: 'customer',
+  customerContact: 'customerContact',
+  comments: 'comments',
   orderStatus: 'orderStatus',
+  requestType: 'requestType',
   existingItem: 'existingItem',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   createdById: 'createdById',
   initialOrderAt: 'initialOrderAt',
   nextOrderAt: 'nextOrderAt',
   orderFrequency: 'orderFrequency',
-  recurring: 'recurring'
+  recurring: 'recurring',
+  processingAt: 'processingAt',
+  lastRunAt: 'lastRunAt',
+  lastError: 'lastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SpecialOrderScalarFieldEnum = (typeof SpecialOrderScalarFieldEnum)[keyof typeof SpecialOrderScalarFieldEnum]
@@ -144,25 +160,17 @@ export type SpecialOrderScalarFieldEnum = (typeof SpecialOrderScalarFieldEnum)[k
 export const SupplierScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
-
-
-export const SupplierDetailsScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
+  slug: 'slug',
   orderDay: 'orderDay',
   orderNotes: 'orderNotes',
   orderMinimum: 'orderMinimum',
-  supplierId: 'supplierId',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
-export type SupplierDetailsScalarFieldEnum = (typeof SupplierDetailsScalarFieldEnum)[keyof typeof SupplierDetailsScalarFieldEnum]
+export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -172,6 +180,7 @@ export const UserScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   phoneNumber: 'phoneNumber',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

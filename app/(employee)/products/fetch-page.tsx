@@ -1,38 +1,42 @@
 import { getBrandData } from '@/lib/actions/brands/get-brand-data';
 import { getAllProducts } from '@/lib/actions/products/get-product-data';
-import { Product, ProductQuery } from '@/lib/actions/products/product-interfaces';
+import { Product, ProductQuery, ProductTable } from '@/lib/actions/products/product-interfaces';
 import { FilterPaginationWrapper } from './components/product-filter-pagination';
 import { getSupplierData } from '@/lib/actions/suppliers/get-supplier-data';
 import { ProductDataTable } from './components/product-data-table';
 import { columns } from './components/column-defs';
 import { BrandComboboxInterface } from '@/lib/actions/brands/brand-interface';
+import { getAllUsers } from '@/lib/actions/users/get-users';
 
 interface TableWrapperProps {
   productQuery: ProductQuery
 }
   export async function ProductTableWrapper({ productQuery }: TableWrapperProps) {
-
-  const asyncTimeout = () => {
+     const asyncTimeout = () => {
     return new Promise((resolve) => {
       setTimeout(resolve, 4000)
     })
   }
   await asyncTimeout();
   const suppliers = await getSupplierData()
+  const users = await getAllUsers()
   const brands = await getBrandData()
   const products = await getAllProducts(productQuery)
 
-  const mapedProducts = products.data.map((product): Product => ({
+  if (!products.ok) {
+    return <div>{products.error}</div>
+  }
+
+  const mapedProducts = products.result.data.map((product): ProductTable => ({
       id: product.id,
       description: product.description,
       available: Number(product.available),
-      status: product.status,
       category: product.Category?.name ?? "NA"
     }))
-    const nextPage = products.nextPage
-    const previousPage = products.previousPage
-    const totalPages = products.pageCount
-    const currentPage = products.page
+    const nextPage = products.result.nextPage
+    const previousPage = products.result.previousPage
+    const totalPages = products.result.pageCount
+    const currentPage = products.result.page
 
     const mappedBrand = brands.data.map((brand): BrandComboboxInterface => ({
       id: brand.id,
@@ -40,9 +44,9 @@ interface TableWrapperProps {
     }))
     
   return (
-  <>
-  <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} brands={mappedBrand} suppliers={suppliers} />
-  <ProductDataTable columns={columns} data={mapedProducts} />
-  </>
+    <div className='flex flex-col gap-4 m-4'>
+      <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} users={users} brands={mappedBrand} suppliers={suppliers} />
+      <ProductDataTable columns={columns} data={mapedProducts} />
+    </div>
   );
 }

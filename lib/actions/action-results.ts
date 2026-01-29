@@ -1,0 +1,1 @@
+export type ActionRes<T> = { ok: true, result: T } | { ok: false, error: string } 

@@ -11,7 +11,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../../ui/sidebar';
-import { sidebarItems, sidebarQuick } from './sidbarItems';
+import { adminActions, sidebarItems, sidebarQuick } from './sidbarItems';
+import { SignedIn, UserButton } from '@clerk/nextjs';
+import { RequireRoleWrapper } from '@/components/ui/check-role-wrapper';
 
 export function AppSidebar() {
   return (
@@ -60,8 +62,26 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        <RequireRoleWrapper roles={["dev"]}>
+              <SidebarGroup>
+                <SidebarGroupLabel>Dev Actions</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {adminActions.map((item) => (
+                      <SidebarMenuItem key={item.title}>
+                        <SidebarMenuButton asChild>
+                          {item.button}
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+        </RequireRoleWrapper>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenuItem><SignedIn><UserButton /></SignedIn></SidebarMenuItem>
+      </SidebarFooter>
     </Sidebar>
   );
 }
