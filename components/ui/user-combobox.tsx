@@ -5,27 +5,34 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { CommandList } from "cmdk";
 import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
 import { Button } from "./button";
-import { useState } from "react";
-import { useDebounce } from "@/lib/debounce";
+import { useEffect, useRef, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface UserComboboxProps {
     users: UserComboboxInterface[]
+    defaultValue?: string
     sendDataUp?: (key: string, val: string) => void
     handleClear?: () => void
     formData?: (val: string) => void 
     isLoading: boolean
 }
 
-export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoading }: UserComboboxProps) {
+export function UserCombobox({ users, sendDataUp, handleClear, defaultValue, formData, isLoading }: UserComboboxProps) {
+    const reference = useRef(false);
     const [open, setOpen] = useState(false);
-        const [value, setValue] = useState<string | undefined>(undefined)
+    const [value, setValue] = useState<string | undefined>(undefined)
 
-    return (
+    useEffect(() => {
+        if (reference.current) reference
+        reference.current === true
+        if (defaultValue) setValue(defaultValue)
+    }, [defaultValue])
+
+     return (
          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
+                <Button type="button" role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
                     {value
                     ? users.find((user) => user.id === value)?.firstName
                     : "Select User"}
@@ -47,6 +54,7 @@ export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoadi
                                     setOpen(false)
                                     sendDataUp?.("user", currentValue)
                                     formData?.(currentValue)
+                                    console.log(currentValue)
                                 }}
                                 >
                                     {`${user.firstName} ${user.lastName}`}
@@ -62,7 +70,7 @@ export function UserCombobox({ users, sendDataUp, handleClear, formData, isLoadi
                     </CommandList>
                 </Command>
             </PopoverContent>
-            <Button variant={"ghost"} onClick={() => {
+            <Button variant={"ghost"} type="button" onClick={() => {
                 handleClear?.()
                 setValue(undefined)
             }}>clear</Button>

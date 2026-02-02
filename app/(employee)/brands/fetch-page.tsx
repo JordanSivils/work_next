@@ -10,9 +10,14 @@ export async function BrandTableWrapper() {
 
     return (
         <BrandTableContext brands={brands.data} brandCount={brands.total}>
-            <div className="flex flex-col gap-4 m-4">
-                <BrandTableTopper users={users}/>
-                <BrandTable users={users}/>
+            <div className="flex flex-col gap-0 m-y-4">
+                <div className="sticky top-0 z-30 bg-background p-4">
+                    <BrandTableTopper users={users}/>
+                </div>
+                <div className="px-4">
+                    <BrandTable users={users}/>
+                </div>
+                
             </div>
         </BrandTableContext>
     )

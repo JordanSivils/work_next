@@ -139,14 +139,3 @@ export function BrandTable({ users }: {users: UserComboboxInterface[]}) {
     </div>
   )
 }
-
-function ActiveRow({brand}: { brand: BrandTableRow}) {
-  return (
-    <form>
-      <TableRow>
-        <TableCell>{brand.name}</TableCell>
-        <TableCell>{}</TableCell>
-      </TableRow>
-    </form>
-  )
-}

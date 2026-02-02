@@ -1,7 +1,3 @@
-// base filters: User, isActive, search (input) 
-// base pagination: first, last, inc-one, dec-1
-// sort: name, last inventory
-// defaults: name: asc, page: 1, filter: isActive = true
 "use client"
 import { BrandQuery, BrandTableRow } from "@/lib/actions/brands/brand-interface";
 import { getBrandData, SortDir } from "@/lib/actions/brands/get-brand-data";
@@ -44,6 +40,7 @@ const defaultSortDir = "asc"
 const defaultPage = 1
 const defaultPageSize = 25
 const DEFAULT_SEARCH: string | undefined = undefined
+
 export function BrandTableContext({ 
     children, 
     brands: initialBrands, 
