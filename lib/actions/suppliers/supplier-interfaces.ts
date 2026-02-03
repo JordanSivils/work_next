@@ -29,7 +29,7 @@ export type SupplierQuery = z.infer<typeof supplierQuerySchema>;
 export type SupplierTableRow = Prisma.SupplierGetPayload<{
     include: { 
         User: true,
-        _count: { select: { SpecialOrder: true}}
+        _count: { select: { SpecialOrder: true }}
     }
 }>
 

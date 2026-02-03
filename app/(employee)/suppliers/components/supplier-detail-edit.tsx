@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSupplierTableContext } from "./supplier-table-context";
 import { CheckedState } from "@radix-ui/react-checkbox";
+import { Label } from "@/components/ui/label";
 
 interface SupplierDetailEditProps {
     supplier: SupplierTableRow
@@ -33,17 +34,25 @@ export function SupplierDetailEdit({ supplier }: SupplierDetailEditProps) {
             </DialogTrigger>
             <DialogContent className="">
                 <DialogHeader><DialogTitle>Supplier Detials & Edit</DialogTitle></DialogHeader>
+                <div className="flex justify-between">
+                    <div>
+                        <h1>{supplier.name}</h1>
+                    </div>
+                    <div>
+                        <Button 
+                        type='button' 
+                        variant={"ghost"} 
+                        onClick={() => setEditOpen((prev) => !prev)}>
+                            {editOpen ? "Details" : "Edit"}
+                        </Button>
+                    </div>
+                </div>
                 {!editOpen ? <SupplierDetails supplier={supplier} /> : <SupplierEdit supplier={supplier} onEditSuccess={() => setEditOpen(false)} />}
                 
                 <div className="flex items-center justify-end gap-4">
                     {/* <Button onClick={onSubmit} disabled={submitting}>De-Activate</Button> */}
-                    <DialogClose asChild><Button type="button" variant="outline">Close</Button></DialogClose>
-                    <Button 
-                    type='button' 
-                    variant={"ghost"} 
-                    onClick={() => setEditOpen((prev) => !prev)}>
-                        {editOpen ? "Details" : "Edit"}
-                    </Button>
+                    
+                    
                 </div>
             </DialogContent>
         </Dialog>
@@ -53,13 +62,39 @@ export function SupplierDetailEdit({ supplier }: SupplierDetailEditProps) {
 
 function SupplierDetails({ supplier }: SupplierDetailEditProps) {
     return (
-        <div>
-            <ul>
-                <li>{supplier.name}</li>
-                <li>{supplier.orderDay}</li>
-                <li>{supplier.User?.firstName} {supplier.User?.lastName}</li>
-            </ul>
-        </div>
+            <div className="flex flex-col gap-4">
+                <div className="flex gap-6 justify-center">
+                    <div className="flex flex-col gap-4 flex-4 border p-4">
+                        {supplier.orderDay && 
+                            <div className="flex gap-1">
+                            <Label htmlFor="orderDay" className="font-bold">Order Day:</Label>
+                            <p id="orderDay">{supplier.orderDay}</p>
+                        </div>
+                        }
+                        {supplier.orderMinimum &&
+                            <div className="flex gap-1 ">
+                            <Label htmlFor="orderMinimum" className="font-bold">Order Minimum:</Label>
+                            <p id="orderMinimum">{supplier.orderMinimum ?? "N/A"}</p>
+                        </div>
+                        }
+                        { supplier.User && 
+                            <div className="flex flex-col">
+                                <Label className="pb-1 font-bold" >Ordered By:</Label>
+                                <p>{supplier.User?.firstName} {supplier.User?.lastName}</p>
+                                <p className="text-sm text-muted-foreground">{supplier.User?.email}</p>
+                                <p className="text-sm text-muted-foreground">{supplier.User?.phoneNumber}</p>
+                            </div>
+                        }
+                    </div>
+                    <div className="flex-6 border p-4">
+                        <Label className="pb-2 font-bold" htmlFor="orderNotes">Order Notes:</Label>
+                        <p className="whitespace-pre-wrap " id="orderNotes">{supplier.orderNotes}</p>
+                    </div>
+                </div>
+                <div className="text-end">
+                    <DialogClose asChild><Button type="button" variant="outline">Close</Button></DialogClose>
+                </div>
+            </div>
     )
 }
 
@@ -145,8 +180,7 @@ function SupplierEdit({ supplier, onEditSuccess }: SupplierDetailEditProps) {
 
     return (
         <div>
-            <h1>{supplier.name}</h1>
-            <form onSubmit={handleSubmit(onSubmit)} method="post" className="w-full">
+            <form onSubmit={handleSubmit(onSubmit)} method="post" className="flex flex-col gap-4 w-full">
                 <div className="flex gap-4 w-full">
                     <div className="flex flex-col gap-4">
                         <Field>
@@ -174,9 +208,10 @@ function SupplierEdit({ supplier, onEditSuccess }: SupplierDetailEditProps) {
                             <Textarea {...register("orderNotes")} placeholder="Order Notes" className="grow h-70" />
                         </Field>
                     </div>
-                    <div>
-                        <Button type="submit">Update</Button>
-                    </div>
+                </div>
+                <div className="flex justify-end gap-4">
+                    <Button type="submit">Update</Button>
+                    <DialogClose asChild><Button type="button" variant="outline">Close</Button></DialogClose>
                 </div>
             </form>
         </div>

@@ -34,7 +34,6 @@ export async function ProductPage({
           supplier,
           category,
           search,
-          status,
           sort,
           dir
         }} 

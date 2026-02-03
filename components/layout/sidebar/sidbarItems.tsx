@@ -15,7 +15,7 @@ import { InventoryFormWrapper } from '@/app/(employee)/components/forms/inventor
 export const sidebarItems = [
   {
     title: 'Home',
-    url: '#',
+    url: '/',
     icon: Home,
   },
   {
@@ -25,12 +25,12 @@ export const sidebarItems = [
   },
   {
     title: 'Suppliers',
-    url: '#',
+    url: '/suppliers',
     icon: Truck,
   },
   {
     title: 'Employees',
-    url: '#',
+    url: '/employees',
     icon: SquareUserRound,
   },
   {
