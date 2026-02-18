@@ -11,6 +11,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { InventoryFormWrapper } from '@/app/(employee)/components/forms/inventory-form-wrapper';
+import { SpecialOrderWrapper } from '@/app/(employee)/components/forms/special-order-wrapper';
 
 export const sidebarItems = [
   {
@@ -44,6 +45,10 @@ export const sidebarQuick = [
   {
     title: 'Inventory',
     button: <InventoryFormWrapper />
+  },
+  {
+    title: 'Special Order Form',
+    button: <SpecialOrderWrapper />
   },
 ];
 

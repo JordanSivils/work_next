@@ -1,19 +1,17 @@
 "use client"
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
-import { Brand } from "@/lib/actions/brands/brand-interface";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./command";
 import { CommandList } from "cmdk";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
 import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
 
 interface SupplierComboboxProps {
     suppliers: Supplier[]
-    sendDataUp: (key: string, val: string) => void
+    sendDataUp: (val: string) => void
     handleClear: () => void
 }
 
@@ -22,18 +20,18 @@ export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: Supplie
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | undefined>(undefined)
 
-    const searchParams = useSearchParams();
-
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+        <div className="flex gap-1">
+        <Popover open={open} modal onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button role="combobox" className="min-w-80">
+                <Button role="combobox" className="md:min-w-70 min-w-50">
                     {value
-                    ? suppliers.find((supplier) => supplier.name === value)?.name
+                    ? suppliers.find((supplier) => supplier.id === value)?.name
                     : "Select Supplier"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
+            
             <PopoverContent >
                 <Command>
                     <CommandInput placeholder="Search Suppliers" />
@@ -44,10 +42,10 @@ export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: Supplie
                                 <CommandItem 
                                 key={supplier.id}
                                 value={supplier.name}
-                                onSelect={(currentValue) => {
-                                    setValue(currentValue ?? "")
+                                onSelect={() => {
+                                    setValue(supplier.id)
                                     setOpen(false)
-                                    sendDataUp("supplier", currentValue)
+                                    sendDataUp(supplier.id)
                                 }}
                                 >
                                     {supplier.name}
@@ -63,10 +61,12 @@ export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: Supplie
                     </CommandList>
                 </Command>
             </PopoverContent>
-            <Button variant={"ghost"} onClick={() => {
+            <Button variant={"ghost"} type="button" onClick={() => {
                 handleClear()
                 setValue(undefined)
             }}>Clear</Button>
+            
         </Popover>
+        </div>
     )
 }

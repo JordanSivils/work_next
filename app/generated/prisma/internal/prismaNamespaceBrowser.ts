@@ -143,13 +143,7 @@ export const SpecialOrderScalarFieldEnum = {
   requestType: 'requestType',
   existingItem: 'existingItem',
   createdById: 'createdById',
-  initialOrderAt: 'initialOrderAt',
-  nextOrderAt: 'nextOrderAt',
-  orderFrequency: 'orderFrequency',
   recurring: 'recurring',
-  processingAt: 'processingAt',
-  lastRunAt: 'lastRunAt',
-  lastError: 'lastError',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -181,8 +181,7 @@ function SupplierEdit({ supplier, onEditSuccess }: SupplierDetailEditProps) {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} method="post" className="flex flex-col gap-4 w-full">
-                <div className="flex gap-4 w-full">
-                    <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                         <Field>
                             <FieldLabel>Order Day</FieldLabel>
                             <Input type="text" {...register("orderDay")} placeholder="Order Day" />
@@ -190,6 +189,10 @@ function SupplierEdit({ supplier, onEditSuccess }: SupplierDetailEditProps) {
                         <Field>
                             <FieldLabel>Order Minimum</FieldLabel>
                             <Input type="text" {...register("orderMinimum")} placeholder="Price, Weight or None" />
+                        </Field>
+                        <Field>
+                            <FieldLabel>Order Notes</FieldLabel>
+                            <Textarea {...register("orderNotes")} placeholder="Order Notes" />
                         </Field>
                         <Field>
                             <FieldLabel>Ordered By</FieldLabel>
@@ -202,13 +205,8 @@ function SupplierEdit({ supplier, onEditSuccess }: SupplierDetailEditProps) {
                             </div>
                         </Field>
                     </div>
-                    <div className="flex-1 h-full">
-                        <Field className="h-full">
-                            <FieldLabel>Order Notes</FieldLabel>
-                            <Textarea {...register("orderNotes")} placeholder="Order Notes" className="grow h-70" />
-                        </Field>
-                    </div>
-                </div>
+                    
+                        
                 <div className="flex justify-end gap-4">
                     <Button type="submit">Update</Button>
                     <DialogClose asChild><Button type="button" variant="outline">Close</Button></DialogClose>

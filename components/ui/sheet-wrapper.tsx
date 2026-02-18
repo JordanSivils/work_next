@@ -20,14 +20,7 @@ export function SheetWrapper({ children }: SheetWrapperProps) {
                 <div className="p-4 flex flex-col gap-4">
                     {children}
                 </div>
-                <SheetFooter>
-                    <SheetClose asChild>
-                        <Button type='submit' className="cursor-pointer">Submit</Button>
-                    </SheetClose>
-                    <SheetClose asChild>
-                        <Button variant='outline' className="cursor-pointer">Cancel</Button>
-                    </SheetClose>
-                </SheetFooter>
+                
             </SheetContent>
         </Sheet>
     )

@@ -24,7 +24,8 @@ const formInputs = z.object({
         .custom<FileList>((xl) => xl instanceof FileList, { message: "Please Upload a File"})
         .refine((xl) => xl.length === 1, { message: "Only 1 File Accepted"}),
 
-    brand: z.string().min(1, { message: "Must Select a Brand"})
+    brandId: z.uuid(),
+    brandName: z.string().min(1)
 })
 type FormInputs = z.infer<typeof formInputs>
 
@@ -37,23 +38,31 @@ export function InventoryForm({ brands }: InventoryFormProps) {
           formState: { errors, isSubmitting, isDirty }     
       } = useForm<FormInputs>({
           resolver: zodResolver(formInputs),
-          defaultValues: { brand: ""},
+          defaultValues: { 
+            brandName: "",
+            brandId: ""
+        },
       });
   
-      function handleBoxSelect(val: string) {
-          setValue("brand", val, { shouldDirty: true, shouldValidate: true})
+      function handleNameSelect(name: string) {
+          setValue("brandName", name, { shouldDirty: true, shouldValidate: true})
+      }
+
+      function handleIdSelect(id: string) {
+          setValue("brandId", id, { shouldDirty: true, shouldValidate: true})
       }
   
       function handleOnClear() {
-          setValue("brand", "")
+          setValue("brandName", "")
+          setValue("brandId", "")
       }
   
       const onSubmit: SubmitHandler<FormInputs> = async (data) => {
           try {
               const rows = await parseExcel(data.excel[0])
-              await downloadPdf(rows, data.brand)
+              await downloadPdf(rows, data.brandName)
   
-              await UpdateBrandInventoried(data.brand) // prisma func
+              await UpdateBrandInventoried(data.brandId) // prisma func
               notify.success("Success")
               setOpen(false)
           } catch (error: any) {
@@ -82,9 +91,9 @@ export function InventoryForm({ brands }: InventoryFormProps) {
                   <div className="flex flex-col gap-2">
                       <Label htmlFor="brand">Brand</Label>
                       <div className="flex ">
-                          <BrandCombobox isLoading={isSubmitting} brands={brands} formData={handleBoxSelect} handleClear={handleOnClear} />
+                          <BrandCombobox isLoading={isSubmitting} brands={brands} formData={handleIdSelect} sendDataUp={handleNameSelect} handleClear={handleOnClear} />
                       </div>
-                      {errors && <p className="text-sm text-purple-300">{errors.brand?.message}</p>}
+                      {errors && <p className="text-sm text-purple-300">{errors.brandName?.message}</p>}
                   </div>
               </div>
               <div className="flex items-center justify-end gap-4">
