@@ -1,10 +1,10 @@
 'use server'
 import prisma from "@/lib/prisma-export/prisma-client";
 
-export async function UpdateBrandInventoried(name: string) {
-    if (!name) throw new Error("No Id")
+export async function UpdateBrandInventoried(id: string) {
+    if (!id) throw new Error("No Id")
     return await prisma.brand.update({
-        where: { name },
+        where: { id },
         data: { lastInventoriedAt: new Date() }
     })
 }

@@ -11,11 +11,12 @@ import {
   Upload,
 } from 'lucide-react';
 import { InventoryFormWrapper } from '@/app/(employee)/components/forms/inventory-form-wrapper';
+import { SpecialOrderWrapper } from '@/app/(employee)/components/forms/special-order-wrapper';
 
 export const sidebarItems = [
   {
     title: 'Home',
-    url: '#',
+    url: '/',
     icon: Home,
   },
   {
@@ -25,12 +26,12 @@ export const sidebarItems = [
   },
   {
     title: 'Suppliers',
-    url: '#',
+    url: '/suppliers',
     icon: Truck,
   },
   {
     title: 'Employees',
-    url: '#',
+    url: '/employees',
     icon: SquareUserRound,
   },
   {
@@ -44,6 +45,10 @@ export const sidebarQuick = [
   {
     title: 'Inventory',
     button: <InventoryFormWrapper />
+  },
+  {
+    title: 'Special Order Form',
+    button: <SpecialOrderWrapper />
   },
 ];
 

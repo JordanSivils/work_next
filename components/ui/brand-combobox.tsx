@@ -12,9 +12,9 @@ import { useDebounce } from "@/lib/debounce";
 
 interface BrandComboboxProps {
     brands: BrandComboboxInterface[]
-    sendDataUp?: (key: string, val: string) => void
+    sendDataUp?: (name: string) => void
     handleClear?: () => void
-    formData?: (val: string) => void 
+    formData?: (id: string) => void 
     isLoading: boolean
 }
 
@@ -27,11 +27,12 @@ export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoa
     
 
     return (
+        <div className="flex gap-1">
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button role="combobox" className={isLoading ? "bg-gray-500" : ""} disabled={isLoading}>
+                <Button role="combobox" className={`md:min-w-70 min-w-50 ${isLoading ? "bg-gray-500" : ""}`} disabled={isLoading}>
                     {value
-                    ? brands.find((brand) => brand.name === value)?.name
+                    ? brands.find((brand) => brand.id === value)?.name
                     : "Select Brand"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
@@ -45,12 +46,12 @@ export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoa
                             {brands.map((brand) => (
                                 <CommandItem 
                                 key={brand.id}
-                                value={brand.name}
-                                onSelect={(currentValue = brand.id) => {
-                                    setValue(currentValue ?? "")
+                                value={brand.id}
+                                onSelect={() => {
+                                    setValue(brand.id)
                                     setOpen(false)
-                                    sendDataUp?.("brand", currentValue)
-                                    formData?.(currentValue)
+                                    sendDataUp?.(brand.name)
+                                    formData?.(brand.id)
                                 }}
                                 >
                                     {brand.name}
@@ -69,7 +70,8 @@ export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoa
             <Button variant={"ghost"} onClick={() => {
                 handleClear?.()
                 setValue(undefined)
-            }}>clear</Button>
+            }}>Clear</Button>
         </Popover>
+        </div>
     )
 }

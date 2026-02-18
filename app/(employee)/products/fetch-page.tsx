@@ -7,17 +7,18 @@ import { ProductDataTable } from './components/product-data-table';
 import { columns } from './components/column-defs';
 import { BrandComboboxInterface } from '@/lib/actions/brands/brand-interface';
 import { getAllUsers } from '@/lib/actions/users/get-users';
+import { Supplier } from '@/lib/actions/suppliers/supplier-interfaces';
 
 interface TableWrapperProps {
   productQuery: ProductQuery
 }
   export async function ProductTableWrapper({ productQuery }: TableWrapperProps) {
-     const asyncTimeout = () => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 4000)
-    })
-  }
-  await asyncTimeout();
+  //    const asyncTimeout = () => {
+  //   return new Promise((resolve) => {
+  //     setTimeout(resolve, 4000)
+  //   })
+  // }
+  // await asyncTimeout();
   const suppliers = await getSupplierData()
   const users = await getAllUsers()
   const brands = await getBrandData()
@@ -42,10 +43,15 @@ interface TableWrapperProps {
       id: brand.id,
       name: brand.name
     }))
+
+    const mappedSupplier = suppliers.data.map((sup): Supplier => ({
+        id: sup.id,
+        name: sup.name,
+    }))
     
   return (
     <div className='flex flex-col gap-4 m-4'>
-      <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} users={users} brands={mappedBrand} suppliers={suppliers} />
+      <FilterPaginationWrapper pagination={{ nextPage, previousPage, totalPages, currentPage }} users={users} brands={mappedBrand} suppliers={mappedSupplier} />
       <ProductDataTable columns={columns} data={mapedProducts} />
     </div>
   );
