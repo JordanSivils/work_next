@@ -1,6 +1,5 @@
 "use client"
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle,DialogTrigger, } from "@/components/ui/dialog"
-import { FileText } from "lucide-react"
+import {  DialogClose } from "@/components/ui/dialog"
 import { downloadPdf } from "@/components/downloading-pdf";
 import { BrandCombobox } from "@/components/ui/brand-combobox";
 import { Button } from "@/components/ui/button";
@@ -14,9 +13,11 @@ import z from "zod"
 import { notify } from "@/lib/toast";
 import { UpdateBrandInventoried } from "@/lib/actions/brands/update-brands";
 import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
  
 interface InventoryFormProps {
     brands: BrandComboboxInterface[]
+    sidebar: boolean
 }
 
 const formInputs = z.object({
@@ -29,11 +30,12 @@ const formInputs = z.object({
 })
 type FormInputs = z.infer<typeof formInputs>
 
-export function InventoryForm({ brands }: InventoryFormProps) {
+export function InventoryForm({ brands, sidebar }: InventoryFormProps) {
   const [open, setOpen] = useState(false)
   const { 
           register, 
           setValue, 
+          reset,
           handleSubmit,
           formState: { errors, isSubmitting, isDirty }     
       } = useForm<FormInputs>({
@@ -70,40 +72,43 @@ export function InventoryForm({ brands }: InventoryFormProps) {
           }
       }
   return (
-    <Dialog modal={false} open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="ghost"><FileText />Inventory</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-106.25">
-          <DialogHeader>
-            <DialogTitle>Get Inventory PDF</DialogTitle>
-            <DialogDescription>
-              Upload Excel
-            </DialogDescription>
-          </DialogHeader>
+    <Card>
+        {!sidebar && (
+            <CardHeader>
+                <CardTitle>Inventory Tool</CardTitle>
+                <CardDescription>Upload Excel & Get Inventory PDF</CardDescription>
+            </CardHeader>
+        )}
+        <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-2">
-                      <Label htmlFor="inventory-file">Excel File</Label>
-                      <Input type="file" accept=".xlsx" id="inventory-file" {...register("excel")} />
-                      {errors && <p className="text-sm text-purple-300">{errors.excel?.message}</p>}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                      <Label htmlFor="brand">Brand</Label>
-                      <div className="flex ">
-                          <BrandCombobox isLoading={isSubmitting} brands={brands} formData={handleIdSelect} sendDataUp={handleNameSelect} handleClear={handleOnClear} />
-                      </div>
-                      {errors && <p className="text-sm text-purple-300">{errors.brandName?.message}</p>}
-                  </div>
-              </div>
-              <div className="flex items-center justify-end gap-4">
-                  <Button type="submit" className={isSubmitting || !isDirty ? "bg-gray-500" : ""} disabled={isSubmitting || !isDirty}>Submit</Button>
-                  <DialogClose asChild>
-                      <Button variant="outline">Cancel</Button>
-                  </DialogClose>
-              </div>
+                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="inventory-file">Excel File</Label>
+                        <Input type="file" accept=".xlsx" id="inventory-file" {...register("excel")} />
+                        {errors && <p className="text-sm text-purple-300">{errors.excel?.message}</p>}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="brand">Brand</Label>
+                        <div className="flex ">
+                            <BrandCombobox isLoading={isSubmitting} brands={brands} formData={handleIdSelect} sendDataUp={handleNameSelect} handleClear={handleOnClear} />
+                        </div>
+                        {errors && <p className="text-sm text-purple-300">{errors.brandName?.message}</p>}
+                    </div>
+                </div>
+                <div className="flex items-center justify-end gap-4">
+                    <Button type="submit" className={isSubmitting || !isDirty ? "bg-gray-500" : ""} disabled={isSubmitting || !isDirty}>Submit</Button>
+                    {sidebar ? (
+                        <DialogClose asChild>
+                            <Button type="button" variant="outline">Cancel</Button>
+                        </DialogClose>
+                    ): (
+                        <Button type="button" onClick={() => reset()} variant="outline">Reset Form</Button>
+                    )}
+                    
+                </div>
             </form>
-        </DialogContent>
-    </Dialog>
+        </CardContent>
+    </Card>
+        
   )
 }

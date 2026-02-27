@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { User, UserTableRow } from "@/lib/actions/users/user-interface";
+import { UserTableRow } from "@/lib/actions/users/user-interface";
 import { updateBrandInventoriedBy } from "@/lib/actions/brands/update-brands";
 import { notify } from "@/lib/toast";
 import { ActivateUser, DeactivateUser } from "./deactivate-user";

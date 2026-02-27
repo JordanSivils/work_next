@@ -1,60 +1,64 @@
 "use client"
-import { useBrandTableContext } from "./brand-table-context";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
-import { useDebounce } from "@/lib/debounce";
+import { useState } from "react";
 import { SheetWrapper } from "@/components/ui/sheet-wrapper";
 import { Label } from "@/components/ui/label";
 import { UserCombobox } from "@/components/ui/user-combobox";
 import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
-import { Checkbox } from "@/components/ui/checkbox";
-import { CheckedState } from "@radix-ui/react-checkbox";
+import { useSpecialOrderContext } from "./special-order-context";
+import { SupplierCombobox } from "@/components/ui/supplier-combobox";
+import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
 
 interface BrandTableTopperProps {
     users: UserComboboxInterface[]
+    suppliers: Supplier[]
 }
 
-export function BrandTableTopper({ users }: BrandTableTopperProps) {
-    const { page, totalPages, setPage, refresh, nextPage, isActive, setIsActive ,search, setSearch, prevPage, loading, inventoriedById, setInventoriedById } = useBrandTableContext()
-    const [checked, setChecked] = useState(false)
-    const [thisSearch, setThisSearch] = useState<string>("")
-    const debouncedSearch = useDebounce(thisSearch, 300);
+export function SpecialOrderTableTopper({ users, suppliers }: BrandTableTopperProps) {
+    const { refresh, setUserId, setSupplierId, loading, setPage, prevPage, page, totalPages, nextPage } = useSpecialOrderContext()
+    // const [checked, setChecked] = useState(false)
 
-    const handleInventory = (id: string) => {
-        setInventoriedById(id);
+    const handleUserSelect = (id: string) => {
+        setUserId(id);
         refresh();
     }
-    const handleClear = () => {
-        setInventoriedById(undefined)
+
+    const handleSupplierSelect = (id: string) => {
+        setSupplierId(id);
+        refresh();
     }
 
-    const handleCheckChange = (next: CheckedState) => {
-        const isChecked = next === true;
-        setChecked(isChecked);
-        setIsActive(isChecked ? false : undefined);
-        refresh()
-    };
+    const handleUserClear = () => {
+        setUserId(undefined)
+    }
 
+    const handleSupplierClear = () => {
+        setSupplierId(undefined)
+    }
 
-    useEffect(() => {
-        const s = debouncedSearch.trim()
-        setSearch(s ? s : undefined)
-    }, [debouncedSearch, setSearch])
+    // const handleCheckChange = (next: CheckedState) => {
+    //     const isChecked = next === true;
+    //     setChecked(isChecked);
+    //     setIsActive(isChecked ? false : undefined);
+    //     refresh()
+    // };
     return (
         <div className="flex justify-between items-center gap-4">
             <SheetWrapper>
                 <div>
                     <Label htmlFor="user-combobox">Select User</Label>
-                    <UserCombobox isLoading={loading} users={users} handleClear={handleClear} formData={handleInventory} />
+                    <UserCombobox isLoading={loading} users={users} handleClear={handleUserClear} formData={handleUserSelect} />
                 </div>
-                <div className="flex gap-2">
+                <div>
+                    <Label htmlFor="user-combobox">Select Supplier</Label>
+                    <SupplierCombobox loading={loading} suppliers={suppliers} handleClear={handleSupplierClear} sendDataUp={handleSupplierSelect} />
+                </div>
+                {/* <div className="flex gap-2">
                     <Checkbox id="check" checked={checked} onCheckedChange={handleCheckChange}/>
-                    <Label htmlFor="check">Show Inactives</Label>
-                </div>
+                    <Label htmlFor="check">Show Fullfilled</Label>
+                </div> */}
             </SheetWrapper>
-            <Input type="text" value={thisSearch} onChange={(e) => setThisSearch(e.target.value)} className="max-w-100" />
             <div className="flex items-center">
                 <Button 
                 className="cursor-pointer" 

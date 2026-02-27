@@ -1,10 +1,8 @@
 'use server';
 
 import prisma from "@/lib/prisma-export/prisma-client";
-import {  ProductQuery,  ProudctTableRow } from "./product-interfaces";
+import {  ProductQuery } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
-import { ActionRes } from "../action-results";
-import { BaseListResponse } from "../base-interfaces/base-responses";
 import { reqRoles } from "../require-auth";
 
 const productWhereBuilder = (q: ProductQuery): Prisma.ProductWhereInput => {
@@ -34,7 +32,7 @@ function sortBuilder(q: ProductQuery) {
   return orderBy
 }
 
-export async function getAllProducts(q: ProductQuery): Promise<ActionRes<BaseListResponse<ProudctTableRow>>> {
+export async function getAllProducts(q: ProductQuery){
   
   await reqRoles.loggedIn()
 

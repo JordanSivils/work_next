@@ -1,6 +1,4 @@
 "use client"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { DatabaseZap } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
@@ -11,6 +9,7 @@ import { Label } from "@radix-ui/react-label";
 import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Card, CardContent } from "@/components/ui/card";
 
 export interface CsvInterface {
     file: FileList
@@ -21,7 +20,7 @@ const formInputs = z.object({
         .refine((xl) => xl.length === 1, { message: "Only 1 File Accepted"})
 })
 type FormInputs = z.infer<typeof formInputs>
-export function CsvDialog() {
+export function CsvForm() {
     const [open, setOpen] = useState(false)
 
     const {
@@ -45,18 +44,8 @@ export function CsvDialog() {
         }
         
     return (
-        <Dialog modal={false} open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button variant="ghost"><DatabaseZap />Database Csv</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-106.25">
-            <DialogHeader>
-              <DialogTitle>Upload Full Inventory CSV</DialogTitle>
-              <DialogDescription>
-                Be Sure it's a CSV and not excel
-              </DialogDescription>
-            </DialogHeader>
-              <div>
+        <Card>
+            <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                         <Label htmlFor="file">CSV</Label>
@@ -69,8 +58,7 @@ export function CsvDialog() {
                         </DialogClose>
                     </div>
                 </form>
-            </div>
-          </DialogContent>
-      </Dialog>
+            </CardContent>
+        </Card>
     )
 }

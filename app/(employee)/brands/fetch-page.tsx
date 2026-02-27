@@ -17,7 +17,6 @@ export async function BrandTableWrapper() {
                 <div className="px-4">
                     <BrandTable users={users}/>
                 </div>
-                
             </div>
         </BrandTableContext>
     )

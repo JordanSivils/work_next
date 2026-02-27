@@ -3,7 +3,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 
 import { useState } from "react"
 import { useBrandTableContext } from "./brand-table-context";
-import { updateBrandInventoriedBy, updateBrandIsActive } from "@/lib/actions/brands/update-brands";
+import { updateBrandIsActive } from "@/lib/actions/brands/update-brands";
 import { notify } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 

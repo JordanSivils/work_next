@@ -9,9 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ArrowUpDown, Ellipsis } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { UserCombobox } from "@/components/ui/user-combobox";
 import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
