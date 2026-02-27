@@ -1,6 +1,5 @@
 import { Prisma } from "@/app/generated/prisma/browser";
-import { BaseListResponse } from "../base-interfaces/base-responses";
-import { Brand } from "../brands/brand-interface";
+
 import { Supplier } from "../suppliers/supplier-interfaces";
 
 export type ItemSortField = "description" | "available";
@@ -24,7 +23,6 @@ export interface Product {
   categoryId?: string
   description: string
   Category?: Category
-  Brand?: Brand
   Supplier?: Supplier
   createdAt?: Date
   updatedAt?: Date

@@ -1,7 +1,9 @@
 'use server'
 import prisma from "@/lib/prisma-export/prisma-client";
+import { reqRoles } from "../require-auth";
 
 export async function UpdateBrandInventoried(id: string) {
+    await reqRoles.loggedIn()
     if (!id) throw new Error("No Id")
     return await prisma.brand.update({
         where: { id },
@@ -10,6 +12,7 @@ export async function UpdateBrandInventoried(id: string) {
 }
 
 export async function updateBrandInventoriedBy(rowId: string, userId: string) {
+    await reqRoles.loggedIn()
     if (!rowId || !userId) throw new Error("No Id")
     return await prisma.brand.update({
         where: { id: rowId },
@@ -18,6 +21,7 @@ export async function updateBrandInventoriedBy(rowId: string, userId: string) {
 }
 
 export async function updateBrandIsActive(id: string, activity: boolean) {
+    await reqRoles.loggedIn()
     if (!id) throw new Error("No Id")
     return await prisma.brand.update({
         where: { id },

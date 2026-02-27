@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSignIn } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { SignedIn, SignedOut, useAuth, useSignIn } from "@clerk/nextjs";
+import { redirect, useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ClerkAPIError } from "@clerk/types"
 import { isClerkAPIResponseError } from '@clerk/nextjs/errors'
@@ -20,6 +20,13 @@ export function SignInForm() {
     const [errors, setErrors] = useState<ClerkAPIError[]>();
     const { handleSubmit, register } = useForm<UserCredentials>()
     const router = useRouter()
+
+    const { isSignedIn } = useAuth();
+
+    if (isSignedIn) {
+        redirect("/")
+    }
+
 
     const onSubmit: SubmitHandler<UserCredentials> = async (data) => {
 
@@ -52,7 +59,9 @@ export function SignInForm() {
     }
 
     return (
-        <div className="w-full h-screen flex justify-center items-center">
+        <>
+        <SignedOut>
+            <div className="w-full h-screen flex justify-center items-center">
             <Card className="w-100">
                 <CardHeader>
                     <CardTitle>Login</CardTitle>
@@ -84,8 +93,9 @@ export function SignInForm() {
                     
                 </CardContent>
             </Card>
-            
-            
         </div>
+        </SignedOut>
+        </>
+        
     )
 }

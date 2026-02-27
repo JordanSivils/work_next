@@ -94,11 +94,11 @@ export function FilterPaginationWrapper({ pagination, brands, suppliers, users }
                 <>
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
-                        <BrandCombobox isLoading={isPending} sendDataUp={handleQueryFromChild} brands={brands} handleClear={() => handleClearFromChild("brand")}/>
+                        <BrandCombobox isLoading={isPending} productData={handleQueryFromChild} brands={brands} handleClear={() => handleClearFromChild("brand")}/>
                     </div>
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
-                        <SupplierCombobox sendDataUp={handleQueryFromChild} suppliers={suppliers} handleClear={() => handleClearFromChild("supplier")} />
+                        <SupplierCombobox productData={handleQueryFromChild} suppliers={suppliers} handleClear={() => handleClearFromChild("supplier")} />
                     </div>
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground pb-2">Select User</p>

@@ -1,16 +1,27 @@
 import { Prisma } from "@/app/generated/prisma/client"
+import z from "zod"
 
-export interface Brand {
-    id?: string
-    name: string
-    itemCount?: number
-    createdAt?: string
-    updatedAt?: string
-    slug?: string
-    inventoriedBy?: string
-    lastInventoriedAt?: string
-    isActive?: boolean
-}
+// export interface Brand {
+//     id?: string
+//     name: string
+//     itemCount?: number
+//     createdAt?: string
+//     updatedAt?: string
+//     slug?: string
+//     inventoriedBy?: string
+//     lastInventoriedAt?: Date
+//     isActive?: boolean
+// }
+
+export const brandSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    updatedAt: z.coerce.date().optional(),
+    inventoriedBy: z.string().optional(),
+    lastInventoriedAt: z.coerce.date().optional(),
+    isActive: z.boolean().optional()
+})
+export type SmallBrand = z.infer<typeof brandSchema>
 
 export interface BrandComboboxInterface {
     id: string

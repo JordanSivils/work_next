@@ -53,7 +53,7 @@ model Product {
   categoryId     String?
   supplierId     String?
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime       @updatedAt
+  updatedAt      DateTime      @updatedAt
   Brand          Brand?        @relation(fields: [brandId], references: [id])
   Category       Category?     @relation(fields: [categoryId], references: [id])
   Supplier       Supplier?     @relation(fields: [supplierId], references: [id])
@@ -65,7 +65,7 @@ model Product {
 }
 
 model SpecialOrder {
-  id             String      @id @default(uuid())
+  id             String        @id @default(uuid())
   items          Json?
   notes          String?
   supplierId     String?
@@ -77,12 +77,12 @@ model SpecialOrder {
   existingItem   Boolean?     @default(false)
 
   createdById    String?
-  recurring      Boolean     @default(false)
+  recurring      Boolean      @default(false)
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   
-  User           User?       @relation(fields: [createdById], references: [id], onDelete: SetNull)
-  Supplier       Supplier?   @relation(fields: [supplierId], references: [id])
+  User           User?        @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  Supplier       Supplier?    @relation(fields: [supplierId], references: [id])
 
   @@index([orderStatus])
   @@index([recurring])

@@ -2,7 +2,6 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 import { useState } from "react"
-import { updateBrandInventoriedBy, updateBrandIsActive } from "@/lib/actions/brands/update-brands";
 import { notify } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { updateUserIsActive } from "@/lib/actions/users/update-users";

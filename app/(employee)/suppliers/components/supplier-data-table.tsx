@@ -14,7 +14,7 @@ import { useSupplierTableContext } from './supplier-table-context';
 import { SupplierTableRow } from '@/lib/actions/suppliers/supplier-interfaces';
 import { ActivateSupplier, DeactivateSupplier } from './deactivate-supplier';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SupplierDetailEdit } from './supplier-detail-edit';
 
 interface ColumnDef<T> {

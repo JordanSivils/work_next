@@ -11,14 +11,17 @@ import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
 
 interface SupplierComboboxProps {
     suppliers: Supplier[]
-    sendDataUp: (val: string) => void
+    sendDataUp?: (val: string) => void
     handleClear: () => void
+    productData?: (key: string, val: string ) => void
+    loading?: boolean
+    initValue?: string
 }
 
 
-export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: SupplierComboboxProps) {
+export function SupplierCombobox({ suppliers, sendDataUp, handleClear, initValue, productData }: SupplierComboboxProps) {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState<string | undefined>(undefined)
+    const [value, setValue] = useState<string | undefined>(initValue ?? undefined)
 
     return (
         <div className="flex gap-1">
@@ -45,7 +48,9 @@ export function SupplierCombobox({ suppliers, sendDataUp, handleClear }: Supplie
                                 onSelect={() => {
                                     setValue(supplier.id)
                                     setOpen(false)
-                                    sendDataUp(supplier.id)
+                                    sendDataUp?.(supplier.id)
+                                    productData?.("brand", supplier.name)
+                                    console.log("selected")
                                 }}
                                 >
                                     {supplier.name}

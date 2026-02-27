@@ -33,7 +33,12 @@ export type SupplierTableRow = Prisma.SupplierGetPayload<{
     }
 }>
 
-// export type SupplierPatch = Prisma.SupplierUpdateInput;
+export const smallSupplierSchema = z.object({
+    id: z.uuid(),
+    name: z.string(),
+    specialorders: z.coerce.number().optional()
+})
+export type SmallSupplier = z.infer<typeof smallSupplierSchema>
 
 export const supplierPatchSchema = z.object({
     orderDay: z.string().optional(),

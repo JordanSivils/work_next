@@ -2,6 +2,9 @@
 import prisma from "@/lib/prisma-export/prisma-client";
 import { BrandQuery } from "./brand-interface";
 import { Prisma } from "@/app/generated/prisma/client";
+import { auth } from "@clerk/nextjs/server";
+import { getUserByClerk } from "../users/get-users";
+import { reqRoles } from "../require-auth";
 
 export type SortDir = "asc" | "desc"
 
@@ -37,6 +40,7 @@ function brandSortBuilder(q?: BrandQuery) {
 }
 
 export async function getBrandData(q?: BrandQuery) {
+    await reqRoles.loggedIn()
     const where = buildBrandWhere(q)
     const orderBy = brandSortBuilder(q) ;
     const limit = Number(q?.limit ?? 300)
@@ -61,4 +65,18 @@ export async function getBrandData(q?: BrandQuery) {
         previousPage: page > 1,
         data
       }  
+}
+
+export async function getBrandsByCurrentUser() {
+    await reqRoles.loggedIn()
+    const { userId } = await auth()
+    if (!userId) throw new Error("no user logged in")
+        
+    const user = await getUserByClerk(userId)
+    if (!user) throw new Error("No Brands found")
+
+    return await prisma.brand.findMany({
+        where: { inventoriedById: user.id },
+        orderBy: { lastInventoriedAt: "asc" }
+    })
 }

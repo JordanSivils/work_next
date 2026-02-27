@@ -15,11 +15,12 @@ interface BrandComboboxProps {
     sendDataUp?: (name: string) => void
     handleClear?: () => void
     formData?: (id: string) => void 
+    productData?: (key: string, val: string ) => void
     isLoading: boolean
 }
 
 
-export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoading }: BrandComboboxProps) {
+export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoading, productData }: BrandComboboxProps) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | undefined>(undefined)
     const debouncedVal = useDebounce(value, 300);
@@ -51,6 +52,7 @@ export function BrandCombobox({ brands, sendDataUp, handleClear, formData, isLoa
                                     setValue(brand.id)
                                     setOpen(false)
                                     sendDataUp?.(brand.name)
+                                    productData?.("brand", brand.name)
                                     formData?.(brand.id)
                                 }}
                                 >

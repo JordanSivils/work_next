@@ -1,4 +1,3 @@
-import { useUser } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
 export const reqRoles = {

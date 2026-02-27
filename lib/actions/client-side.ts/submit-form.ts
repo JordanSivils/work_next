@@ -1,4 +1,8 @@
+"use server"
+import { reqRoles } from "../require-auth";
+
 export async function postDataToServer(file: File) {
+    await reqRoles.allowRoles(["dev"])
     const form = new FormData();
     form.append("file", file)
 
@@ -12,5 +16,4 @@ export async function postDataToServer(file: File) {
 
     const result = await res.json()
     return result
-
 }

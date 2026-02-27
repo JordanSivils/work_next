@@ -1,12 +1,11 @@
-import { cards } from '@/app/(employee)/components/cards';
-import { HomeCard } from './components/home-card';
+import { Suspense } from "react";
+import { GeneralWrapper } from "@/components/ui/page-wrapper";
+import { HomePageFetch } from "./home-page-fetch";
 
-export default function Home() {
-  return (
-    <div className='flex flex-wrap gap-4 m-4 '>
-      {cards.map((card) => (
-        <HomeCard data={card} key={card.title} />
-      ))}
-    </div>
-  );
+export default function HomePage() {
+    return (
+        <GeneralWrapper>
+            <HomePageFetch />
+        </GeneralWrapper>
+    )
 }

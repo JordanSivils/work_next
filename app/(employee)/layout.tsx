@@ -11,7 +11,7 @@ export default function EmployeeLayout({
 }>) {
   return (
           <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar/>
               <main className='w-full'>
                 <Header aside={<SidebarTrigger />} />
                 {children}

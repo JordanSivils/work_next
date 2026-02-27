@@ -3,8 +3,10 @@ import prisma from "@/lib/prisma-export/prisma-client";
 import { SpecialOrderCreate, SpecialOrderEmail, specialOrderEmailSchema, specialOrderItemsArray } from "./special-order-interfaces";
 import { sendSpecialOrderEmail } from "../email/special-order-email";
 import { auth } from "@clerk/nextjs/server";
+import { reqRoles } from "../require-auth";
 
 export async function specialOrderCreate(fd: SpecialOrderCreate) {
+    await reqRoles.loggedIn()
     const { userId } = await auth()
     if (!userId) throw new Error("No user signed in")
     try {

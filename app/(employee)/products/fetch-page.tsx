@@ -15,7 +15,7 @@ interface TableWrapperProps {
   export async function ProductTableWrapper({ productQuery }: TableWrapperProps) {
   //    const asyncTimeout = () => {
   //   return new Promise((resolve) => {
-  //     setTimeout(resolve, 4000)
+  //     setTimeout(resolve, 3000)
   //   })
   // }
   // await asyncTimeout();
@@ -23,10 +23,6 @@ interface TableWrapperProps {
   const users = await getAllUsers()
   const brands = await getBrandData()
   const products = await getAllProducts(productQuery)
-
-  if (!products.ok) {
-    return <div>{products.error}</div>
-  }
 
   const mapedProducts = products.result.data.map((product): ProductTable => ({
       id: product.id,
