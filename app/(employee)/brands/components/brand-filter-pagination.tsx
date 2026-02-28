@@ -17,7 +17,7 @@ interface BrandTableTopperProps {
 }
 
 export function BrandTableTopper({ users }: BrandTableTopperProps) {
-    const { page, totalPages, setPage, refresh, nextPage, isActive, setIsActive ,search, setSearch, prevPage, loading, inventoriedById, setInventoriedById } = useBrandTableContext()
+    const { page, totalPages, setPage, refresh, nextPage, setIsActive, setSearch, prevPage, loading, setInventoriedById } = useBrandTableContext()
     const [checked, setChecked] = useState(false)
     const [thisSearch, setThisSearch] = useState<string>("")
     const debouncedSearch = useDebounce(thisSearch, 300);

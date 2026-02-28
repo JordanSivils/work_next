@@ -58,7 +58,6 @@ export function BrandTableContext({
     const [search, setSearch] = useState<string | undefined>(DEFAULT_SEARCH)
     const [brands, setBrands] = useState<BrandTableRow[]>(initialBrands)
     const [totalBrands, setTotalBrands] = useState<number>(initialBrandCount)
-    const [inventoriedAt, setInventoriedAt] = useState<string | undefined>(undefined)
     const [isActive, setIsActive] = useState<boolean | undefined>(undefined)
 
     const isInitialMount = useRef(true);

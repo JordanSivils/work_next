@@ -1,6 +1,7 @@
 import { Prisma } from "@/app/generated/prisma/browser";
 
 import { Supplier } from "../suppliers/supplier-interfaces";
+import z from "zod";
 
 export type ItemSortField = "description" | "available";
 export type ItemSortDir = "asc" | "desc"
@@ -28,19 +29,20 @@ export interface Product {
   updatedAt?: Date
 }
 
+export const productQuerySchema = z.object({
+  brandId: z.string().optional(),
+  supplierId: z.string().optional(),
+  categoryId: z.string().optional(),
+  search: z.string().optional(),
+  sortDir: z.enum(["asc", "desc"]).optional(),
+  sortKey: z.uuid().optional(),
+  page: z.coerce.number(),
+  limit: z.coerce.number()
+})
 
-export interface ProductQuery  {
-  brand?: string
-  supplier?: string
-  category?: string
-  search?: string
-  sort?: SortOpts
-  page?: string
-  limit?: string
-  dir?: "asc" | "desc"
-}
+export type ProductQuery = z.infer<typeof productQuerySchema>
 
-export type ProudctTableRow = Prisma.ProductGetPayload<{
+export type ProductTableRow = Prisma.ProductGetPayload<{
   include: { Category: {
     select: { name: true }
   }}
