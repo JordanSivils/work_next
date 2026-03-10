@@ -205,7 +205,7 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  id?: Prisma.StringFilter<"User"> | string
+  id?: Prisma.UuidFilter<"User"> | string
   clerkId?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringFilter<"User"> | string
   lastName?: Prisma.StringFilter<"User"> | string
@@ -217,6 +217,7 @@ export type UserWhereInput = {
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
   Supplier?: Prisma.SupplierListRelationFilter
   Brand?: Prisma.BrandListRelationFilter
+  MissedInventory?: Prisma.MissedInventoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +233,7 @@ export type UserOrderByWithRelationInput = {
   SpecialOrder?: Prisma.SpecialOrderOrderByRelationAggregateInput
   Supplier?: Prisma.SupplierOrderByRelationAggregateInput
   Brand?: Prisma.BrandOrderByRelationAggregateInput
+  MissedInventory?: Prisma.MissedInventoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +252,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
   Supplier?: Prisma.SupplierListRelationFilter
   Brand?: Prisma.BrandListRelationFilter
+  MissedInventory?: Prisma.MissedInventoryListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -271,7 +274,7 @@ export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"User"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"User"> | string
   clerkId?: Prisma.StringWithAggregatesFilter<"User"> | string
   firstName?: Prisma.StringWithAggregatesFilter<"User"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"User"> | string
@@ -295,6 +298,7 @@ export type UserCreateInput = {
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -310,6 +314,7 @@ export type UserUncheckedCreateInput = {
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +330,7 @@ export type UserUpdateInput = {
   SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -340,6 +346,7 @@ export type UserUncheckedUpdateInput = {
   SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -419,6 +426,11 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserCreateNestedOneWithoutBrandInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBrandInput, Prisma.UserUncheckedCreateWithoutBrandInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBrandInput
@@ -467,6 +479,20 @@ export type UserUpdateOneWithoutSupplierNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSupplierInput, Prisma.UserUpdateWithoutSupplierInput>, Prisma.UserUncheckedUpdateWithoutSupplierInput>
 }
 
+export type UserCreateNestedOneWithoutMissedInventoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMissedInventoryInput, Prisma.UserUncheckedCreateWithoutMissedInventoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMissedInventoryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMissedInventoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMissedInventoryInput, Prisma.UserUncheckedCreateWithoutMissedInventoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMissedInventoryInput
+  upsert?: Prisma.UserUpsertWithoutMissedInventoryInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMissedInventoryInput, Prisma.UserUpdateWithoutMissedInventoryInput>, Prisma.UserUncheckedUpdateWithoutMissedInventoryInput>
+}
+
 export type UserCreateWithoutBrandInput = {
   id?: string
   clerkId: string
@@ -479,6 +505,7 @@ export type UserCreateWithoutBrandInput = {
   updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBrandInput = {
@@ -493,6 +520,7 @@ export type UserUncheckedCreateWithoutBrandInput = {
   updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBrandInput = {
@@ -523,6 +551,7 @@ export type UserUpdateWithoutBrandInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBrandInput = {
@@ -537,6 +566,7 @@ export type UserUncheckedUpdateWithoutBrandInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSpecialOrderInput = {
@@ -551,6 +581,7 @@ export type UserCreateWithoutSpecialOrderInput = {
   updatedAt?: Date | string
   Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSpecialOrderInput = {
@@ -565,6 +596,7 @@ export type UserUncheckedCreateWithoutSpecialOrderInput = {
   updatedAt?: Date | string
   Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSpecialOrderInput = {
@@ -595,6 +627,7 @@ export type UserUpdateWithoutSpecialOrderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpecialOrderInput = {
@@ -609,6 +642,7 @@ export type UserUncheckedUpdateWithoutSpecialOrderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSupplierInput = {
@@ -623,6 +657,7 @@ export type UserCreateWithoutSupplierInput = {
   updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSupplierInput = {
@@ -637,6 +672,7 @@ export type UserUncheckedCreateWithoutSupplierInput = {
   updatedAt?: Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
   Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSupplierInput = {
@@ -667,6 +703,7 @@ export type UserUpdateWithoutSupplierInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupplierInput = {
@@ -681,6 +718,83 @@ export type UserUncheckedUpdateWithoutSupplierInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
   Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
+  MissedInventory?: Prisma.MissedInventoryUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMissedInventoryInput = {
+  id?: string
+  clerkId: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  phoneNumber?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  SpecialOrder?: Prisma.SpecialOrderCreateNestedManyWithoutUserInput
+  Supplier?: Prisma.SupplierCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMissedInventoryInput = {
+  id?: string
+  clerkId: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  phoneNumber?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  SpecialOrder?: Prisma.SpecialOrderUncheckedCreateNestedManyWithoutUserInput
+  Supplier?: Prisma.SupplierUncheckedCreateNestedManyWithoutUserInput
+  Brand?: Prisma.BrandUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMissedInventoryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMissedInventoryInput, Prisma.UserUncheckedCreateWithoutMissedInventoryInput>
+}
+
+export type UserUpsertWithoutMissedInventoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMissedInventoryInput, Prisma.UserUncheckedUpdateWithoutMissedInventoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMissedInventoryInput, Prisma.UserUncheckedCreateWithoutMissedInventoryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMissedInventoryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMissedInventoryInput, Prisma.UserUncheckedUpdateWithoutMissedInventoryInput>
+}
+
+export type UserUpdateWithoutMissedInventoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  SpecialOrder?: Prisma.SpecialOrderUpdateManyWithoutUserNestedInput
+  Supplier?: Prisma.SupplierUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMissedInventoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  SpecialOrder?: Prisma.SpecialOrderUncheckedUpdateManyWithoutUserNestedInput
+  Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutUserNestedInput
+  Brand?: Prisma.BrandUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -692,12 +806,14 @@ export type UserCountOutputType = {
   SpecialOrder: number
   Supplier: number
   Brand: number
+  MissedInventory: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   SpecialOrder?: boolean | UserCountOutputTypeCountSpecialOrderArgs
   Supplier?: boolean | UserCountOutputTypeCountSupplierArgs
   Brand?: boolean | UserCountOutputTypeCountBrandArgs
+  MissedInventory?: boolean | UserCountOutputTypeCountMissedInventoryArgs
 }
 
 /**
@@ -731,6 +847,13 @@ export type UserCountOutputTypeCountBrandArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.BrandWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMissedInventoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MissedInventoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -745,6 +868,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   SpecialOrder?: boolean | Prisma.User$SpecialOrderArgs<ExtArgs>
   Supplier?: boolean | Prisma.User$SupplierArgs<ExtArgs>
   Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
+  MissedInventory?: boolean | Prisma.User$MissedInventoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -789,6 +913,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   SpecialOrder?: boolean | Prisma.User$SpecialOrderArgs<ExtArgs>
   Supplier?: boolean | Prisma.User$SupplierArgs<ExtArgs>
   Brand?: boolean | Prisma.User$BrandArgs<ExtArgs>
+  MissedInventory?: boolean | Prisma.User$MissedInventoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -800,6 +925,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     SpecialOrder: Prisma.$SpecialOrderPayload<ExtArgs>[]
     Supplier: Prisma.$SupplierPayload<ExtArgs>[]
     Brand: Prisma.$BrandPayload<ExtArgs>[]
+    MissedInventory: Prisma.$MissedInventoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1208,6 +1334,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   SpecialOrder<T extends Prisma.User$SpecialOrderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$SpecialOrderArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpecialOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Supplier<T extends Prisma.User$SupplierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$SupplierArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Brand<T extends Prisma.User$BrandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BrandArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  MissedInventory<T extends Prisma.User$MissedInventoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MissedInventoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissedInventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1703,6 +1830,30 @@ export type User$BrandArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
+}
+
+/**
+ * User.MissedInventory
+ */
+export type User$MissedInventoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MissedInventory
+   */
+  select?: Prisma.MissedInventorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MissedInventory
+   */
+  omit?: Prisma.MissedInventoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MissedInventoryInclude<ExtArgs> | null
+  where?: Prisma.MissedInventoryWhereInput
+  orderBy?: Prisma.MissedInventoryOrderByWithRelationInput | Prisma.MissedInventoryOrderByWithRelationInput[]
+  cursor?: Prisma.MissedInventoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MissedInventoryScalarFieldEnum | Prisma.MissedInventoryScalarFieldEnum[]
 }
 
 /**

@@ -26,17 +26,7 @@ export async function ProductPage({
       <h1 className='text-xl font-semibold'>Products</h1>
         
       <Suspense fallback={<TableSkeleton />}>
-        <ProductTableWrapper 
-        productQuery={{ 
-          page,
-          limit,
-          brand,
-          supplier,
-          category,
-          search,
-          sort,
-          dir
-        }} 
+        <ProductTableWrapper
         />
       </Suspense>
     </div>

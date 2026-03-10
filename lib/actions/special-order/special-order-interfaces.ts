@@ -18,7 +18,7 @@ export const specialOrderEmailSchema = z.object({
     supplierName: z.string().optional(),
     customer: z.string().optional(),
     customerContact: z.string().optional(),
-    orderStatus: z.enum(["requested", "rejected", "ordered", "received", "shorted"]).optional(),
+    orderStatus: z.enum(["requested", "rejected", "ordered", "received", "shorted", "fulfilled"]).optional(),
     existingItem: z.boolean(),
     createdBy: z.string(),
     recurring: z.boolean(),
@@ -34,7 +34,7 @@ export const specialOrderCreateSchema = z.object({
     customer: z.string(),
     customerContact: z.string(),
     comments: z.string().optional(),
-    orderStatus: z.enum(["requested", "rejected", "ordered", "received", "shorted"]).optional(),
+    orderStatus: z.enum(["requested", "rejected", "ordered", "received", "shorted", "fulfilled"]).optional(),
     requestType: z.enum(["order", "cost"]).optional(),
     recurring: z.boolean(),
     existingItem: z.boolean()

@@ -57,7 +57,8 @@ export const ModelName = {
   Product: 'Product',
   SpecialOrder: 'SpecialOrder',
   Supplier: 'Supplier',
-  User: 'User'
+  User: 'User',
+  MissedInventory: 'MissedInventory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -94,7 +95,8 @@ export const CategoryScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
   name: 'name',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  targetMargin: 'targetMargin'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -180,6 +182,16 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const MissedInventoryScalarFieldEnum = {
+  id: 'id',
+  month: 'month',
+  missedCount: 'missedCount',
+  userId: 'userId'
+} as const
+
+export type MissedInventoryScalarFieldEnum = (typeof MissedInventoryScalarFieldEnum)[keyof typeof MissedInventoryScalarFieldEnum]
 
 
 export const SortOrder = {

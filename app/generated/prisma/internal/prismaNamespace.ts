@@ -390,7 +390,8 @@ export const ModelName = {
   Product: 'Product',
   SpecialOrder: 'SpecialOrder',
   Supplier: 'Supplier',
-  User: 'User'
+  User: 'User',
+  MissedInventory: 'MissedInventory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "category" | "productStaging" | "product" | "specialOrder" | "supplier" | "user"
+    modelProps: "brand" | "category" | "productStaging" | "product" | "specialOrder" | "supplier" | "user" | "missedInventory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -928,6 +929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MissedInventory: {
+      payload: Prisma.$MissedInventoryPayload<ExtArgs>
+      fields: Prisma.MissedInventoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MissedInventoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MissedInventoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        findFirst: {
+          args: Prisma.MissedInventoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MissedInventoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        findMany: {
+          args: Prisma.MissedInventoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>[]
+        }
+        create: {
+          args: Prisma.MissedInventoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        createMany: {
+          args: Prisma.MissedInventoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MissedInventoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>[]
+        }
+        delete: {
+          args: Prisma.MissedInventoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        update: {
+          args: Prisma.MissedInventoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.MissedInventoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MissedInventoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MissedInventoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.MissedInventoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissedInventoryPayload>
+        }
+        aggregate: {
+          args: Prisma.MissedInventoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMissedInventory>
+        }
+        groupBy: {
+          args: Prisma.MissedInventoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MissedInventoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MissedInventoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MissedInventoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -985,7 +1060,8 @@ export const CategoryScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
   name: 'name',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  targetMargin: 'targetMargin'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -1071,6 +1147,16 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const MissedInventoryScalarFieldEnum = {
+  id: 'id',
+  month: 'month',
+  missedCount: 'missedCount',
+  userId: 'userId'
+} as const
+
+export type MissedInventoryScalarFieldEnum = (typeof MissedInventoryScalarFieldEnum)[keyof typeof MissedInventoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1326,6 +1412,7 @@ export type GlobalOmitConfig = {
   specialOrder?: Prisma.SpecialOrderOmit
   supplier?: Prisma.SupplierOmit
   user?: Prisma.UserOmit
+  missedInventory?: Prisma.MissedInventoryOmit
 }
 
 /* Types for Logging */

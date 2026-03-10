@@ -212,7 +212,7 @@ export type SupplierWhereInput = {
   AND?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[]
   OR?: Prisma.SupplierWhereInput[]
   NOT?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[]
-  id?: Prisma.StringFilter<"Supplier"> | string
+  id?: Prisma.UuidFilter<"Supplier"> | string
   name?: Prisma.StringFilter<"Supplier"> | string
   slug?: Prisma.StringFilter<"Supplier"> | string
   orderDay?: Prisma.StringNullableFilter<"Supplier"> | string | null
@@ -221,7 +221,7 @@ export type SupplierWhereInput = {
   isActive?: Prisma.BoolFilter<"Supplier"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
-  userId?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  userId?: Prisma.UuidNullableFilter<"Supplier"> | string | null
   User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Product?: Prisma.ProductListRelationFilter
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
@@ -256,7 +256,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"Supplier"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
-  userId?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  userId?: Prisma.UuidNullableFilter<"Supplier"> | string | null
   User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Product?: Prisma.ProductListRelationFilter
   SpecialOrder?: Prisma.SpecialOrderListRelationFilter
@@ -282,7 +282,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   AND?: Prisma.SupplierScalarWhereWithAggregatesInput | Prisma.SupplierScalarWhereWithAggregatesInput[]
   OR?: Prisma.SupplierScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SupplierScalarWhereWithAggregatesInput | Prisma.SupplierScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Supplier"> | string
   name?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   orderDay?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
@@ -291,7 +291,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"Supplier"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Supplier"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Supplier"> | Date | string
-  userId?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"Supplier"> | string | null
 }
 
 export type SupplierCreateInput = {
@@ -722,7 +722,7 @@ export type SupplierScalarWhereInput = {
   AND?: Prisma.SupplierScalarWhereInput | Prisma.SupplierScalarWhereInput[]
   OR?: Prisma.SupplierScalarWhereInput[]
   NOT?: Prisma.SupplierScalarWhereInput | Prisma.SupplierScalarWhereInput[]
-  id?: Prisma.StringFilter<"Supplier"> | string
+  id?: Prisma.UuidFilter<"Supplier"> | string
   name?: Prisma.StringFilter<"Supplier"> | string
   slug?: Prisma.StringFilter<"Supplier"> | string
   orderDay?: Prisma.StringNullableFilter<"Supplier"> | string | null
@@ -731,7 +731,7 @@ export type SupplierScalarWhereInput = {
   isActive?: Prisma.BoolFilter<"Supplier"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
-  userId?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  userId?: Prisma.UuidNullableFilter<"Supplier"> | string | null
 }
 
 export type SupplierCreateManyUserInput = {

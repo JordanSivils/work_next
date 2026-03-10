@@ -13,7 +13,7 @@ import { getAllCategories } from '@/lib/actions/categories/get-category-data';
 interface TableWrapperProps {
   productQuery: ProductQuery
 }
-  export async function ProductTableWrapper({ productQuery }: TableWrapperProps) {
+  export async function ProductTableWrapper() {
   //    const asyncTimeout = () => {
   //   return new Promise((resolve) => {
   //     setTimeout(resolve, 3000)

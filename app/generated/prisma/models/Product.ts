@@ -250,14 +250,14 @@ export type ProductWhereInput = {
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
-  id?: Prisma.StringFilter<"Product"> | string
+  id?: Prisma.UuidFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
   available?: Prisma.IntNullableFilter<"Product"> | number | null
   margin?: Prisma.FloatNullableFilter<"Product"> | number | null
-  brandId?: Prisma.StringNullableFilter<"Product"> | string | null
-  categoryId?: Prisma.StringNullableFilter<"Product"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"Product"> | string | null
+  brandId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  categoryId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"Product"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   Brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
@@ -290,9 +290,9 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Product"> | string
   available?: Prisma.IntNullableFilter<"Product"> | number | null
   margin?: Prisma.FloatNullableFilter<"Product"> | number | null
-  brandId?: Prisma.StringNullableFilter<"Product"> | string | null
-  categoryId?: Prisma.StringNullableFilter<"Product"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"Product"> | string | null
+  brandId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  categoryId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"Product"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   Brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
@@ -322,14 +322,14 @@ export type ProductScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProductScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Product"> | string
   sku?: Prisma.StringWithAggregatesFilter<"Product"> | string
   description?: Prisma.StringWithAggregatesFilter<"Product"> | string
   available?: Prisma.IntNullableWithAggregatesFilter<"Product"> | number | null
   margin?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
-  brandId?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
-  categoryId?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
-  supplierId?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  brandId?: Prisma.UuidNullableWithAggregatesFilter<"Product"> | string | null
+  categoryId?: Prisma.UuidNullableWithAggregatesFilter<"Product"> | string | null
+  supplierId?: Prisma.UuidNullableWithAggregatesFilter<"Product"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
 }
@@ -661,14 +661,14 @@ export type ProductScalarWhereInput = {
   AND?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
   OR?: Prisma.ProductScalarWhereInput[]
   NOT?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
-  id?: Prisma.StringFilter<"Product"> | string
+  id?: Prisma.UuidFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
   available?: Prisma.IntNullableFilter<"Product"> | number | null
   margin?: Prisma.FloatNullableFilter<"Product"> | number | null
-  brandId?: Prisma.StringNullableFilter<"Product"> | string | null
-  categoryId?: Prisma.StringNullableFilter<"Product"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"Product"> | string | null
+  brandId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  categoryId?: Prisma.UuidNullableFilter<"Product"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"Product"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
 }
