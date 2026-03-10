@@ -17,10 +17,9 @@ export function SheetWrapper({ children }: SheetWrapperProps) {
                 <SheetHeader>
                     <SheetTitle>Filter Products</SheetTitle>
                 </SheetHeader>
-                <div className="p-4 flex flex-col gap-4">
+                <div className="p-4 flex flex-col gap-6">
                     {children}
                 </div>
-                
             </SheetContent>
         </Sheet>
     )

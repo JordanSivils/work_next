@@ -5,6 +5,10 @@ import { sendSpecialOrderEmail } from "../email/special-order-email";
 import { auth } from "@clerk/nextjs/server";
 import { reqRoles } from "../require-auth";
 
+const managerOneEmail = process.env.MANAGER_ONE_EMAIL
+const managerTwoEmail = process.env.MANAGER_TWO_EMAIL
+const managerThreeEmail = process.env.MANAGER_THREE_EMAIL
+
 export async function specialOrderCreate(fd: SpecialOrderCreate) {
     await reqRoles.loggedIn()
     const { userId } = await auth()
@@ -45,7 +49,9 @@ export async function specialOrderCreate(fd: SpecialOrderCreate) {
             createdBy: `${createSpecialOrder.User?.firstName ?? ""} ${createSpecialOrder.User?.lastName ?? ""}`,
         }
     
-        const employeeEmails = ["jordan.sivils.wd@gmail.com", "kaily@mooreequine.com"]
+        if (!managerOneEmail || !managerTwoEmail || !managerThreeEmail) throw new Error("env emails missing")
+
+        const employeeEmails = [managerOneEmail, managerTwoEmail, managerThreeEmail]
         const emails = createSpecialOrder.Supplier?.User?.email ? [createSpecialOrder.Supplier?.User?.email] : employeeEmails
         
         sendSpecialOrderEmail(emails, mappedSpecialOrderEmail)

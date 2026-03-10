@@ -1,121 +1,120 @@
 "use client"
-import { BrandCombobox } from "@/components/ui/brand-combobox";
-import { Checkbox } from "@/components/ui/checkbox";
-import { DebouncedInput } from "@/components/ui/debounced-input";
-import { PaginationGroup } from "@/components/ui/pagination-group";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
+import { useDebounce } from "@/lib/debounce";
 import { SheetWrapper } from "@/components/ui/sheet-wrapper";
-import { Skeleton } from "@/components/ui/skeleton";
-import { SupplierCombobox } from "@/components/ui/supplier-combobox";
-import { UserCombobox } from "@/components/ui/user-combobox";
-import { BaseListPaginationInterface } from "@/lib/actions/base-interfaces/base-pagination";
-import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
+import { Label } from "@/components/ui/label";
+import { useProductContext } from "./product-table-context";
 import { Supplier } from "@/lib/actions/suppliers/supplier-interfaces";
-import { UserComboboxInterface } from "@/lib/actions/users/user-interface";
-import { CheckedState } from "@radix-ui/react-checkbox";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState, useTransition } from "react";
+import { BrandComboboxInterface } from "@/lib/actions/brands/brand-interface";
+import { CategoryCombobox } from "@/components/ui/category-combobox";
+import { SupplierCombobox } from "@/components/ui/supplier-combobox";
+import { BrandCombobox } from "@/components/ui/brand-combobox";
 
-interface FilterPaginationWrapperProps {
-    pagination: BaseListPaginationInterface
-    brands: BrandComboboxInterface[]
-    users: UserComboboxInterface[]
+interface ProductTableTopProps {
     suppliers: Supplier[]
+    categories: Category[]
+    brands: BrandComboboxInterface[]
 }
 
-export function FilterPaginationWrapper({ pagination, brands, suppliers, users }: FilterPaginationWrapperProps) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const [isPending, startTransition] = useTransition()
-    const searchParams = useSearchParams()
+export function ProductTableTopper({ categories, suppliers, brands }: ProductTableTopProps) {
+    const { page, setBrandId, setSupplierId, setCategoryId, totalPages, setPage, refresh, nextPage, search, setSearch, prevPage, loading } = useProductContext()
+    
+    const [thisSearch, setThisSearch] = useState<string>("")
+    const debouncedSearch = useDebounce(thisSearch, 300);
 
-
-    const handleQueryFromChild = useCallback((key: string, value: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        params.set(key, value)
-        params.set("page", "1")
-        return startTransition(() => router.push(pathname + '?' + params))
-    }, [searchParams, pathname, router, startTransition])
-
-    const handleClearFromChild = useCallback((key: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        params.delete(key)
-        params.set("page", "1")
-        return startTransition(() => router.push(pathname + '?' + params.toString()))
-    }, [searchParams, pathname, router, startTransition])
-
-    const handleInputChange = (val: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        
-        if (!val) {
-            params.delete("search")
-        } else {
-            params.set("page", "1")
-            params.set("search", val)
-        }
-        return startTransition(() => router.push(pathname + '?' + params.toString()))
+    const handleBrandId = (id: string) => {
+        setBrandId(id);
+        refresh();
+    }
+    const handleBrandClear = () => {
+        setBrandId(undefined)
+        setPage(1)
     }
 
-    const [checked, setChecked] = useState(false)
-
-    const handleCheckChange = (next: CheckedState) => {
-        const isChecked = next === true
-        setChecked(isChecked)
-        
-        const params = new URLSearchParams(searchParams.toString())
-        
-        if (!isChecked) {
-            params.set("page", "1")
-            params.delete("status")
-        } else {
-            params.set("page", "1")
-            params.set("status", "negative")
-        }
-        startTransition(() => router.push(pathname + '?' + params.toString()))
+    const handleSupplierId = (id: string) => {
+        setSupplierId(id);
+        refresh();
+    }
+    const handleSupplierClear = () => {
+        setSupplierId(undefined)
+        setPage(1)
     }
 
+    const handleCategoryId = (id: string) => {
+        setCategoryId(id);
+        refresh();
+    }
+    const handleCategoryClear = () => {
+        setCategoryId(undefined)
+        setPage(1)
+    }
+    
+    useEffect(() => {
+        const s = debouncedSearch.trim()
+        setSearch(s ? s : undefined)
+    }, [debouncedSearch, setSearch])
+    
     return (
-        <div className="flex justify-between px-4 items-center">
+        <div className="flex justify-between items-center gap-4">
             <SheetWrapper>
-                {isPending ? 
-                <>
-                    <div>
-                    <Skeleton className="h-3 w-24 mb-2" />
-                    <Skeleton className="h-10 w-56" />
-                    </div>
-                    <div>
-                    <Skeleton className="h-3 w-24 mb-2" />
-                    <Skeleton className="h-10 w-56" />
-                    </div>
-                    <div>
-                        <Skeleton className="h-3 w-24 mb-2" />
-                    <Skeleton className="h-10 w-56" />
-                    </div>
-                </> :
-                <>
-                    <div>
-                        <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
-                        <BrandCombobox isLoading={isPending} productData={handleQueryFromChild} brands={brands} handleClear={() => handleClearFromChild("brand")}/>
-                    </div>
-                    <div>
-                        <p className="text-xs font-semibold text-muted-foreground pb-2">Select Brand</p>
-                        <SupplierCombobox productData={handleQueryFromChild} suppliers={suppliers} handleClear={() => handleClearFromChild("supplier")} />
-                    </div>
-                    <div>
-                        <p className="text-xs font-semibold text-muted-foreground pb-2">Select User</p>
-                        <UserCombobox isLoading={isPending} sendDataUp={handleQueryFromChild} users={users} handleClear={() => handleClearFromChild("user")} />
-                    </div>
-                </>
-                }
-                
+                <div className="flex flex-col gap-2">
+                    <Label>Select Category</Label>
+                    <CategoryCombobox sendDataUp={handleCategoryId} handleClear={handleCategoryClear} categories={categories}/>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <Label>Select Supplier</Label>
+                    <SupplierCombobox sendDataUp={handleSupplierId} handleClear={handleSupplierClear} suppliers={suppliers}/>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <Label>Select Brand</Label>
+                    <BrandCombobox isLoading={loading} sendDataUp={handleBrandId} handleClear={handleBrandClear} brands={brands}/>
+                </div>
             </SheetWrapper>
-            <DebouncedInput sendChange={handleInputChange} placeholder="search..." />
-            <div>
-                <label className="px-2" htmlFor="inventory">Negative</label> 
-                <Checkbox id="inventory" checked={checked} onCheckedChange={handleCheckChange} />
+            <Input type="text" value={thisSearch} onChange={(e) => setThisSearch(e.target.value)} className="max-w-100" />
+            <div className="flex items-center">
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading}
+                onClick={() => setPage(1)}
+                >
+                    <ChevronsLeft className={!loading ? "" : "text-muted"}/>
+                </Button>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading}
+                onClick={prevPage}
+                >
+                    <ChevronLeft className={!loading ? "" : "text-muted"} />
+                </Button>
+                <p>{page}</p>
+                <p>/</p>
+                <p>{totalPages}</p>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading || page === totalPages}
+                onClick={nextPage}
+                >
+                    <ChevronRight className={!loading ? "" : "text-muted"} />
+                    </Button>
+                <Button 
+                className="cursor-pointer" 
+                variant={`ghost`} 
+                size={`icon-sm`}
+                disabled={loading || page === totalPages}
+                onClick={() => page < totalPages ? setPage(totalPages) : null }
+                >
+                    <ChevronsRight className={!loading ? "" : "text-muted"} />
+                </Button>
             </div>
-            
-
-            <PaginationGroup pagination={ pagination } />
         </div>
     )
 }

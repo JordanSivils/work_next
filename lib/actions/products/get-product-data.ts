@@ -5,11 +5,12 @@ import {  ProductQuery } from "./product-interfaces";
 import { Prisma } from "@/app/generated/prisma/client";
 import { reqRoles } from "../require-auth";
 
-const productWhereBuilder = (q: ProductQuery): Prisma.ProductWhereInput => {
+const productWhereBuilder = (q?: ProductQuery): Prisma.ProductWhereInput => {
   return {
-    Brand: { name: q.brand },
-    Supplier: { name: q.supplier },
-    ...(q.search && {
+    Brand: { id: q?.brandId },
+    Supplier: { id: q?.supplierId },
+    Category: { id: q?.categoryId },
+    ...(q?.search && {
       OR: [
         { description: {
           contains: q.search, mode: "insensitive"
@@ -19,13 +20,15 @@ const productWhereBuilder = (q: ProductQuery): Prisma.ProductWhereInput => {
   }
 }
 
-function sortBuilder(q: ProductQuery) {
+function sortBuilder(q?: ProductQuery) {
   let orderBy: Prisma.ProductOrderByWithRelationInput = {}
-  let dir = q.dir
-  switch (q.sort) {
+  let dir = q?.sortDir
+  switch (q?.sortKey) {
     case "description": orderBy = { description: dir ?? "asc" }
     break;
     case "available": orderBy = { available: dir ?? "asc" }
+    break;
+    case "margin": orderBy = { margin: dir ?? "asc" }
     break;
     default: orderBy = { description: "asc"}
   }
@@ -58,15 +61,12 @@ export async function getAllProducts(q: ProductQuery){
     prisma.product.count({ where })
   ])
   return {
-    ok: true,
-    result: {
-      page: page,
-      limit: limit,
-      total,
-      pageCount: Math.ceil(total / limit),
-      nextPage: page * limit < total,
-      previousPage: page > 1,
-      data
-    }
+    page: page,
+    limit: limit,
+    total,
+    pageCount: Math.ceil(total / limit),
+    nextPage: page * limit < total,
+    previousPage: page > 1,
+    data
   }
 }

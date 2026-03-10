@@ -23,7 +23,7 @@ const columns: CoumnDef<BrandTableRow>[] = [
 interface SmallBrandTableProps {
   brands: SmallBrand[]
 }
-export function SmallBrandTable({ brands}: SmallBrandTableProps) {
+export function SmallBrandTable({ brands }: SmallBrandTableProps) {
   
   return (
     <div className='space-y-4'>
