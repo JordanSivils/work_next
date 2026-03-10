@@ -1,15 +1,16 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('requested', 'rejected', 'ordered', 'received', 'shorted');
+CREATE TYPE "OrderStatus" AS ENUM ('requested', 'rejected', 'ordered', 'received', 'shorted', 'fulfilled');
 
 -- CreateEnum
 CREATE TYPE "RequestType" AS ENUM ('cost', 'order');
 
 -- CreateTable
 CREATE TABLE "Brand" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "inventoriedById" TEXT,
+    "inventoriedById" UUID,
     "lastInventoriedAt" TIMESTAMP(3),
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -20,10 +21,11 @@ CREATE TABLE "Brand" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "targetMargin" TEXT,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
@@ -45,14 +47,14 @@ CREATE TABLE "ProductStaging" (
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "sku" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "available" INTEGER,
     "margin" DOUBLE PRECISION,
-    "brandId" TEXT,
-    "categoryId" TEXT,
-    "supplierId" TEXT,
+    "brandId" UUID,
+    "categoryId" UUID,
+    "supplierId" UUID,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -64,14 +66,14 @@ CREATE TABLE "SpecialOrder" (
     "id" TEXT NOT NULL,
     "items" JSONB,
     "notes" TEXT,
-    "supplierId" TEXT,
+    "supplierId" UUID,
     "customer" TEXT,
     "customerContact" TEXT,
     "comments" TEXT,
     "orderStatus" "OrderStatus" NOT NULL DEFAULT 'requested',
     "requestType" "RequestType" NOT NULL DEFAULT 'order',
     "existingItem" BOOLEAN DEFAULT false,
-    "createdById" TEXT,
+    "createdById" UUID,
     "recurring" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -81,7 +83,7 @@ CREATE TABLE "SpecialOrder" (
 
 -- CreateTable
 CREATE TABLE "Supplier" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "orderDay" TEXT,
@@ -90,14 +92,14 @@ CREATE TABLE "Supplier" (
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT,
+    "userId" UUID,
 
     CONSTRAINT "Supplier_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "clerkId" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,

@@ -9,7 +9,6 @@ import { SmallSupplierTable } from "./components/home/small-supplier-table"
 import { SmallSupplier, Supplier } from "@/lib/actions/suppliers/supplier-interfaces"
 import { getLoggedInSpecialOrderData, getSpecialOrderData } from "@/lib/actions/special-order/get-special-order"
 import { SmallSpecialTable, UnknownSpecialOrder } from "./components/home/small-special-table"
-import { SpecialOrderForm } from "./components/forms/special-order-form"
 import { InventoryForm } from "./components/forms/inventory-form"
 import { RequireRoleWrapper } from "@/components/ui/check-role-wrapper"
 
@@ -53,7 +52,8 @@ export async function HomePageFetch() {
                 <div className="shrink-0">
                     <InventoryForm sidebar={false} brands={comboboxBrands} />
                 </div>
-                <div className="lg:flex-1 lg:min-w-0">
+                {mappedBrands.length > 0 && (
+                    <div className="lg:flex-1 lg:min-w-0">
                     <HomeComponentWrapper 
                     title="Brands"
                     descritpion="Brands that you are in charge of Inventorying."
@@ -61,9 +61,11 @@ export async function HomePageFetch() {
                         <SmallBrandTable brands={mappedBrands}/>
                     </HomeComponentWrapper>
                 </div>
+                )}
+                
             </div>
-            
-            <RequireRoleWrapper roles={["admin", "manager", "dev"]}>
+            {specialOrders.unknown.length > 0 && (
+                <RequireRoleWrapper roles={["admin", "manager", "dev"]}>
                 <HomeComponentWrapper 
                 title="Special Order With Unkown Supplier"
                 descritpion="It is on all managers to source the product, determine if we can get it, then notify the correct person to order or get cost."
@@ -71,20 +73,26 @@ export async function HomePageFetch() {
                     <UnknownSpecialOrder  unknownSpecOrds={specialOrders.unknown}/>
             </HomeComponentWrapper>
             </RequireRoleWrapper>
+            )}
             
-            <HomeComponentWrapper 
+            {specialOrders.found.length > 0 && (
+                <HomeComponentWrapper 
             title="Special Orders"
             descritpion="Special Orders for your suppliers."
             >
                 <SmallSpecialTable  foundSpecOrds={specialOrders.found}/>
             </HomeComponentWrapper>
+            )}
             
-            <HomeComponentWrapper 
+            {mappedSuppliers.length > 0 && (
+                <HomeComponentWrapper 
             title="Suppliers"
             descritpion="Suppliers you are in charge of ordering from."
             >
                 <SmallSupplierTable suppliers={mappedSuppliers}/>
             </HomeComponentWrapper>
+            )}
+            
         </div>
     )
 }

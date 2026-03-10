@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { postDataToServer } from "@/lib/actions/client-side.ts/submit-form";
+import { postDataToServer, pushFileToS3 } from "@/lib/actions/client-side.ts/submit-form";
 import { notify } from "@/lib/toast";
 import { Label } from "@radix-ui/react-label";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -35,7 +35,8 @@ export function CsvForm() {
             const file = data.file[0]
             console.log(file)
             try {
-                await postDataToServer(file)
+                await pushFileToS3(file)
+                // await pushFileToS3(file)
                 notify.success("File processed successfully")
                 setOpen(false)
             } catch (error) {
