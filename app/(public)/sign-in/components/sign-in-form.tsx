@@ -7,7 +7,7 @@ import { redirect, useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ClerkAPIError } from "@clerk/types"
 import { isClerkAPIResponseError } from '@clerk/nextjs/errors'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface UserCredentials {
@@ -23,9 +23,11 @@ export function SignInForm() {
 
     const { isSignedIn } = useAuth();
 
-    if (isSignedIn) {
-        redirect("/")
+    useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.replace("/");
     }
+  }, [isLoaded, isSignedIn, router]);
 
 
     const onSubmit: SubmitHandler<UserCredentials> = async (data) => {
@@ -50,7 +52,7 @@ export function SignInForm() {
                 await setActive({
                     session: signInAttempt.createdSessionId,
                 })
-                router.push('/')
+                router.replace("/")
                 return
             } 
         } catch (err) {

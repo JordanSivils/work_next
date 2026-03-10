@@ -14,16 +14,9 @@ import { RequireRoleWrapper } from "@/components/ui/check-role-wrapper"
 
 export async function HomePageFetch() {
     const user = await getCurrentUser()
-    // const asyncTimeout = () => {
-    //     return new Promise((resolve) => {
-    //     setTimeout(resolve, 3000)
-    //     })
-    // }
-    // await asyncTimeout();
     const currentUsersBrands = await getBrandsByCurrentUser()
     const currentUsersSuppliers = await getSuppliersByCurrentUser()
     const specialOrders = await getLoggedInSpecialOrderData();
-    const suppliers = await getSupplierData({ page: 1, limit: 500 })
     const brands = await getBrandData();
     
     
