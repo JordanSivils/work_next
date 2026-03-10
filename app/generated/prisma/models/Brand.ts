@@ -198,10 +198,10 @@ export type BrandWhereInput = {
   AND?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
   OR?: Prisma.BrandWhereInput[]
   NOT?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
-  id?: Prisma.StringFilter<"Brand"> | string
+  id?: Prisma.UuidFilter<"Brand"> | string
   name?: Prisma.StringFilter<"Brand"> | string
   slug?: Prisma.StringFilter<"Brand"> | string
-  inventoriedById?: Prisma.StringNullableFilter<"Brand"> | string | null
+  inventoriedById?: Prisma.UuidNullableFilter<"Brand"> | string | null
   lastInventoriedAt?: Prisma.DateTimeNullableFilter<"Brand"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
@@ -230,7 +230,7 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
   OR?: Prisma.BrandWhereInput[]
   NOT?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
-  inventoriedById?: Prisma.StringNullableFilter<"Brand"> | string | null
+  inventoriedById?: Prisma.UuidNullableFilter<"Brand"> | string | null
   lastInventoriedAt?: Prisma.DateTimeNullableFilter<"Brand"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
@@ -257,10 +257,10 @@ export type BrandScalarWhereWithAggregatesInput = {
   AND?: Prisma.BrandScalarWhereWithAggregatesInput | Prisma.BrandScalarWhereWithAggregatesInput[]
   OR?: Prisma.BrandScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BrandScalarWhereWithAggregatesInput | Prisma.BrandScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Brand"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Brand"> | string
   name?: Prisma.StringWithAggregatesFilter<"Brand"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Brand"> | string
-  inventoriedById?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
+  inventoriedById?: Prisma.UuidNullableWithAggregatesFilter<"Brand"> | string | null
   lastInventoriedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Brand"> | Date | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Brand"> | Date | string
@@ -585,10 +585,10 @@ export type BrandScalarWhereInput = {
   AND?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
   OR?: Prisma.BrandScalarWhereInput[]
   NOT?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
-  id?: Prisma.StringFilter<"Brand"> | string
+  id?: Prisma.UuidFilter<"Brand"> | string
   name?: Prisma.StringFilter<"Brand"> | string
   slug?: Prisma.StringFilter<"Brand"> | string
-  inventoriedById?: Prisma.StringNullableFilter<"Brand"> | string | null
+  inventoriedById?: Prisma.UuidNullableFilter<"Brand"> | string | null
   lastInventoriedAt?: Prisma.DateTimeNullableFilter<"Brand"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string

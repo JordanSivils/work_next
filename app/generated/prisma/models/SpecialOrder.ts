@@ -239,14 +239,14 @@ export type SpecialOrderWhereInput = {
   id?: Prisma.StringFilter<"SpecialOrder"> | string
   items?: Prisma.JsonNullableFilter<"SpecialOrder">
   notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
   requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
   existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
-  createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdById?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
   createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
@@ -280,14 +280,14 @@ export type SpecialOrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SpecialOrderWhereInput | Prisma.SpecialOrderWhereInput[]
   items?: Prisma.JsonNullableFilter<"SpecialOrder">
   notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
   requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
   existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
-  createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdById?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
   createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
@@ -322,14 +322,14 @@ export type SpecialOrderScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SpecialOrder"> | string
   items?: Prisma.JsonNullableWithAggregatesFilter<"SpecialOrder">
   notes?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
-  supplierId?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  supplierId?: Prisma.UuidNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   customer?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   customerContact?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   comments?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusWithAggregatesFilter<"SpecialOrder"> | $Enums.OrderStatus
   requestType?: Prisma.EnumRequestTypeWithAggregatesFilter<"SpecialOrder"> | $Enums.RequestType
   existingItem?: Prisma.BoolNullableWithAggregatesFilter<"SpecialOrder"> | boolean | null
-  createdById?: Prisma.StringNullableWithAggregatesFilter<"SpecialOrder"> | string | null
+  createdById?: Prisma.UuidNullableWithAggregatesFilter<"SpecialOrder"> | string | null
   recurring?: Prisma.BoolWithAggregatesFilter<"SpecialOrder"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SpecialOrder"> | Date | string
@@ -672,14 +672,14 @@ export type SpecialOrderScalarWhereInput = {
   id?: Prisma.StringFilter<"SpecialOrder"> | string
   items?: Prisma.JsonNullableFilter<"SpecialOrder">
   notes?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
-  supplierId?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  supplierId?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   customer?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   customerContact?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   comments?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
   orderStatus?: Prisma.EnumOrderStatusFilter<"SpecialOrder"> | $Enums.OrderStatus
   requestType?: Prisma.EnumRequestTypeFilter<"SpecialOrder"> | $Enums.RequestType
   existingItem?: Prisma.BoolNullableFilter<"SpecialOrder"> | boolean | null
-  createdById?: Prisma.StringNullableFilter<"SpecialOrder"> | string | null
+  createdById?: Prisma.UuidNullableFilter<"SpecialOrder"> | string | null
   recurring?: Prisma.BoolFilter<"SpecialOrder"> | boolean
   createdAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SpecialOrder"> | Date | string

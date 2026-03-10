@@ -52,3 +52,8 @@ export type Supplier = Prisma.SupplierModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model MissedInventory
+ * 
+ */
+export type MissedInventory = Prisma.MissedInventoryModel

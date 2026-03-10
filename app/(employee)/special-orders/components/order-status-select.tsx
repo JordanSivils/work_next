@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select"
 import { useState } from "react"
 
-type OrderStatus = "requested" | "ordered" | "rejected" | "received" | "shorted";
+type OrderStatus = "requested" | "ordered" | "rejected" | "received" | "shorted" | "fulfilled";
 
 interface OrderStatusSelectProps {
   initVal: OrderStatus | null;
@@ -38,7 +38,7 @@ export function OrderStatusSelect({ initVal, formData }: OrderStatusSelectProps)
                 <SelectItem value="rejected">Rejected</SelectItem>
                 <SelectItem value="received">Received</SelectItem>
                 <SelectItem value="shorted">Shorted</SelectItem>
-                <SelectItem value="fullfilled">Fullfilled</SelectItem>
+                <SelectItem value="fulfilled">Fulfilled</SelectItem>
                 </SelectGroup>
             </SelectContent>
         </Select>
