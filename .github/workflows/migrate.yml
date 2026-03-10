@@ -8,10 +8,13 @@ on:
       - 'prisma/migrations/**'
       - 'prisma/schema.prisma'
       - 'prisma.config.ts'
+  workflow_dispatch:
 
 jobs:
   migrate:
     runs-on: ubuntu-latest
+    env:
+      DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
     steps:
       - name: Checkout repo
@@ -27,5 +30,3 @@ jobs:
 
       - name: Apply migrations
         run: npx prisma migrate deploy
-        env:
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
