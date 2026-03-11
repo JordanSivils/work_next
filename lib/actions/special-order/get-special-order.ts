@@ -42,7 +42,10 @@ export async function getSpecialOrderData(q?: SpecialOrderQuery) {
 
     const [data, total] = await Promise.all([
         prisma.specialOrder.findMany({
-            where,
+            where: {
+                ...where,
+                orderStatus: { not: "fulfilled" }
+            },
             orderBy,
             take: limit,
             skip: skip,
@@ -76,7 +79,8 @@ export async function getLoggedInSpecialOrderData() {
     const [found, unknown] = await Promise.all([
         prisma.specialOrder.findMany({
             where: {
-                Supplier: { userId: loggedUser.id}
+                Supplier: { userId: loggedUser.id},
+                orderStatus: { not: "fulfilled" }
             },
             include: {
                     Supplier: {

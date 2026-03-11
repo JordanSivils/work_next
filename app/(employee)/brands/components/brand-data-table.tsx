@@ -49,7 +49,6 @@ export function BrandTable({ users }: {users: UserComboboxInterface[]}) {
         setActive(null);
         setThisUser(null);
         refresh();
-        // console.log(thisUser);
     } catch (error) {
       notify.error("Failed to update")
     }

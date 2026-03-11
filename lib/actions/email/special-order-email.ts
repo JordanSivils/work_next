@@ -12,7 +12,6 @@ const sandboxEmail = process.env.SANDBOX_EMAIL ?? ""
 
 
 export async function sendSpecialOrderEmail(adresses: string[], specialOrder: SpecialOrderEmail) {
-    console.log(mailKey)
     const mg = mailgun.client({
         username: "api",
         key: mailKey

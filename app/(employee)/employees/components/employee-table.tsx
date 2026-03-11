@@ -39,7 +39,6 @@ export function UserTable({ users }: {users: UserTableRow[]}) {
         notify.success("Updated");
         setActive(null);
         setThisUser(null);
-        // console.log(thisUser);
     } catch (error) {
       notify.error("Failed to update")
     }

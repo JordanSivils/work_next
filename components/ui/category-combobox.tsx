@@ -48,7 +48,6 @@ export function CategoryCombobox({ categories, sendDataUp, handleClear, initValu
                                     setValue(category.id)
                                     setOpen(false)
                                     sendDataUp?.(category.id)
-                                    console.log(category.id)
                                 }}
                                 >
                                     {category.name}

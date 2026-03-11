@@ -49,7 +49,6 @@ export function SpecialOrderForm({ suppliers }: SpecialOrderFormProps) {
     const onInvalid = (errs: any) => console.log("INVALID", errs)
 
     const onSubmit: SubmitHandler<SpecialOrderCreate> = async (data) => {
-        console.log(data)
         try {
             await specialOrderCreate(data)
             notify.success("Special Order Created")

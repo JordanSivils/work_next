@@ -9,19 +9,36 @@ import { ClerkAPIError } from "@clerk/types"
 import { isClerkAPIResponseError } from '@clerk/nextjs/errors'
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface UserCredentials {
-    email: string
-    password: string
-}
+const signInSchema = z.object({
+    username: z.string().trim().min(1),
+    password: z.string().min(6)
+})
+type SignIn = z.infer<typeof signInSchema>
 
 export function SignInForm() {
     const { isLoaded, signIn, setActive } = useSignIn()
-    const [errors, setErrors] = useState<ClerkAPIError[]>();
-    const { handleSubmit, register } = useForm<UserCredentials>()
     const router = useRouter()
-
     const { isSignedIn } = useAuth();
+
+    const [errors, setErrors] = useState<ClerkAPIError[]>();
+    const { 
+        handleSubmit, 
+        register,
+        formState: { isSubmitting, isValid }
+    } = useForm<SignIn>({
+        resolver: zodResolver(signInSchema),
+        mode: "onChange",
+        defaultValues: {
+            username: "",
+            password: ""
+        }
+    })
+    
+
+    
 
     useEffect(() => {
     if (isLoaded && isSignedIn) {
@@ -30,16 +47,17 @@ export function SignInForm() {
   }, [isLoaded, isSignedIn, router]);
 
 
-    const onSubmit: SubmitHandler<UserCredentials> = async (data) => {
+    const onSubmit: SubmitHandler<SignIn> = async (data) => {
 
         setErrors(undefined);
 
         if (!isLoaded) return
 
         const password = data.password
+        const identifier = data.username
         try {
             const signInAttempt = await signIn?.create({
-                identifier: data.email,
+                identifier,
                 password
             })
 
@@ -72,8 +90,8 @@ export function SignInForm() {
                 <CardContent>
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="text" {...register("email")} />
+                            <Label htmlFor="username">Username</Label>
+                            <Input id="username" type="text" {...register("username")} />
                         </div>
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="password">Password</Label>
@@ -89,7 +107,11 @@ export function SignInForm() {
                             )}
                         </div>
                         <div className="text-end">
-                            <Button type="submit">Submit</Button>
+                            <Button 
+                            disabled={!isValid || isSubmitting} 
+                            type="submit"
+                            className={!isValid || isSubmitting ? "bg-gray-400" : ""}
+                            >Submit</Button>
                         </div>
                     </form>
                     
