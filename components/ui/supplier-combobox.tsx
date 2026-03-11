@@ -50,7 +50,6 @@ export function SupplierCombobox({ suppliers, sendDataUp, handleClear, initValue
                                     setOpen(false)
                                     sendDataUp?.(supplier.id)
                                     productData?.("brand", supplier.name)
-                                    console.log("selected")
                                 }}
                                 >
                                     {supplier.name}

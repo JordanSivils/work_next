@@ -33,7 +33,6 @@ export function CsvForm() {
     
         const onSubmit: SubmitHandler<FormInputs> = async (data) => {
             const file = data.file[0]
-            console.log(file)
             try {
                 await pushFileToS3(file)
                 // await pushFileToS3(file)

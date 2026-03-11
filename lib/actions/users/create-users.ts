@@ -11,8 +11,7 @@ export async function createUsers() {
     const client = await clerkClient()
     const clerkUsers = await client.users.getUserList()
     const ourUsers = await prisma.user.findMany()
-    const ourSet = new Set(ourUsers.map(user => user.clerkId)) 
-    console.log(ourSet)
+    const ourSet = new Set(ourUsers.map(user => user.clerkId))
     
     const mappedClerk = clerkUsers.data
     .filter(user => !ourSet.has(user.id))

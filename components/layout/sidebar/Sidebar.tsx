@@ -12,8 +12,10 @@ import {
   SidebarMenuItem,
 } from '../../ui/sidebar';
 import { adminActions, sidebarItems, sidebarQuick } from './sidbarItems';
-import { SignedIn, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignOutButton, UserButton } from '@clerk/nextjs';
 import { RequireRoleWrapper } from '@/components/ui/check-role-wrapper';
+import { Button } from '@/components/ui/button';
+import { LogOut } from 'lucide-react';
 
 export function AppSidebar() {
   return (
@@ -78,10 +80,22 @@ export function AppSidebar() {
                 </SidebarGroupContent>
               </SidebarGroup>
         </RequireRoleWrapper>
+        <SidebarGroup>
+          <SidebarGroupLabel>Account Actions</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SignedIn>
+                <SignOutButton>
+                  <Button variant={"outline"} className='cursor-pointer'>
+                    <LogOut /> Log Out
+                  </Button>
+                
+                </SignOutButton>
+              </SignedIn>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenuItem><SignedIn><UserButton /></SignedIn></SidebarMenuItem>
-      </SidebarFooter>
     </Sidebar>
   );
 }
