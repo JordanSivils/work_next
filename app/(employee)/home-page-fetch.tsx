@@ -2,12 +2,11 @@ import { getBrandData, getBrandsByCurrentUser } from "@/lib/actions/brands/get-b
 import { getCurrentUser } from "@/lib/actions/users/get-users"
 import { BrandComboboxInterface, SmallBrand } from "@/lib/actions/brands/brand-interface"
 import { SmallBrandTable } from "./components/home/small-brand-table"
-import { Suspense } from "react"
 import { HomeComponentWrapper } from "./components/home/home-comp-wrapper"
-import { getSupplierData, getSuppliersByCurrentUser } from "@/lib/actions/suppliers/get-supplier-data"
+import { getSuppliersByCurrentUser } from "@/lib/actions/suppliers/get-supplier-data"
 import { SmallSupplierTable } from "./components/home/small-supplier-table"
-import { SmallSupplier, Supplier } from "@/lib/actions/suppliers/supplier-interfaces"
-import { getLoggedInSpecialOrderData, getSpecialOrderData } from "@/lib/actions/special-order/get-special-order"
+import { SmallSupplier } from "@/lib/actions/suppliers/supplier-interfaces"
+import { getLoggedInSpecialOrderData } from "@/lib/actions/special-order/get-special-order"
 import { SmallSpecialTable, UnknownSpecialOrder } from "./components/home/small-special-table"
 import { InventoryForm } from "./components/forms/inventory-form"
 import { RequireRoleWrapper } from "@/components/ui/check-role-wrapper"
@@ -85,7 +84,6 @@ export async function HomePageFetch() {
                 <SmallSupplierTable suppliers={mappedSuppliers}/>
             </HomeComponentWrapper>
             )}
-            
         </div>
     )
 }
