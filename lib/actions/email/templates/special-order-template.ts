@@ -93,7 +93,7 @@ export function renderSpecialOrderEmailHtml(order: SpecialOrderEmail) {
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color:#6b7280;">Customer Contact</td>
-                    <td style="padding: 8px 0; font-weight: 600;">${customer}</td>
+                    <td style="padding: 8px 0; font-weight: 600;">${customerContact ?? "N/A"}</td>
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color:#6b7280;">Status</td>

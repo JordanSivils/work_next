@@ -60,7 +60,7 @@ export async function HomePageFetch() {
                 <RequireRoleWrapper roles={["admin", "manager", "dev"]}>
                 <HomeComponentWrapper 
                 title="Special Order With Unkown Supplier"
-                descritpion="It is on all managers to source the product, determine if we can get it, then notify the correct person to order or get cost."
+                descritpion="This group either doesn't have an attached supplier, or a person in charge of ordering. Please figure out the supplier and update, or asign someone to order from this supplier."
                 >
                     <UnknownSpecialOrder  unknownSpecOrds={specialOrders.unknown}/>
             </HomeComponentWrapper>
