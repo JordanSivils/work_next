@@ -91,12 +91,17 @@ export async function getLoggedInSpecialOrderData() {
             take: 200
     }),
         prisma.specialOrder.findMany({
-            where: {
-                supplierId: null
+            where:{ 
+                OR: [
+                    { supplierId: null },
+                    { Supplier: { User: null } },
+                    { Supplier: { User: { email: null } } },
+                    { Supplier: { User: { email: "" } } }
+                ]
             },
             include: {
                     Supplier: {
-                        include: { User: true}
+                        include: { User: true }
                     },
                     User: true
             },

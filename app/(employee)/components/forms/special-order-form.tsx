@@ -151,7 +151,7 @@ export function SpecialOrderForm({ suppliers }: SpecialOrderFormProps) {
                                     <Textarea {...register("notes")} placeholder="Order Notes..." />
                                 </div>
                                 <div className="flex flex-col gap-1">
-                                    <Label>Known Supplier? (This helps Emails find the right person)</Label>
+                                    <Label>Known Supplier? This can be left blank, but selecting a supplier will help emails find the right person</Label>
                                     <SupplierCombobox suppliers={suppliers} sendDataUp={handleCombobox} handleClear={handleSupplierClear} />
                                 </div>
                                 <div>
