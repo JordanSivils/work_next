@@ -54,9 +54,10 @@ export async function specialOrderCreate(fd: SpecialOrderCreate) {
         const employeeEmails = [managerOneEmail, managerTwoEmail, managerThreeEmail]
         const emails = createSpecialOrder.Supplier?.User?.email ? [createSpecialOrder.Supplier?.User?.email] : employeeEmails
         
-        sendSpecialOrderEmail(emails, mappedSpecialOrderEmail)
+        await sendSpecialOrderEmail(emails, mappedSpecialOrderEmail)
                
     } catch (error) {
         console.error(error)
+        throw error
     }
 }

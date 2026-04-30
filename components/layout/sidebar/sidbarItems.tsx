@@ -1,15 +1,11 @@
 import { SyncUsers } from '@/app/(employee)/components/forms/sync-users';
-import { InventoryForm } from '@/app/(employee)/components/forms/inventory-form';
 import {
   Barcode,
   BriefcaseBusiness,
-  FileText,
   Home,
   Newspaper,
   SquareUserRound,
   Truck,
-  Upload,
-  User,
 } from 'lucide-react';
 import { InventoryFormWrapper } from '@/app/(employee)/components/forms/inventory-form-wrapper';
 import { SpecialOrderWrapper } from '@/app/(employee)/components/forms/special-order-wrapper';
